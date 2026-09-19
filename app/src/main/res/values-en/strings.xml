@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="abbrechen">Cancel</string>
+    <string name="app_name">Rechenwerk</string>
+    <string name="bereich_brueche">Fractions</string>
+    <string name="bereich_dezimal">Decimal numbers</string>
+    <string name="bereich_gleichungen">Terms and equations</string>
+    <string name="bereich_grundrechnen">Basic arithmetic</string>
+    <string name="bereich_negativ">Negative numbers</string>
+    <string name="bereich_prozent">Percentages</string>
+    <string name="bundesland_bw">Baden-Württemberg</string>
+    <string name="detail_fehlerarten">Recently observed error patterns</string>
+    <string name="detail_grad">Mastery level</string>
+    <string name="detail_kontakt">Last contact</string>
+    <string name="detail_training">Train specifically</string>
+    <string name="detail_treffer">Correct answers</string>
+    <string name="detail_versuche">Attempts</string>
+    <string name="detail_voraussetzungen">Prerequisites</string>
+    <string name="detail_wiederholung">Next review</string>
+    <string name="detail_wiederholungen">Reviews so far</string>
+    <string name="detail_zahlen">Numbers for this competency</string>
+    <string name="detail_zeit">Average response time</string>
+    <string name="einordnung_arbeit">in progress</string>
+    <string name="einordnung_offen">not started yet</string>
+    <plurals name="einordnung_offene">
+        <item quantity="one">%1$d competency still needs practice</item>
+        <item quantity="other">%1$d competencies still need practice</item>
+    </plurals>
+    <string name="einordnung_sicher">secure</string>
+    <string name="einordnung_traegt">holds up, but not secure yet</string>
+    <string name="einordnung_training">needs practice</string>
+    <string name="einst_daten">Data</string>
+    <string name="einst_erscheinung">Appearance</string>
+    <string name="einst_export">Export</string>
+    <string name="einst_export_fehler">The file could not be written.</string>
+    <string name="einst_export_fertig">Data written to the selected file.</string>
+    <string name="einst_import">Import</string>
+    <string name="einst_import_fehler">This file does not match Rechenwerk and was not applied.</string>
+    <string name="einst_import_fertig">Data applied.</string>
+    <string name="einst_loeschen_fertig">All local data has been deleted.</string>
+    <string name="einst_loeschen_ja">Reset</string>
+    <string name="einst_loeschen_text">Profile, mastery levels and all numbers will be deleted. This cannot be undone. If you want to keep the data, export it first.</string>
+    <string name="einst_loeschen_titel">Really reset?</string>
+    <string name="einst_lokal">All data stays on this device. No account, no network access.</string>
+    <string name="einst_profil">Profile</string>
+    <string name="einst_quelle">Curriculum source</string>
+    <string name="einst_quelle_fassung">Edition</string>
+    <string name="einst_quelle_fassung_wert">2016</string>
+    <string name="einst_quelle_name">Basis</string>
+    <string name="einst_quelle_wert">Baden-Württemberg education plan, mathematics, lower secondary level</string>
+    <string name="einst_titel">Settings</string>
+    <string name="einst_zuruecksetzen">Reset</string>
+    <string name="einst_zuruecksetzen_taste">Reset local data</string>
+    <string name="f_als_dezimalzahl">%1$s as a decimal number</string>
+    <string name="f_ausdruck">%1$s</string>
+    <string name="f_geteilt">%1$s : %2$s</string>
+    <string name="f_kuerzen">Reduce %1$s completely</string>
+    <string name="f_mal">%1$s · %2$s</string>
+    <string name="f_minus">%1$s − %2$s</string>
+    <string name="f_plus">%1$s + %2$s</string>
+    <string name="f_prozent_von">%1$s %% of %2$s</string>
+    <string name="f_prozentsatz">What percentage is %1$s of %2$s?</string>
+    <string name="f_term_fuer_x">%1$s for x = %2$s</string>
+    <string name="fa_addiert_statt_mal">Added instead of multiplied</string>
+    <string name="fa_bezug_vertauscht">Base value and percentage value swapped</string>
+    <string name="fa_bruchstrich_verwechselt">Numerator and denominator swapped</string>
+    <string name="fa_divisor_als_ergebnis">Took the divisor as the result</string>
+    <string name="fa_durch_hundert_vergessen">Did not divide by 100</string>
+    <string name="fa_einer_vergessen">Forgot to carry the ones</string>
+    <string name="fa_entbuendeln_vergessen">Did not unbundle, subtracted the smaller digit from the larger</string>
+    <string name="fa_falsche_gegenrechnung">Rearranged in the wrong direction</string>
+    <string name="fa_falschen_bruch_gedreht">Flipped the wrong fraction</string>
+    <string name="fa_falsches_vorzeichen_umgestellt">Flipped the sign when rearranging</string>
+    <string name="fa_geteilt_statt_mal">Divided instead of multiplied</string>
+    <string name="fa_kehrwert_vergessen">Forgot the reciprocal, multiplied directly</string>
+    <string name="fa_klammer_nicht_beachtet">Did not treat the bracket as a whole</string>
+    <string name="fa_komma_verrutscht">Decimal point slipped</string>
+    <string name="fa_komma_zu_weit_links">Decimal point one place too far left</string>
+    <string name="fa_komma_zu_weit_rechts">Decimal point one place too far right</string>
+    <string name="fa_kreuzweise_multipliziert">Cross-multiplied</string>
+    <string name="fa_mal_als_plus">Read multiplication as addition</string>
+    <string name="fa_mal_hundert_vergessen">Forgot to multiply by 100</string>
+    <string name="fa_minus_uebersehen">Missed the minus sign</string>
+    <string name="fa_nenner_erweitert_zaehler_nicht">Expanded the denominator, not the numerator</string>
+    <string name="fa_nicht_fertig_gekuerzt">Not fully reduced</string>
+    <string name="fa_nur_zaehler_gekuerzt">Reduced only the numerator</string>
+    <string name="fa_nur_zaehler_multipliziert">Multiplied only the numerator</string>
+    <string name="fa_punkt_vor_strich_missachtet">Ignored multiplication before addition</string>
+    <string name="fa_reihe_verzaehlt">Counted one row too few</string>
+    <string name="fa_stellen_nicht_ausgerichtet">Decimal points not aligned</string>
+    <string name="fa_stellenwert_verloren">Lost the place value of the tens</string>
+    <string name="fa_subtrahiert_statt_geteilt">Subtracted instead of divided</string>
+    <string name="fa_summand_uebersehen">Did not subtract the addend</string>
+    <string name="fa_uebertrag_vergessen">Forgot the carry</string>
+    <string name="fa_um_zehn_daneben">Off by ten</string>
+    <string name="fa_vorzeichen_vertauscht">Signs swapped</string>
+    <string name="fa_vorzeichenregel_verwechselt">Sign rule mixed up</string>
+    <string name="fa_zaehler_und_nenner_verrechnet">Computed numerator and denominator separately</string>
+    <string name="fortschritt_aufgaben">Tasks</string>
+    <string name="fortschritt_beherrscht">Mastered</string>
+    <string name="fortschritt_beste_serie">Longest streak of correct answers</string>
+    <string name="fortschritt_bestwerte">Personal bests</string>
+    <string name="fortschritt_fehlerarten">Observed error patterns</string>
+    <string name="fortschritt_in_arbeit">In progress</string>
+    <string name="fortschritt_kompetenzen">Competencies in progress</string>
+    <string name="fortschritt_lernzeit">Learning time</string>
+    <string name="fortschritt_quote">Success rate</string>
+    <string name="fortschritt_schnellste">Fastest correct answer</string>
+    <string name="fortschritt_sitzungen">Sessions</string>
+    <string name="fortschritt_titel">Progress</string>
+    <string name="fortschritt_wiederholungen">Reviews</string>
+    <string name="h_br_add_1_a">Unlike denominators cannot be added directly.</string>
+    <string name="h_br_add_1_b">Give both fractions a common denominator, then you only add the numerators.</string>
+    <string name="h_br_add_1_c">The common denominator is %1$s.</string>
+    <string name="h_br_div_1_a">Dividing by a fraction can be turned into a multiplication.</string>
+    <string name="h_br_div_1_b">Flip the second fraction and multiply.</string>
+    <string name="h_br_div_1_c">The reciprocal of %1$s is %2$s.</string>
+    <string name="h_br_kue_1_a">Which number divides both numerator and denominator?</string>
+    <string name="h_br_kue_1_b">Check 2, 3 and 5 in turn and reduce until nothing more works.</string>
+    <string name="h_br_kue_1_c">Both are divisible by %1$s.</string>
+    <string name="h_br_mul_1_a">You do not need a common denominator here.</string>
+    <string name="h_br_mul_1_b">Multiply numerator by numerator and denominator by denominator.</string>
+    <string name="h_br_mul_1_c">Numerator: %1$s · %2$s = %3$s</string>
+    <string name="h_dz_add_1_a">First look at where the decimal point sits in both numbers.</string>
+    <string name="h_dz_add_1_b">Pad the shorter number with a zero so the places line up.</string>
+    <string name="h_dz_add_1_c">%1$s and %2$s, now place by place.</string>
+    <string name="h_dz_bru_1_a">A fraction is nothing more than a division.</string>
+    <string name="h_dz_bru_1_b">Expand to 10, 100 or 1000, then you can read off the decimal number.</string>
+    <string name="h_dz_bru_1_c">Expand by %1$s to the denominator %2$s.</string>
+    <string name="h_dz_mul_1_a">First compute the task without any decimal point.</string>
+    <string name="h_dz_mul_1_b">Add up the decimal places of both numbers; the result has that many.</string>
+    <string name="h_gl_kla_1_a">The bracket as a whole is multiplied by %1$s.</string>
+    <string name="h_gl_kla_1_b">First divide by the factor in front of the bracket; the bracket stays together.</string>
+    <string name="h_gl_lin_1_a">What is still in the way of the x?</string>
+    <string name="h_gl_lin_1_b">First move the number to the other side, then divide by the factor.</string>
+    <string name="h_gl_ter_1_a">Substitute the number for x and write the term out again.</string>
+    <string name="h_gl_ter_1_b">Multiplication before addition: multiply first, then add or subtract.</string>
+    <string name="h_gl_zwischenschritt">This is what the equation looks like after the first step: %1$s</string>
+    <string name="h_gr_add_1_a">Take the second addend in two portions.</string>
+    <string name="h_gr_add_1_b">First %1$s on top, then the remaining %2$s.</string>
+    <string name="h_gr_div_1_a">Dividing means multiplying backwards.</string>
+    <string name="h_gr_div_1_b">Look for the number %2$s in the times table of %1$s.</string>
+    <string name="h_gr_div_1_c">%1$s · %2$s = %3$s, that is still too small.</string>
+    <string name="h_gr_mul_1_a">Use a row you know well as a stepping stone.</string>
+    <string name="h_gr_mul_1_b">Compute %1$s · %2$s and add %1$s once more.</string>
+    <string name="h_gr_mul_1_c">%1$s · %2$s = %3$s. One more %1$s is missing.</string>
+    <string name="h_gr_mul_2_a">Split the larger number into tens and ones.</string>
+    <string name="h_gr_mul_2_b">Compute %1$s · %2$s and %3$s · %2$s and add both.</string>
+    <string name="h_gr_sub_1_a">Take the subtrahend in two portions.</string>
+    <string name="h_gr_sub_1_b">First take away %1$s, then the remaining %2$s.</string>
+    <string name="h_nz_add_1_a">Think of the number line.</string>
+    <string name="h_nz_add_1_b">Plus means to the right, minus means to the left.</string>
+    <string name="h_nz_add_1_c">From %1$s it is %2$s steps.</string>
+    <string name="h_nz_mul_1_a">First compute without the signs.</string>
+    <string name="h_nz_mul_1_b">Count the minus signs: an even number gives plus, an odd number minus.</string>
+    <string name="h_nz_mul_1_c">The absolute value is %1$s, only the sign is missing.</string>
+    <string name="h_pz_sat_1_a">First form the fraction of the share.</string>
+    <string name="h_pz_sat_1_b">Percentage value divided by base value, then times 100.</string>
+    <string name="h_pz_sat_1_c">%1$s : %2$s = %3$s</string>
+    <string name="h_pz_von_1_a">How much is a single percent?</string>
+    <string name="h_pz_von_1_b">Base value divided by 100, then times the percentage rate.</string>
+    <string name="h_pz_von_1_c">One percent is %1$s.</string>
+    <string name="h_rechnung_mal">First step: %1$s · %2$s = %3$s</string>
+    <string name="h_rechnung_minus">First step: %1$s − %2$s = %3$s</string>
+    <string name="h_rechnung_plus">First step: %1$s + %2$s = %3$s</string>
+    <string name="held_beschriftung">Overall foundation</string>
+    <string name="k_br_add_1">Adding and subtracting fractions</string>
+    <string name="k_br_div_1">Dividing fractions</string>
+    <string name="k_br_kue_1">Reducing fractions</string>
+    <string name="k_br_mul_1">Multiplying fractions</string>
+    <string name="k_dz_add_1">Adding and subtracting decimal numbers</string>
+    <string name="k_dz_bru_1">Fractions as decimal numbers</string>
+    <string name="k_dz_mul_1">Multiplying decimal numbers</string>
+    <string name="k_gl_kla_1">Equations with brackets</string>
+    <string name="k_gl_lin_1">Solving linear equations</string>
+    <string name="k_gl_ter_1">Substituting into and evaluating terms</string>
+    <string name="k_gr_add_1">Addition and subtraction up to 1000</string>
+    <string name="k_gr_div_1">Division in the number range up to 144</string>
+    <string name="k_gr_mul_1">Times tables up to 10 times 10</string>
+    <string name="k_gr_mul_2">Two-digit times one-digit</string>
+    <string name="k_nz_add_1">Adding and subtracting negative numbers</string>
+    <string name="k_nz_mul_1">Sign rules for multiplication and division</string>
+    <string name="k_pz_sat_1">Calculating the percentage rate</string>
+    <string name="k_pz_von_1">Calculating the percentage value</string>
+    <string name="leer_basis_taste">Solve the first task</string>
+    <string name="leer_basis_text">As soon as you have solved your first task, a card for each competency area will fill in here.</string>
+    <string name="leer_basis_titel">No foundation recorded yet</string>
+    <string name="leer_detail_fehler_text">No typical error pattern has been noticed for this competency yet.</string>
+    <string name="leer_detail_fehler_titel">No pattern recognizable yet</string>
+    <string name="leer_fehler_text">When a known pattern shows up while calculating, it will be named here.</string>
+    <string name="leer_fehler_titel">No error patterns recorded</string>
+    <string name="leer_fortschritt_text">Learning time, success rate and observed error patterns will appear here soon. Start with a short session on Start.</string>
+    <string name="leer_fortschritt_titel">Nothing to show yet</string>
+    <string name="leer_training_taste">Back to Start</string>
+    <string name="leer_training_text">No task is currently running. You can start a new session at any time.</string>
+    <string name="leer_training_titel">Session ended</string>
+    <string name="leer_voraussetzung_text">This competency stands on its own; you can start right away.</string>
+    <string name="leer_voraussetzung_titel">No prerequisites</string>
+    <string name="modus_dunkel">Dark</string>
+    <string name="modus_hell">Light</string>
+    <string name="modus_system">Same as system</string>
+    <string name="niveau_e">E – advanced</string>
+    <string name="niveau_g">G – basic</string>
+    <string name="niveau_m">M – intermediate</string>
+    <string name="onboarding_bundesland">Federal state</string>
+    <string name="onboarding_klasse">Grade</string>
+    <string name="onboarding_niveau">Level</string>
+    <string name="onboarding_schulart">School type</string>
+    <string name="onboarding_text">Briefly tell us what the exercises should be tailored to. You can change this at any time in the settings.</string>
+    <string name="onboarding_titel">Welcome to Rechenwerk</string>
+    <string name="onboarding_weiter">Continue to the placement test</string>
+    <string name="prozent_wert">%1$s %%</string>
+    <string name="pruefung_antworten">Answers</string>
+    <string name="pruefung_aufgabe_ueberspringen">Skip this task</string>
+    <string name="pruefung_fertig_hinweis">The mastery levels now start where you stand. Everything else follows from training.</string>
+    <string name="pruefung_fertig_kopf">The test has been evaluated</string>
+    <string name="pruefung_fertig_text">Well done</string>
+    <string name="pruefung_loslegen">Get started</string>
+    <string name="pruefung_titel">Placement test</string>
+    <string name="pruefung_ueberspringen">Skip test</string>
+    <string name="pruefung_zaehler">Task %1$s of %2$s · at most seven minutes</string>
+    <string name="reiter_einstellungen">Settings</string>
+    <string name="reiter_fortschritt">Progress</string>
+    <string name="reiter_start">Start</string>
+    <string name="schulart_gemeinschaftsschule">Comprehensive school</string>
+    <string name="schulart_gymnasium">Grammar school</string>
+    <string name="schulart_hauptschule">Hauptschule / Werkrealschule</string>
+    <string name="schulart_realschule">Intermediate school</string>
+    <string name="start_basis">Your foundation</string>
+    <string name="start_fuenf_minuten">Train for five minutes</string>
+    <string name="start_gruss">Hello</string>
+    <string name="start_profil">Grade %1$s · %2$s · Level %3$s</string>
+    <string name="start_schwaechen">Close weaknesses</string>
+    <string name="start_weiterlernen">Keep learning</string>
+    <string name="taste_loeschen">Delete last character</string>
+    <string name="training_beenden">End session</string>
+    <string name="training_bilanz_aufgaben">Tasks</string>
+    <string name="training_bilanz_dauer">Duration</string>
+    <string name="training_bilanz_fertig">Done</string>
+    <string name="training_bilanz_kopf">This is what you just did</string>
+    <string name="training_bilanz_richtig">Of these correct</string>
+    <string name="training_bilanz_titel">Session ended</string>
+    <string name="training_fehlerart">Observed: %1$s</string>
+    <string name="training_form_bruch">Enter as a fraction, for example 3/4</string>
+    <string name="training_form_prozent">Enter a number, without the percent sign</string>
+    <string name="training_form_zahl">Enter a number, decimal point allowed</string>
+    <string name="training_hilfe">Help</string>
+    <string name="training_hilfe_mehr">One more level of help</string>
+    <string name="training_hilfe_stufe">Help, level %1$s of 4</string>
+    <string name="training_loesung">The correct answer would be %1$s</string>
+    <string name="training_platzhalter">Answer</string>
+    <string name="training_richtig">Correct</string>
+    <string name="training_senden">Send</string>
+    <string name="training_titel">Training</string>
+    <string name="training_warum">Why</string>
+    <string name="training_weiter">Continue</string>
+    <string name="training_zaehler">Task %1$s · %2$s correct</string>
+    <string name="w_add_zerlegen">Split %1$s into %2$s and %3$s</string>
+    <string name="w_br_div_regel">Dividing by a fraction means multiplying by its reciprocal.</string>
+    <string name="w_br_div_umformen">%1$s : %2$s = %1$s · %3$s</string>
+    <string name="w_br_erweitern">%1$s = %2$s and %3$s = %4$s</string>
+    <string name="w_br_hauptnenner">The common denominator of %1$s and %2$s is %3$s.</string>
+    <string name="w_br_mul_nenner">Denominator: %1$s · %2$s = %3$s</string>
+    <string name="w_br_mul_regel">Numerator times numerator, denominator times denominator.</string>
+    <string name="w_br_mul_zaehler">Numerator: %1$s · %2$s = %3$s</string>
+    <string name="w_br_zaehler_minus">Subtract numerators: %1$s − %2$s, that gives %3$s</string>
+    <string name="w_br_zaehler_plus">Add numerators: %1$s + %2$s, that gives %3$s</string>
+    <string name="w_div_ergebnis">So %1$s : %2$s = %3$s</string>
+    <string name="w_div_umkehr">Which number times %1$s gives %2$s?</string>
+    <string name="w_dz_aufgefuellt">%1$s and %2$s are now aligned place over place.</string>
+    <string name="w_dz_bru_ablesen">%1$s read off is %2$s</string>
+    <string name="w_dz_bru_erweitern">Expanding %1$s by %2$s gives %3$s</string>
+    <string name="w_dz_komma_ausrichten">Align the decimal points, pad missing places with zeros.</string>
+    <string name="w_dz_komma_setzen">Decimal point two places from the right: %1$s</string>
+    <string name="w_dz_ohne_komma">Computed without the decimal point: %1$s · %2$s = %3$s</string>
+    <string name="w_dz_stellen_zaehlen">%1$s and %2$s each have one decimal place, so two in total.</string>
+    <string name="w_gl_beide_seiten">Calculate %1$s on both sides: %2$s</string>
+    <string name="w_gl_durch_teilen">Divide by %1$s: x = %2$s</string>
+    <string name="w_gl_einsetzen">Substituting for x: %1$s</string>
+    <string name="w_gl_klammer_ausgleichen">Calculate − %1$s on both sides: x = %2$s</string>
+    <string name="w_gl_klammer_teilen">Divide by %1$s: x + %2$s = %3$s</string>
+    <string name="w_gl_punkt_vor_strich">Multiplication before addition: %1$s · %2$s = %3$s</string>
+    <string name="w_kue_ergebnis">Result: %1$s</string>
+    <string name="w_kue_ggt">The greatest common divisor of %1$s and %2$s is %3$s.</string>
+    <string name="w_kue_teilen">%1$s : %2$s = %3$s and %4$s : %2$s = %5$s</string>
+    <string name="w_mal_zerlegen">%1$s · %2$s is %1$s · %3$s and %1$s once more.</string>
+    <string name="w_nz_also">So %1$s</string>
+    <string name="w_nz_betraege_geteilt">Absolute values computed: %1$s : %2$s = %3$s</string>
+    <string name="w_nz_betraege_mal">Absolute values computed: %1$s · %2$s = %3$s</string>
+    <string name="w_nz_landen">You land at %1$s.</string>
+    <string name="w_nz_nach_links">Start at %1$s, then %2$s steps to the left.</string>
+    <string name="w_nz_nach_rechts">Start at %1$s, then %2$s steps to the right.</string>
+    <string name="w_nz_regel_gleich">Same signs give a plus.</string>
+    <string name="w_nz_regel_ungleich">Different signs give a minus.</string>
+    <string name="w_pz_anteil">Share: %1$s : %2$s = %3$s</string>
+    <string name="w_pz_ein_prozent">1 %% of %1$s is %2$s.</string>
+    <string name="w_pz_mal_hundert">%1$s · 100 = %2$s percent</string>
+    <string name="w_rechnung_mal">%1$s · %2$s = %3$s</string>
+    <string name="w_rechnung_minus">%1$s − %2$s = %3$s</string>
+    <string name="w_rechnung_plus">%1$s + %2$s = %3$s</string>
+    <string name="wann_faellig">due now</string>
+    <string name="wann_gestern">yesterday</string>
+    <string name="wann_heute">today</string>
+    <plurals name="wann_in_tagen">
+        <item quantity="one">in %1$d day</item>
+        <item quantity="other">in %1$d days</item>
+    </plurals>
+    <string name="wann_nie">never yet</string>
+    <plurals name="wann_vor_tagen">
+        <item quantity="one">%1$d day ago</item>
+        <item quantity="other">%1$d days ago</item>
+    </plurals>
+    <string name="zeit_minuten">%1$s min</string>
+    <string name="zeit_sekunden">%1$s s</string>
+    <string name="zeit_stunden">%1$s h %2$s min</string>
+    <string name="zurueck">Back</string>
+</resources>

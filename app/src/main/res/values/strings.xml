@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Rechenwerk</string>
+
+    <!-- Reiter der unteren Leiste -->
+    <string name="reiter_start">Start</string>
+    <string name="reiter_fortschritt">Fortschritt</string>
+    <string name="reiter_einstellungen">Einstellungen</string>
+
+    <!-- Allgemeines -->
+    <string name="zurueck">Zurück</string>
+    <string name="abbrechen">Abbrechen</string>
+    <string name="prozent_wert">%1$s %%</string>
+    <string name="zeit_stunden">%1$s h %2$s min</string>
+    <string name="zeit_minuten">%1$s min</string>
+    <string name="zeit_sekunden">%1$s s</string>
+    <string name="wann_nie">noch nie</string>
+    <string name="wann_heute">heute</string>
+    <string name="wann_gestern">gestern</string>
+    <string name="wann_faellig">jetzt fällig</string>
+    <plurals name="wann_vor_tagen">
+        <item quantity="one">vor %1$d Tag</item>
+        <item quantity="other">vor %1$d Tagen</item>
+    </plurals>
+    <plurals name="wann_in_tagen">
+        <item quantity="one">in %1$d Tag</item>
+        <item quantity="other">in %1$d Tagen</item>
+    </plurals>
+
+    <!-- Onboarding: Profil -->
+    <string name="onboarding_titel">Willkommen im Rechenwerk</string>
+    <string name="onboarding_text">Sag kurz, worauf die Übungen zugeschnitten sein sollen. Du kannst das später jederzeit in den Einstellungen ändern.</string>
+    <string name="onboarding_bundesland">Bundesland</string>
+    <string name="onboarding_schulart">Schulart</string>
+    <string name="onboarding_klasse">Klasse</string>
+    <string name="onboarding_niveau">Niveau</string>
+    <string name="onboarding_weiter">Weiter zum Einstufungstest</string>
+
+    <string name="bundesland_bw">Baden-Württemberg</string>
+    <string name="schulart_hauptschule">Hauptschule / Werkrealschule</string>
+    <string name="schulart_realschule">Realschule</string>
+    <string name="schulart_gemeinschaftsschule">Gemeinschaftsschule</string>
+    <string name="schulart_gymnasium">Gymnasium</string>
+    <string name="niveau_g">G – grundlegend</string>
+    <string name="niveau_m">M – mittel</string>
+    <string name="niveau_e">E – erweitert</string>
+
+    <!-- Onboarding: Einstufungstest -->
+    <string name="pruefung_titel">Einstufungstest</string>
+    <string name="pruefung_zaehler">Aufgabe %1$s von %2$s · höchstens sieben Minuten</string>
+    <string name="pruefung_antworten">Antworten</string>
+    <string name="pruefung_aufgabe_ueberspringen">Diese Aufgabe überspringen</string>
+    <string name="pruefung_ueberspringen">Test überspringen</string>
+    <string name="pruefung_fertig_text">Geschafft</string>
+    <string name="pruefung_fertig_kopf">Der Test ist ausgewertet</string>
+    <string name="pruefung_fertig_hinweis">Die Beherrschungsgrade starten jetzt dort, wo du stehst. Alles Weitere ergibt sich aus dem Training.</string>
+    <string name="pruefung_loslegen">Loslegen</string>
+
+    <!-- Start -->
+    <string name="start_gruss">Guten Tag</string>
+    <string name="start_profil">Klasse %1$s · %2$s · Niveau %3$s</string>
+    <string name="start_fuenf_minuten">Fünf Minuten trainieren</string>
+    <string name="start_weiterlernen">Weiterlernen</string>
+    <string name="start_schwaechen">Schwächen schließen</string>
+    <string name="start_basis">Deine Basis</string>
+    <string name="held_beschriftung">Basis insgesamt</string>
+
+    <string name="einordnung_offen">noch nicht angefangen</string>
+    <string name="einordnung_sicher">sicher</string>
+    <string name="einordnung_traegt">trägt, aber noch nicht sicher</string>
+    <string name="einordnung_arbeit">in Arbeit</string>
+    <string name="einordnung_training">braucht Training</string>
+    <plurals name="einordnung_offene">
+        <item quantity="one">%1$d Kompetenz braucht noch Training</item>
+        <item quantity="other">%1$d Kompetenzen brauchen noch Training</item>
+    </plurals>
+
+    <!-- Kompetenzbereiche -->
+    <string name="bereich_grundrechnen">Grundrechenarten</string>
+    <string name="bereich_brueche">Brüche</string>
+    <string name="bereich_dezimal">Dezimalzahlen</string>
+    <string name="bereich_negativ">Negative Zahlen</string>
+    <string name="bereich_prozent">Prozent</string>
+    <string name="bereich_gleichungen">Terme und Gleichungen</string>
+
+    <!-- Kompetenzen -->
+    <string name="k_gr_mul_1">Einmaleins bis 10 mal 10</string>
+    <string name="k_gr_add_1">Addieren und Subtrahieren bis 1000</string>
+    <string name="k_gr_div_1">Teilen im Zahlenraum bis 144</string>
+    <string name="k_gr_mul_2">Zweistellig mal einstellig</string>
+    <string name="k_dz_add_1">Dezimalzahlen addieren und subtrahieren</string>
+    <string name="k_dz_mul_1">Dezimalzahlen multiplizieren</string>
+    <string name="k_dz_bru_1">Brüche als Dezimalzahlen</string>
+    <string name="k_br_kue_1">Brüche kürzen</string>
+    <string name="k_br_add_1">Brüche addieren und subtrahieren</string>
+    <string name="k_br_mul_1">Brüche multiplizieren</string>
+    <string name="k_br_div_1">Brüche dividieren</string>
+    <string name="k_nz_add_1">Negative Zahlen addieren und subtrahieren</string>
+    <string name="k_nz_mul_1">Vorzeichenregeln beim Mal- und Geteiltrechnen</string>
+    <string name="k_pz_von_1">Prozentwert berechnen</string>
+    <string name="k_pz_sat_1">Prozentsatz berechnen</string>
+    <string name="k_gl_ter_1">Terme einsetzen und auswerten</string>
+    <string name="k_gl_lin_1">Lineare Gleichungen lösen</string>
+    <string name="k_gl_kla_1">Gleichungen mit Klammer</string>
+
+    <!-- Aufgabenstellungen -->
+    <string name="f_mal">%1$s · %2$s</string>
+    <string name="f_geteilt">%1$s : %2$s</string>
+    <string name="f_plus">%1$s + %2$s</string>
+    <string name="f_minus">%1$s − %2$s</string>
+    <string name="f_kuerzen">%1$s vollständig kürzen</string>
+    <string name="f_als_dezimalzahl">%1$s als Dezimalzahl</string>
+    <string name="f_prozent_von">%1$s %% von %2$s</string>
+    <string name="f_prozentsatz">Wie viel Prozent sind %1$s von %2$s?</string>
+    <string name="f_term_fuer_x">%1$s für x = %2$s</string>
+    <string name="f_ausdruck">%1$s</string>
+
+    <!-- Rechenwege -->
+    <string name="w_rechnung_mal">%1$s · %2$s = %3$s</string>
+    <string name="w_rechnung_plus">%1$s + %2$s = %3$s</string>
+    <string name="w_rechnung_minus">%1$s − %2$s = %3$s</string>
+    <string name="w_mal_zerlegen">%1$s · %2$s ist %1$s · %3$s und noch einmal %1$s.</string>
+    <string name="w_add_zerlegen">%1$s zerlegen in %2$s und %3$s</string>
+    <string name="w_div_umkehr">Welche Zahl mal %1$s ergibt %2$s?</string>
+    <string name="w_div_ergebnis">Also %1$s : %2$s = %3$s</string>
+
+    <string name="w_dz_komma_ausrichten">Kommas untereinander, fehlende Stellen mit Null auffüllen.</string>
+    <string name="w_dz_aufgefuellt">%1$s und %2$s stehen jetzt Stelle über Stelle.</string>
+    <string name="w_dz_ohne_komma">Ohne Komma gerechnet: %1$s · %2$s = %3$s</string>
+    <string name="w_dz_stellen_zaehlen">%1$s und %2$s haben je eine Nachkommastelle, zusammen also zwei.</string>
+    <string name="w_dz_komma_setzen">Komma zwei Stellen von rechts: %1$s</string>
+    <string name="w_dz_bru_erweitern">%1$s mit %2$s erweitern ergibt %3$s</string>
+    <string name="w_dz_bru_ablesen">%1$s heißt abgelesen %2$s</string>
+
+    <string name="w_kue_ggt">Größter gemeinsamer Teiler von %1$s und %2$s ist %3$s.</string>
+    <string name="w_kue_teilen">%1$s : %2$s = %3$s und %4$s : %2$s = %5$s</string>
+    <string name="w_kue_ergebnis">Ergebnis: %1$s</string>
+
+    <string name="w_br_hauptnenner">Hauptnenner von %1$s und %2$s ist %3$s.</string>
+    <string name="w_br_erweitern">%1$s = %2$s und %3$s = %4$s</string>
+    <string name="w_br_zaehler_plus">Zähler addieren: %1$s + %2$s, das ergibt %3$s</string>
+    <string name="w_br_zaehler_minus">Zähler subtrahieren: %1$s − %2$s, das ergibt %3$s</string>
+    <string name="w_br_mul_regel">Zähler mal Zähler, Nenner mal Nenner.</string>
+    <string name="w_br_mul_zaehler">Zähler: %1$s · %2$s = %3$s</string>
+    <string name="w_br_mul_nenner">Nenner: %1$s · %2$s = %3$s</string>
+    <string name="w_br_div_regel">Durch einen Bruch teilen heißt mit seinem Kehrwert malnehmen.</string>
+    <string name="w_br_div_umformen">%1$s : %2$s = %1$s · %3$s</string>
+
+    <string name="w_nz_nach_rechts">Start bei %1$s, dann %2$s Schritte nach rechts.</string>
+    <string name="w_nz_nach_links">Start bei %1$s, dann %2$s Schritte nach links.</string>
+    <string name="w_nz_landen">Du landest bei %1$s.</string>
+    <string name="w_nz_betraege_mal">Beträge gerechnet: %1$s · %2$s = %3$s</string>
+    <string name="w_nz_betraege_geteilt">Beträge gerechnet: %1$s : %2$s = %3$s</string>
+    <string name="w_nz_regel_gleich">Gleiche Vorzeichen ergeben ein Plus.</string>
+    <string name="w_nz_regel_ungleich">Verschiedene Vorzeichen ergeben ein Minus.</string>
+    <string name="w_nz_also">Also %1$s</string>
+
+    <string name="w_pz_ein_prozent">1 %% von %1$s sind %2$s.</string>
+    <string name="w_pz_anteil">Anteil: %1$s : %2$s = %3$s</string>
+    <string name="w_pz_mal_hundert">%1$s · 100 = %2$s Prozent</string>
+
+    <string name="w_gl_einsetzen">Für x einsetzen: %1$s</string>
+    <string name="w_gl_punkt_vor_strich">Punkt vor Strich: %1$s · %2$s = %3$s</string>
+    <string name="w_gl_beide_seiten">Auf beiden Seiten %1$s rechnen: %2$s</string>
+    <string name="w_gl_durch_teilen">Durch %1$s teilen: x = %2$s</string>
+    <string name="w_gl_klammer_teilen">Durch %1$s teilen: x + %2$s = %3$s</string>
+    <string name="w_gl_klammer_ausgleichen">Auf beiden Seiten − %1$s rechnen: x = %2$s</string>
+
+    <!-- Gestufte Hilfe -->
+    <string name="h_rechnung_mal">Erster Schritt: %1$s · %2$s = %3$s</string>
+    <string name="h_rechnung_plus">Erster Schritt: %1$s + %2$s = %3$s</string>
+    <string name="h_rechnung_minus">Erster Schritt: %1$s − %2$s = %3$s</string>
+
+    <string name="h_gr_mul_1_a">Nimm eine Reihe, die du sicher kennst, als Sprungbrett.</string>
+    <string name="h_gr_mul_1_b">Rechne %1$s · %2$s und lege noch einmal %1$s dazu.</string>
+    <string name="h_gr_mul_1_c">%1$s · %2$s = %3$s. Es fehlt noch ein %1$s.</string>
+
+    <string name="h_gr_add_1_a">Nimm dir den zweiten Summanden in zwei Portionen vor.</string>
+    <string name="h_gr_add_1_b">Erst %1$s dazu, danach die restlichen %2$s.</string>
+    <string name="h_gr_sub_1_a">Nimm dir den Subtrahenden in zwei Portionen vor.</string>
+    <string name="h_gr_sub_1_b">Erst %1$s weg, danach die restlichen %2$s.</string>
+
+    <string name="h_gr_div_1_a">Teilen heißt rückwärts malnehmen.</string>
+    <string name="h_gr_div_1_b">Suche in der Reihe von %1$s die Zahl %2$s.</string>
+    <string name="h_gr_div_1_c">%1$s · %2$s = %3$s, das ist noch zu klein.</string>
+
+    <string name="h_gr_mul_2_a">Zerlege die größere Zahl in Zehner und Einer.</string>
+    <string name="h_gr_mul_2_b">Rechne %1$s · %2$s und %3$s · %2$s und addiere beides.</string>
+
+    <string name="h_dz_add_1_a">Sieh zuerst nach, wo bei beiden Zahlen das Komma steht.</string>
+    <string name="h_dz_add_1_b">Fülle die kürzere Zahl mit einer Null auf, dann stehen die Stellen passend.</string>
+    <string name="h_dz_add_1_c">%1$s und %2$s, jetzt Stelle für Stelle.</string>
+
+    <string name="h_dz_mul_1_a">Rechne die Aufgabe zuerst ganz ohne Komma.</string>
+    <string name="h_dz_mul_1_b">Zähle die Nachkommastellen beider Zahlen zusammen, so viele hat das Ergebnis.</string>
+
+    <string name="h_dz_bru_1_a">Ein Bruch ist nichts anderes als eine Divisionsaufgabe.</string>
+    <string name="h_dz_bru_1_b">Erweitere auf 10, 100 oder 1000, dann kannst du die Dezimalzahl ablesen.</string>
+    <string name="h_dz_bru_1_c">Erweitere mit %1$s auf den Nenner %2$s.</string>
+
+    <string name="h_br_kue_1_a">Welche Zahl teilt Zähler und Nenner zugleich?</string>
+    <string name="h_br_kue_1_b">Prüfe der Reihe nach 2, 3 und 5 und kürze so lange, bis nichts mehr geht.</string>
+    <string name="h_br_kue_1_c">Beide sind durch %1$s teilbar.</string>
+
+    <string name="h_br_add_1_a">Ungleiche Nenner lassen sich nicht direkt zusammenrechnen.</string>
+    <string name="h_br_add_1_b">Mach beide Brüche gleichnamig, danach rechnest du nur die Zähler.</string>
+    <string name="h_br_add_1_c">Der Hauptnenner ist %1$s.</string>
+
+    <string name="h_br_mul_1_a">Hier brauchst du keinen Hauptnenner.</string>
+    <string name="h_br_mul_1_b">Multipliziere Zähler mit Zähler und Nenner mit Nenner.</string>
+    <string name="h_br_mul_1_c">Zähler: %1$s · %2$s = %3$s</string>
+
+    <string name="h_br_div_1_a">Teilen durch einen Bruch lässt sich in eine Malaufgabe verwandeln.</string>
+    <string name="h_br_div_1_b">Dreh den zweiten Bruch um und multipliziere.</string>
+    <string name="h_br_div_1_c">Der Kehrwert von %1$s ist %2$s.</string>
+
+    <string name="h_nz_add_1_a">Denk an den Zahlenstrahl.</string>
+    <string name="h_nz_add_1_b">Plus heißt nach rechts, minus heißt nach links.</string>
+    <string name="h_nz_add_1_c">Von %1$s aus sind es %2$s Schritte.</string>
+
+    <string name="h_nz_mul_1_a">Rechne zuerst ohne Vorzeichen.</string>
+    <string name="h_nz_mul_1_b">Zähle die Minuszeichen: eine gerade Anzahl ergibt Plus, eine ungerade Minus.</string>
+    <string name="h_nz_mul_1_c">Der Betrag ist %1$s, es fehlt nur noch das Vorzeichen.</string>
+
+    <string name="h_pz_von_1_a">Wie viel ist ein einziges Prozent?</string>
+    <string name="h_pz_von_1_b">Grundwert durch 100, danach mal den Prozentsatz.</string>
+    <string name="h_pz_von_1_c">Ein Prozent sind %1$s.</string>
+
+    <string name="h_pz_sat_1_a">Bilde zuerst den Anteil als Bruch.</string>
+    <string name="h_pz_sat_1_b">Prozentwert durch Grundwert, danach mal 100.</string>
+    <string name="h_pz_sat_1_c">%1$s : %2$s = %3$s</string>
+
+    <string name="h_gl_ter_1_a">Setze die Zahl für x ein und schreibe den Term neu auf.</string>
+    <string name="h_gl_ter_1_b">Punkt vor Strich: erst malnehmen, dann addieren oder subtrahieren.</string>
+
+    <string name="h_gl_lin_1_a">Was steht dem x noch im Weg?</string>
+    <string name="h_gl_lin_1_b">Erst die Zahl auf die andere Seite bringen, dann durch den Faktor teilen.</string>
+    <string name="h_gl_zwischenschritt">So sieht die Gleichung nach dem ersten Schritt aus: %1$s</string>
+
+    <string name="h_gl_kla_1_a">Die Klammer steht als Ganzes mal %1$s.</string>
+    <string name="h_gl_kla_1_b">Teile zuerst durch den Faktor vor der Klammer, die Klammer bleibt dabei zusammen.</string>
+
+    <!-- Fehlerarten -->
+    <string name="fa_reihe_verzaehlt">Eine Reihe zu wenig gerechnet</string>
+    <string name="fa_addiert_statt_mal">Addiert statt multipliziert</string>
+    <string name="fa_uebertrag_vergessen">Übertrag vergessen</string>
+    <string name="fa_um_zehn_daneben">Um zehn danebengelandet</string>
+    <string name="fa_entbuendeln_vergessen">Nicht entbündelt, kleinere von größerer Ziffer abgezogen</string>
+    <string name="fa_divisor_als_ergebnis">Den Divisor als Ergebnis genommen</string>
+    <string name="fa_subtrahiert_statt_geteilt">Subtrahiert statt geteilt</string>
+    <string name="fa_einer_vergessen">Die Einer nicht mitgerechnet</string>
+    <string name="fa_stellenwert_verloren">Stellenwert der Zehner verloren</string>
+    <string name="fa_stellen_nicht_ausgerichtet">Kommas nicht untereinander gestellt</string>
+    <string name="fa_komma_verrutscht">Komma verrutscht</string>
+    <string name="fa_komma_zu_weit_rechts">Komma eine Stelle zu weit rechts</string>
+    <string name="fa_komma_zu_weit_links">Komma eine Stelle zu weit links</string>
+    <string name="fa_bruchstrich_verwechselt">Zähler und Nenner vertauscht</string>
+    <string name="fa_nur_zaehler_gekuerzt">Nur den Zähler gekürzt</string>
+    <string name="fa_nicht_fertig_gekuerzt">Nicht vollständig gekürzt</string>
+    <string name="fa_zaehler_und_nenner_verrechnet">Zähler und Nenner getrennt verrechnet</string>
+    <string name="fa_nenner_erweitert_zaehler_nicht">Nenner erweitert, Zähler nicht</string>
+    <string name="fa_kreuzweise_multipliziert">Über Kreuz multipliziert</string>
+    <string name="fa_nur_zaehler_multipliziert">Nur den Zähler multipliziert</string>
+    <string name="fa_kehrwert_vergessen">Kehrwert vergessen, direkt multipliziert</string>
+    <string name="fa_falschen_bruch_gedreht">Den falschen Bruch umgedreht</string>
+    <string name="fa_vorzeichen_vertauscht">Vorzeichen vertauscht</string>
+    <string name="fa_minus_uebersehen">Minuszeichen übersehen</string>
+    <string name="fa_vorzeichenregel_verwechselt">Vorzeichenregel verwechselt</string>
+    <string name="fa_durch_hundert_vergessen">Nicht durch 100 geteilt</string>
+    <string name="fa_geteilt_statt_mal">Geteilt statt malgenommen</string>
+    <string name="fa_bezug_vertauscht">Grundwert und Prozentwert vertauscht</string>
+    <string name="fa_mal_hundert_vergessen">Mal 100 vergessen</string>
+    <string name="fa_punkt_vor_strich_missachtet">Punkt vor Strich missachtet</string>
+    <string name="fa_mal_als_plus">Malnehmen als Addieren gelesen</string>
+    <string name="fa_summand_uebersehen">Den Summanden nicht weggerechnet</string>
+    <string name="fa_falsche_gegenrechnung">In die falsche Richtung umgestellt</string>
+    <string name="fa_klammer_nicht_beachtet">Klammer nicht als Ganzes behandelt</string>
+    <string name="fa_falsches_vorzeichen_umgestellt">Beim Umstellen das Vorzeichen gedreht</string>
+
+    <!-- Training -->
+    <string name="training_titel">Training</string>
+    <string name="training_beenden">Sitzung beenden</string>
+    <string name="training_zaehler">Aufgabe %1$s · %2$s richtig</string>
+    <string name="training_platzhalter">Antwort</string>
+    <string name="training_form_zahl">Zahl eingeben, Komma erlaubt</string>
+    <string name="training_form_bruch">Als Bruch eingeben, zum Beispiel 3/4</string>
+    <string name="training_form_prozent">Zahl eingeben, ohne Prozentzeichen</string>
+    <string name="training_senden">Senden</string>
+    <string name="training_weiter">Weiter</string>
+    <string name="training_hilfe">Hilfe</string>
+    <string name="training_hilfe_mehr">Noch eine Stufe Hilfe</string>
+    <string name="training_hilfe_stufe">Hilfe, Stufe %1$s von 4</string>
+    <string name="training_richtig">Richtig</string>
+    <string name="training_loesung">Richtig wäre %1$s</string>
+    <string name="training_fehlerart">Beobachtet: %1$s</string>
+    <string name="training_warum">Warum</string>
+    <string name="taste_loeschen">Letztes Zeichen löschen</string>
+    <string name="training_bilanz_titel">Sitzung beendet</string>
+    <string name="training_bilanz_kopf">Das hast du gerade gemacht</string>
+    <string name="training_bilanz_aufgaben">Aufgaben</string>
+    <string name="training_bilanz_richtig">Davon richtig</string>
+    <string name="training_bilanz_dauer">Dauer</string>
+    <string name="training_bilanz_fertig">Fertig</string>
+
+    <!-- Fortschritt -->
+    <string name="fortschritt_titel">Fortschritt</string>
+    <string name="fortschritt_beherrscht">Beherrscht</string>
+    <string name="fortschritt_in_arbeit">In Arbeit</string>
+    <string name="fortschritt_quote">Trefferquote</string>
+    <string name="fortschritt_lernzeit">Lernzeit</string>
+    <string name="fortschritt_wiederholungen">Wiederholungen</string>
+    <string name="fortschritt_aufgaben">Aufgaben</string>
+    <string name="fortschritt_bestwerte">Persönliche Bestwerte</string>
+    <string name="fortschritt_beste_serie">Längste Reihe richtiger Antworten</string>
+    <string name="fortschritt_schnellste">Schnellste richtige Antwort</string>
+    <string name="fortschritt_sitzungen">Sitzungen</string>
+    <string name="fortschritt_kompetenzen">Kompetenzen in Arbeit</string>
+    <string name="fortschritt_fehlerarten">Beobachtete Fehlerarten</string>
+
+    <!-- Kompetenzdetail -->
+    <string name="detail_grad">Beherrschungsgrad</string>
+    <string name="detail_training">Gezielt trainieren</string>
+    <string name="detail_zahlen">Zahlen zu dieser Kompetenz</string>
+    <string name="detail_versuche">Versuche</string>
+    <string name="detail_treffer">Treffer</string>
+    <string name="detail_zeit">Durchschnittliche Antwortzeit</string>
+    <string name="detail_kontakt">Letzter Kontakt</string>
+    <string name="detail_wiederholung">Nächste Wiederholung</string>
+    <string name="detail_wiederholungen">Bisherige Wiederholungen</string>
+    <string name="detail_fehlerarten">Zuletzt beobachtete Fehlerarten</string>
+    <string name="detail_voraussetzungen">Voraussetzungen</string>
+
+    <!-- Einstellungen -->
+    <string name="einst_titel">Einstellungen</string>
+    <string name="einst_profil">Profil</string>
+    <string name="einst_erscheinung">Erscheinungsbild</string>
+    <string name="modus_system">Wie das System</string>
+    <string name="modus_dunkel">Dunkel</string>
+    <string name="modus_hell">Hell</string>
+    <string name="einst_daten">Daten</string>
+    <string name="einst_export">Exportieren</string>
+    <string name="einst_import">Importieren</string>
+    <string name="einst_export_fertig">Daten in die gewählte Datei geschrieben.</string>
+    <string name="einst_export_fehler">Die Datei konnte nicht geschrieben werden.</string>
+    <string name="einst_import_fertig">Daten übernommen.</string>
+    <string name="einst_import_fehler">Diese Datei passt nicht zum Rechenwerk und wurde nicht übernommen.</string>
+    <string name="einst_quelle">Lehrplanquelle</string>
+    <string name="einst_quelle_name">Grundlage</string>
+    <string name="einst_quelle_wert">Bildungsplan Baden-Württemberg, Mathematik, Sekundarstufe I</string>
+    <string name="einst_quelle_fassung">Fassung</string>
+    <string name="einst_quelle_fassung_wert">2016</string>
+    <string name="einst_lokal">Alle Daten bleiben auf diesem Gerät. Kein Konto, kein Netzzugriff.</string>
+    <string name="einst_zuruecksetzen">Zurücksetzen</string>
+    <string name="einst_zuruecksetzen_taste">Lokale Daten zurücksetzen</string>
+    <string name="einst_loeschen_titel">Wirklich zurücksetzen?</string>
+    <string name="einst_loeschen_text">Profil, Beherrschungsgrade und alle Zahlen werden gelöscht. Das lässt sich nicht rückgängig machen. Wenn du die Daten behalten willst, exportiere sie vorher.</string>
+    <string name="einst_loeschen_ja">Zurücksetzen</string>
+    <string name="einst_loeschen_fertig">Alle lokalen Daten wurden gelöscht.</string>
+
+    <!-- Leerzustände -->
+    <string name="leer_basis_titel">Noch keine Basis erfasst</string>
+    <string name="leer_basis_text">Sobald du die erste Aufgabe gerechnet hast, füllt sich hier eine Karte je Kompetenzbereich.</string>
+    <string name="leer_basis_taste">Erste Aufgabe rechnen</string>
+    <string name="leer_fortschritt_titel">Noch nichts zu zeigen</string>
+    <string name="leer_fortschritt_text">Hier stehen bald Lernzeit, Trefferquote und beobachtete Fehlerarten. Beginne mit einer kurzen Sitzung im Start.</string>
+    <string name="leer_fehler_titel">Keine Fehlerarten erfasst</string>
+    <string name="leer_fehler_text">Wenn beim Rechnen ein bekanntes Muster auftaucht, wird es hier beim Namen genannt.</string>
+    <string name="leer_detail_fehler_titel">Noch kein Muster erkennbar</string>
+    <string name="leer_detail_fehler_text">Zu dieser Kompetenz ist bisher keine typische Fehlerart aufgefallen.</string>
+    <string name="leer_voraussetzung_titel">Keine Voraussetzungen</string>
+    <string name="leer_voraussetzung_text">Diese Kompetenz steht für sich, du kannst sofort einsteigen.</string>
+    <string name="leer_training_titel">Sitzung beendet</string>
+    <string name="leer_training_text">Es läuft gerade keine Aufgabe. Du kannst jederzeit eine neue Sitzung starten.</string>
+    <string name="leer_training_taste">Zurück zum Start</string>
+
+</resources>

@@ -1,0 +1,13 @@
+# Datenfluss-Manifest (Spec §5.1). Erzeugt von der Fabrik fuer eine App
+# ohne Netzziele: alles bleibt auf dem Geraet. Bei Netzzugriff hier jeden
+# Datentyp mit Ziel/Empfaenger nachtragen -- Station 8 vergleicht gegen
+# Code, SDKs und Paket.
+- datentyp: keine_personenbezogenen_daten
+  quelle: keine
+  ziel: nur_lokal
+  zweck: rechenwerk
+  speicherung: keine
+  weitergabe: keine
+  empfaenger: null
+  aufbewahrung: entfaellt
+  loeschung: entfaellt

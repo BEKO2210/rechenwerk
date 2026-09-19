@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="abbrechen">İptal</string>
+    <string name="app_name">Rechenwerk</string>
+    <string name="bereich_brueche">Kesirler</string>
+    <string name="bereich_dezimal">Ondalık sayılar</string>
+    <string name="bereich_gleichungen">İfadeler ve denklemler</string>
+    <string name="bereich_grundrechnen">Temel işlemler</string>
+    <string name="bereich_negativ">Negatif sayılar</string>
+    <string name="bereich_prozent">Yüzde</string>
+    <string name="bundesland_bw">Baden-Württemberg</string>
+    <string name="detail_fehlerarten">Son gözlenen hata türleri</string>
+    <string name="detail_grad">Ustalık derecesi</string>
+    <string name="detail_kontakt">Son temas</string>
+    <string name="detail_training">Hedefli çalışma</string>
+    <string name="detail_treffer">Doğru cevaplar</string>
+    <string name="detail_versuche">Denemeler</string>
+    <string name="detail_voraussetzungen">Ön koşullar</string>
+    <string name="detail_wiederholung">Sonraki tekrar</string>
+    <string name="detail_wiederholungen">Şimdiye kadarki tekrarlar</string>
+    <string name="detail_zahlen">Bu yetkinliğe ait sayılar</string>
+    <string name="detail_zeit">Ortalama cevap süresi</string>
+    <string name="einordnung_arbeit">devam ediyor</string>
+    <string name="einordnung_offen">henüz başlanmadı</string>
+    <plurals name="einordnung_offene">
+        <item quantity="one">%1$d yetkinlik hâlâ çalışma gerektiriyor</item>
+        <item quantity="other">%1$d yetkinlik hâlâ çalışma gerektiriyor</item>
+    </plurals>
+    <string name="einordnung_sicher">sağlam</string>
+    <string name="einordnung_traegt">oluyor ama henüz sağlam değil</string>
+    <string name="einordnung_training">çalışma gerekiyor</string>
+    <string name="einst_daten">Veriler</string>
+    <string name="einst_erscheinung">Görünüm</string>
+    <string name="einst_export">Dışa aktar</string>
+    <string name="einst_export_fehler">Dosya yazılamadı.</string>
+    <string name="einst_export_fertig">Veriler seçilen dosyaya yazıldı.</string>
+    <string name="einst_import">İçe aktar</string>
+    <string name="einst_import_fehler">Bu dosya Rechenwerk ile uyuşmuyor ve alınmadı.</string>
+    <string name="einst_import_fertig">Veriler alındı.</string>
+    <string name="einst_loeschen_fertig">Tüm yerel veriler silindi.</string>
+    <string name="einst_loeschen_ja">Sıfırla</string>
+    <string name="einst_loeschen_text">Profil, ustalık dereceleri ve tüm sayılar silinecek. Bu geri alınamaz. Verileri saklamak istiyorsan önce dışa aktar.</string>
+    <string name="einst_loeschen_titel">Gerçekten sıfırlansın mı?</string>
+    <string name="einst_lokal">Tüm veriler bu cihazda kalır. Hesap yok, ağ erişimi yok.</string>
+    <string name="einst_profil">Profil</string>
+    <string name="einst_quelle">Müfredat kaynağı</string>
+    <string name="einst_quelle_fassung">Sürüm</string>
+    <string name="einst_quelle_fassung_wert">2016</string>
+    <string name="einst_quelle_name">Temel</string>
+    <string name="einst_quelle_wert">Baden-Württemberg eğitim planı, Matematik, Ortaöğretim I</string>
+    <string name="einst_titel">Ayarlar</string>
+    <string name="einst_zuruecksetzen">Sıfırla</string>
+    <string name="einst_zuruecksetzen_taste">Yerel verileri sıfırla</string>
+    <string name="f_als_dezimalzahl">%1$s ondalık sayı olarak</string>
+    <string name="f_ausdruck">%1$s</string>
+    <string name="f_geteilt">%1$s : %2$s</string>
+    <string name="f_kuerzen">%1$s tamamen sadeleştir</string>
+    <string name="f_mal">%1$s · %2$s</string>
+    <string name="f_minus">%1$s − %2$s</string>
+    <string name="f_plus">%1$s + %2$s</string>
+    <string name="f_prozent_von">%2$s sayısının %% %1$s\'i</string>
+    <string name="f_prozentsatz">%1$s, %2$s sayısının yüzde kaçıdır?</string>
+    <string name="f_term_fuer_x">x = %2$s için %1$s</string>
+    <string name="fa_addiert_statt_mal">Çarpmak yerine topladı</string>
+    <string name="fa_bezug_vertauscht">Taban değer ile yüzde değeri karıştırıldı</string>
+    <string name="fa_bruchstrich_verwechselt">Pay ile payda karıştırıldı</string>
+    <string name="fa_divisor_als_ergebnis">Bölen sonuç olarak alındı</string>
+    <string name="fa_durch_hundert_vergessen">100\'e bölme unutuldu</string>
+    <string name="fa_einer_vergessen">Birler basamağı hesaba katılmadı</string>
+    <string name="fa_entbuendeln_vergessen">Onluk bozulmadı, küçük basamak büyükten çıkarıldı</string>
+    <string name="fa_falsche_gegenrechnung">Yanlış yönde çözüldü</string>
+    <string name="fa_falschen_bruch_gedreht">Yanlış kesir ters çevrildi</string>
+    <string name="fa_falsches_vorzeichen_umgestellt">Çözerken işaret ters çevrildi</string>
+    <string name="fa_geteilt_statt_mal">Çarpmak yerine böldü</string>
+    <string name="fa_kehrwert_vergessen">Ters çevirme unutuldu, doğrudan çarpıldı</string>
+    <string name="fa_klammer_nicht_beachtet">Parantez bir bütün olarak ele alınmadı</string>
+    <string name="fa_komma_verrutscht">Virgül kaydı</string>
+    <string name="fa_komma_zu_weit_links">Virgül bir basamak fazla solda</string>
+    <string name="fa_komma_zu_weit_rechts">Virgül bir basamak fazla sağda</string>
+    <string name="fa_kreuzweise_multipliziert">Çapraz çarpıldı</string>
+    <string name="fa_mal_als_plus">Çarpma toplama olarak okundu</string>
+    <string name="fa_mal_hundert_vergessen">100 ile çarpma unutuldu</string>
+    <string name="fa_minus_uebersehen">Eksi işareti gözden kaçtı</string>
+    <string name="fa_nenner_erweitert_zaehler_nicht">Payda genişletildi, pay genişletilmedi</string>
+    <string name="fa_nicht_fertig_gekuerzt">Tamamen sadeleştirilmedi</string>
+    <string name="fa_nur_zaehler_gekuerzt">Sadece pay sadeleştirildi</string>
+    <string name="fa_nur_zaehler_multipliziert">Sadece pay çarpıldı</string>
+    <string name="fa_punkt_vor_strich_missachtet">İşlem önceliği göz ardı edildi</string>
+    <string name="fa_reihe_verzaehlt">Bir satır eksik hesaplandı</string>
+    <string name="fa_stellen_nicht_ausgerichtet">Virgüller alt alta yazılmadı</string>
+    <string name="fa_stellenwert_verloren">Onlar basamağının basamak değeri kayboldu</string>
+    <string name="fa_subtrahiert_statt_geteilt">Bölmek yerine çıkardı</string>
+    <string name="fa_summand_uebersehen">Toplanan diğer tarafa atılmadı</string>
+    <string name="fa_uebertrag_vergessen">Elde unutuldu</string>
+    <string name="fa_um_zehn_daneben">On kadar yanında</string>
+    <string name="fa_vorzeichen_vertauscht">İşaretler karıştırıldı</string>
+    <string name="fa_vorzeichenregel_verwechselt">İşaret kuralı karıştırıldı</string>
+    <string name="fa_zaehler_und_nenner_verrechnet">Pay ve payda ayrı ayrı hesaplandı</string>
+    <string name="fortschritt_aufgaben">Görevler</string>
+    <string name="fortschritt_beherrscht">Öğrenildi</string>
+    <string name="fortschritt_beste_serie">En uzun doğru cevap dizisi</string>
+    <string name="fortschritt_bestwerte">Kişisel rekorlar</string>
+    <string name="fortschritt_fehlerarten">Gözlenen hata türleri</string>
+    <string name="fortschritt_in_arbeit">Devam ediyor</string>
+    <string name="fortschritt_kompetenzen">Üzerinde çalışılan yetkinlikler</string>
+    <string name="fortschritt_lernzeit">Öğrenme süresi</string>
+    <string name="fortschritt_quote">Başarı oranı</string>
+    <string name="fortschritt_schnellste">En hızlı doğru cevap</string>
+    <string name="fortschritt_sitzungen">Oturumlar</string>
+    <string name="fortschritt_titel">İlerleme</string>
+    <string name="fortschritt_wiederholungen">Tekrarlar</string>
+    <string name="h_br_add_1_a">Farklı paydalar doğrudan toplanamaz.</string>
+    <string name="h_br_add_1_b">İki kesri de ortak paydaya getir, sonra sadece payları hesapla.</string>
+    <string name="h_br_add_1_c">Ortak payda %1$s.</string>
+    <string name="h_br_div_1_a">Bir kesre bölmek bir çarpma işlemine dönüştürülebilir.</string>
+    <string name="h_br_div_1_b">İkinci kesri ters çevir ve çarp.</string>
+    <string name="h_br_div_1_c">%1$s sayısının çarpmaya göre tersi %2$s.</string>
+    <string name="h_br_kue_1_a">Hangi sayı payı ve paydayı aynı anda böler?</string>
+    <string name="h_br_kue_1_b">Sırayla 2, 3 ve 5\'i dene ve mümkün olduğunca sadeleştir.</string>
+    <string name="h_br_kue_1_c">İkisi de %1$s ile bölünebilir.</string>
+    <string name="h_br_mul_1_a">Burada ortak paydaya ihtiyacın yok.</string>
+    <string name="h_br_mul_1_b">Payı payla, paydayı paydayla çarp.</string>
+    <string name="h_br_mul_1_c">Pay: %1$s · %2$s = %3$s</string>
+    <string name="h_dz_add_1_a">Önce iki sayıda da virgülün nerede olduğuna bak.</string>
+    <string name="h_dz_add_1_b">Kısa sayıyı sıfırla doldur, böylece basamaklar denk gelir.</string>
+    <string name="h_dz_add_1_c">%1$s ve %2$s, şimdi basamak basamak.</string>
+    <string name="h_dz_bru_1_a">Kesir, bölme işleminden başka bir şey değildir.</string>
+    <string name="h_dz_bru_1_b">10, 100 veya 1000 ile genişlet, sonra ondalık sayıyı okuyabilirsin.</string>
+    <string name="h_dz_bru_1_c">%1$s ile genişleterek paydayı %2$s yap.</string>
+    <string name="h_dz_mul_1_a">Önce işlemi tamamen virgülsüz hesapla.</string>
+    <string name="h_dz_mul_1_b">İki sayının ondalık basamaklarını topla, sonuçta o kadar olur.</string>
+    <string name="h_gl_kla_1_a">Parantez bir bütün olarak %1$s ile çarpılıyor.</string>
+    <string name="h_gl_kla_1_b">Önce parantezin önündeki çarpana böl, parantez bu sırada bir arada kalır.</string>
+    <string name="h_gl_lin_1_a">x\'in önünde daha ne var?</string>
+    <string name="h_gl_lin_1_b">Önce sayıyı diğer tarafa taşı, sonra çarpana böl.</string>
+    <string name="h_gl_ter_1_a">Sayıyı x yerine koy ve ifadeyi yeniden yaz.</string>
+    <string name="h_gl_ter_1_b">İşlem önceliği: önce çarp, sonra topla veya çıkar.</string>
+    <string name="h_gl_zwischenschritt">İlk adımdan sonra denklem şöyle görünüyor: %1$s</string>
+    <string name="h_gr_add_1_a">İkinci toplananı iki parçaya böl.</string>
+    <string name="h_gr_add_1_b">Önce %1$s ekle, sonra kalan %2$s.</string>
+    <string name="h_gr_div_1_a">Bölmek, tersine çarpmak demektir.</string>
+    <string name="h_gr_div_1_b">%1$s çarpım tablosunda %2$s sayısını ara.</string>
+    <string name="h_gr_div_1_c">%1$s · %2$s = %3$s, bu hâlâ çok küçük.</string>
+    <string name="h_gr_mul_1_a">Emin olduğun bir satırı basamak olarak kullan.</string>
+    <string name="h_gr_mul_1_b">%1$s · %2$s hesapla ve bir kez daha %1$s ekle.</string>
+    <string name="h_gr_mul_1_c">%1$s · %2$s = %3$s. Bir %1$s daha eksik.</string>
+    <string name="h_gr_mul_2_a">Büyük sayıyı onluk ve birliklere ayır.</string>
+    <string name="h_gr_mul_2_b">%1$s · %2$s ve %3$s · %2$s hesapla ve ikisini topla.</string>
+    <string name="h_gr_sub_1_a">Çıkanı iki parçaya böl.</string>
+    <string name="h_gr_sub_1_b">Önce %1$s çıkar, sonra kalan %2$s.</string>
+    <string name="h_nz_add_1_a">Sayı doğrusunu düşün.</string>
+    <string name="h_nz_add_1_b">Artı sağa, eksi sola demektir.</string>
+    <string name="h_nz_add_1_c">%1$s noktasından itibaren %2$s adım.</string>
+    <string name="h_nz_mul_1_a">Önce işaretsiz hesapla.</string>
+    <string name="h_nz_mul_1_b">Eksi işaretlerini say: çift sayı artı, tek sayı eksi verir.</string>
+    <string name="h_nz_mul_1_c">Mutlak değer %1$s, sadece işaret eksik.</string>
+    <string name="h_pz_sat_1_a">Önce oranı kesir olarak yaz.</string>
+    <string name="h_pz_sat_1_b">Yüzde değeri taban değere böl, sonra 100 ile çarp.</string>
+    <string name="h_pz_sat_1_c">%1$s : %2$s = %3$s</string>
+    <string name="h_pz_von_1_a">Tek bir yüzde ne kadar?</string>
+    <string name="h_pz_von_1_b">Taban değeri 100\'e böl, sonra yüzde oranıyla çarp.</string>
+    <string name="h_pz_von_1_c">Bir yüzde %1$s eder.</string>
+    <string name="h_rechnung_mal">İlk adım: %1$s · %2$s = %3$s</string>
+    <string name="h_rechnung_minus">İlk adım: %1$s − %2$s = %3$s</string>
+    <string name="h_rechnung_plus">İlk adım: %1$s + %2$s = %3$s</string>
+    <string name="held_beschriftung">Toplam temel</string>
+    <string name="k_br_add_1">Kesirleri toplama ve çıkarma</string>
+    <string name="k_br_div_1">Kesirleri bölme</string>
+    <string name="k_br_kue_1">Kesirleri sadeleştirme</string>
+    <string name="k_br_mul_1">Kesirleri çarpma</string>
+    <string name="k_dz_add_1">Ondalık sayıları toplama ve çıkarma</string>
+    <string name="k_dz_bru_1">Kesirleri ondalık sayı olarak yazma</string>
+    <string name="k_dz_mul_1">Ondalık sayıları çarpma</string>
+    <string name="k_gl_kla_1">Parantezli denklemler</string>
+    <string name="k_gl_lin_1">Doğrusal denklemleri çözme</string>
+    <string name="k_gl_ter_1">İfadelere değer koyma ve hesaplama</string>
+    <string name="k_gr_add_1">1000\'e kadar toplama ve çıkarma</string>
+    <string name="k_gr_div_1">144\'e kadar sayı alanında bölme</string>
+    <string name="k_gr_mul_1">10\'a kadar çarpım tablosu</string>
+    <string name="k_gr_mul_2">İki basamaklı çarpı bir basamaklı</string>
+    <string name="k_nz_add_1">Negatif sayıları toplama ve çıkarma</string>
+    <string name="k_nz_mul_1">Çarpma ve bölmede işaret kuralları</string>
+    <string name="k_pz_sat_1">Yüzde oranını hesaplama</string>
+    <string name="k_pz_von_1">Yüzde değerini hesaplama</string>
+    <string name="leer_basis_taste">İlk görevi çöz</string>
+    <string name="leer_basis_text">İlk görevi çözdüğünde burada her yetkinlik alanı için bir kart oluşacak.</string>
+    <string name="leer_basis_titel">Henüz temel kaydedilmedi</string>
+    <string name="leer_detail_fehler_text">Bu yetkinlikte şimdiye kadar tipik bir hata türü göze çarpmadı.</string>
+    <string name="leer_detail_fehler_titel">Henüz örüntü görünmüyor</string>
+    <string name="leer_fehler_text">Hesaplama sırasında bilinen bir örüntü ortaya çıkarsa burada adıyla anılacak.</string>
+    <string name="leer_fehler_titel">Hata türü kaydedilmedi</string>
+    <string name="leer_fortschritt_text">Yakında burada öğrenme süresi, başarı oranı ve gözlenen hata türleri yer alacak. Başlangıçta kısa bir oturumla başla.</string>
+    <string name="leer_fortschritt_titel">Gösterilecek bir şey yok</string>
+    <string name="leer_training_taste">Başlangıca dön</string>
+    <string name="leer_training_text">Şu anda devam eden bir görev yok. İstediğin zaman yeni bir oturum başlatabilirsin.</string>
+    <string name="leer_training_titel">Oturum sona erdi</string>
+    <string name="leer_voraussetzung_text">Bu yetkinlik bağımsızdır, hemen başlayabilirsin.</string>
+    <string name="leer_voraussetzung_titel">Ön koşul yok</string>
+    <string name="modus_dunkel">Koyu</string>
+    <string name="modus_hell">Açık</string>
+    <string name="modus_system">Sistemle aynı</string>
+    <string name="niveau_e">E – ileri</string>
+    <string name="niveau_g">G – temel</string>
+    <string name="niveau_m">M – orta</string>
+    <string name="onboarding_bundesland">Eyalet</string>
+    <string name="onboarding_klasse">Sınıf</string>
+    <string name="onboarding_niveau">Seviye</string>
+    <string name="onboarding_schulart">Okul türü</string>
+    <string name="onboarding_text">Alıştırmaların neye göre ayarlanacağını kısaca söyle. Bunu daha sonra istediğin zaman ayarlardan değiştirebilirsin.</string>
+    <string name="onboarding_titel">Rechenwerk\'e hoş geldin</string>
+    <string name="onboarding_weiter">Seviye tespit sınavına geç</string>
+    <string name="prozent_wert">%% %1$s</string>
+    <string name="pruefung_antworten">Cevaplar</string>
+    <string name="pruefung_aufgabe_ueberspringen">Bu görevi atla</string>
+    <string name="pruefung_fertig_hinweis">Ustalık dereceleri şimdi olduğun yerden başlıyor. Gerisi çalışmayla şekillenecek.</string>
+    <string name="pruefung_fertig_kopf">Test değerlendirildi</string>
+    <string name="pruefung_fertig_text">Başardın</string>
+    <string name="pruefung_loslegen">Başla</string>
+    <string name="pruefung_titel">Seviye tespit sınavı</string>
+    <string name="pruefung_ueberspringen">Testi atla</string>
+    <string name="pruefung_zaehler">Görev %1$s / %2$s · en fazla yedi dakika</string>
+    <string name="reiter_einstellungen">Ayarlar</string>
+    <string name="reiter_fortschritt">İlerleme</string>
+    <string name="reiter_start">Başlangıç</string>
+    <string name="schulart_gemeinschaftsschule">Gemeinschaftsschule</string>
+    <string name="schulart_gymnasium">Gymnasium</string>
+    <string name="schulart_hauptschule">Hauptschule / Werkrealschule</string>
+    <string name="schulart_realschule">Realschule</string>
+    <string name="start_basis">Temelin</string>
+    <string name="start_fuenf_minuten">Beş dakika çalış</string>
+    <string name="start_gruss">İyi günler</string>
+    <string name="start_profil">Sınıf %1$s · %2$s · Seviye %3$s</string>
+    <string name="start_schwaechen">Zayıflıkları kapat</string>
+    <string name="start_weiterlernen">Öğrenmeye devam et</string>
+    <string name="taste_loeschen">Son karakteri sil</string>
+    <string name="training_beenden">Oturumu bitir</string>
+    <string name="training_bilanz_aufgaben">Görevler</string>
+    <string name="training_bilanz_dauer">Süre</string>
+    <string name="training_bilanz_fertig">Bitti</string>
+    <string name="training_bilanz_kopf">Az önce yaptıkların</string>
+    <string name="training_bilanz_richtig">Doğru olan</string>
+    <string name="training_bilanz_titel">Oturum sona erdi</string>
+    <string name="training_fehlerart">Gözlendi: %1$s</string>
+    <string name="training_form_bruch">Kesir olarak gir, örneğin 3/4</string>
+    <string name="training_form_prozent">Sayı gir, yüzde işareti olmadan</string>
+    <string name="training_form_zahl">Sayı gir, virgül kullanılabilir</string>
+    <string name="training_hilfe">Yardım</string>
+    <string name="training_hilfe_mehr">Bir kademe daha yardım</string>
+    <string name="training_hilfe_stufe">Yardım, kademe %1$s / 4</string>
+    <string name="training_loesung">Doğru cevap %1$s olacaktı</string>
+    <string name="training_platzhalter">Cevap</string>
+    <string name="training_richtig">Doğru</string>
+    <string name="training_senden">Gönder</string>
+    <string name="training_titel">Çalışma</string>
+    <string name="training_warum">Neden</string>
+    <string name="training_weiter">Devam</string>
+    <string name="training_zaehler">Görev %1$s · %2$s doğru</string>
+    <string name="w_add_zerlegen">%1$s sayısını %2$s ve %3$s olarak ayır</string>
+    <string name="w_br_div_regel">Bir kesre bölmek, onun tersiyle çarpmak demektir.</string>
+    <string name="w_br_div_umformen">%1$s : %2$s = %1$s · %3$s</string>
+    <string name="w_br_erweitern">%1$s = %2$s ve %3$s = %4$s</string>
+    <string name="w_br_hauptnenner">%1$s ve %2$s sayılarının ortak paydası %3$s.</string>
+    <string name="w_br_mul_nenner">Payda: %1$s · %2$s = %3$s</string>
+    <string name="w_br_mul_regel">Pay çarpı pay, payda çarpı payda.</string>
+    <string name="w_br_mul_zaehler">Pay: %1$s · %2$s = %3$s</string>
+    <string name="w_br_zaehler_minus">Payları çıkar: %1$s − %2$s, sonuç %3$s</string>
+    <string name="w_br_zaehler_plus">Payları topla: %1$s + %2$s, sonuç %3$s</string>
+    <string name="w_div_ergebnis">Yani %1$s : %2$s = %3$s</string>
+    <string name="w_div_umkehr">Hangi sayı %1$s ile çarpılınca %2$s eder?</string>
+    <string name="w_dz_aufgefuellt">%1$s ve %2$s artık basamak basamak alt alta.</string>
+    <string name="w_dz_bru_ablesen">%1$s okunduğunda %2$s demektir</string>
+    <string name="w_dz_bru_erweitern">%1$s, %2$s ile genişletilince %3$s olur</string>
+    <string name="w_dz_komma_ausrichten">Virgüller alt alta, eksik basamaklar sıfırla doldurulur.</string>
+    <string name="w_dz_komma_setzen">Virgül sağdan iki basamak: %1$s</string>
+    <string name="w_dz_ohne_komma">Virgülsüz hesaplandı: %1$s · %2$s = %3$s</string>
+    <string name="w_dz_stellen_zaehlen">%1$s ve %2$s sayılarının birer ondalık basamağı var, toplamda iki.</string>
+    <string name="w_gl_beide_seiten">İki tarafta da %1$s hesapla: %2$s</string>
+    <string name="w_gl_durch_teilen">%1$s sayısına böl: x = %2$s</string>
+    <string name="w_gl_einsetzen">x yerine koy: %1$s</string>
+    <string name="w_gl_klammer_ausgleichen">İki tarafta da − %1$s hesapla: x = %2$s</string>
+    <string name="w_gl_klammer_teilen">%1$s sayısına böl: x + %2$s = %3$s</string>
+    <string name="w_gl_punkt_vor_strich">İşlem önceliği: %1$s · %2$s = %3$s</string>
+    <string name="w_kue_ergebnis">Sonuç: %1$s</string>
+    <string name="w_kue_ggt">%1$s ve %2$s sayılarının en büyük ortak böleni %3$s.</string>
+    <string name="w_kue_teilen">%1$s : %2$s = %3$s ve %4$s : %2$s = %5$s</string>
+    <string name="w_mal_zerlegen">%1$s · %2$s, %1$s · %3$s ve bir kez daha %1$s demektir.</string>
+    <string name="w_nz_also">Yani %1$s</string>
+    <string name="w_nz_betraege_geteilt">Mutlak değerler hesaplandı: %1$s : %2$s = %3$s</string>
+    <string name="w_nz_betraege_mal">Mutlak değerler hesaplandı: %1$s · %2$s = %3$s</string>
+    <string name="w_nz_landen">%1$s noktasına varırsın.</string>
+    <string name="w_nz_nach_links">%1$s noktasından başla, sonra %2$s adım sola.</string>
+    <string name="w_nz_nach_rechts">%1$s noktasından başla, sonra %2$s adım sağa.</string>
+    <string name="w_nz_regel_gleich">Aynı işaretler artı verir.</string>
+    <string name="w_nz_regel_ungleich">Farklı işaretler eksi verir.</string>
+    <string name="w_pz_anteil">Oran: %1$s : %2$s = %3$s</string>
+    <string name="w_pz_ein_prozent">%1$s sayısının %% 1\'i %2$s eder.</string>
+    <string name="w_pz_mal_hundert">%1$s · 100 = %% %2$s</string>
+    <string name="w_rechnung_mal">%1$s · %2$s = %3$s</string>
+    <string name="w_rechnung_minus">%1$s − %2$s = %3$s</string>
+    <string name="w_rechnung_plus">%1$s + %2$s = %3$s</string>
+    <string name="wann_faellig">şimdi zamanı</string>
+    <string name="wann_gestern">dün</string>
+    <string name="wann_heute">bugün</string>
+    <plurals name="wann_in_tagen">
+        <item quantity="one">%1$d gün sonra</item>
+        <item quantity="other">%1$d gün sonra</item>
+    </plurals>
+    <string name="wann_nie">hiç</string>
+    <plurals name="wann_vor_tagen">
+        <item quantity="one">%1$d gün önce</item>
+        <item quantity="other">%1$d gün önce</item>
+    </plurals>
+    <string name="zeit_minuten">%1$s dk</string>
+    <string name="zeit_sekunden">%1$s sn</string>
+    <string name="zeit_stunden">%1$s sa %2$s dk</string>
+    <string name="zurueck">Geri</string>
+</resources>

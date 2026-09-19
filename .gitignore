@@ -1,0 +1,19 @@
+# Bau
+build/
+app/build/
+.gradle/
+.kotlin/
+local.properties
+captures/
+.cxx/
+
+# Signierung — NIEMALS einchecken
+*.jks
+*.keystore
+keystore.properties
+upload-keystore*
+
+# Werkzeuge
+.idea/
+*.iml
+.DS_Store
