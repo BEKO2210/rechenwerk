@@ -1,132 +1,88 @@
-# Nachtrag: Room und Hilt (Auftragspunkte 6 und 7)
+# Room und Hilt — umgesetzt
 
-Die Punkte 6 (Room für die Lerndaten) und 7 (Hilt für die Abhängigkeiten) des
-Änderungsauftrags sind **nicht umgesetzt**. Dieses Dokument sagt, warum, und
-was genau einzutragen ist, damit der nächste Arbeitsschritt sie ohne erneute
-Untersuchung erledigen kann.
+Dieses Dokument war der Bauplan für Room und Hilt. Beides ist seit dem
+20.09.2026 eingebaut; hier steht jetzt, wo was liegt und warum.
 
-## Warum blockiert
+## Fassungen
 
-Zwei Sperren, beide unabhängig voneinander ausreichend:
+Die Nummern wurden am 20.09.2026 an der Quelle geprüft (`repo1.maven.org`,
+`dl.google.com/dl/android/maven2`) und sind nicht geraten:
 
-1. **Schreibgrenze.** Der Arbeitsschritt, der die Compose-Bildschirme schreibt,
-   darf ausschließlich unterhalb von `app/src/main/java` und
-   `app/src/main/res` schreiben; `build.gradle.kts` ist ausdrücklich
-   ausgenommen. Room und Hilt brauchen dort das KSP-Plugin und vier bis sechs
-   neue Abhängigkeiten. Ohne sie übersetzt eine einzige Datei mit `@Entity`
-   oder `@HiltAndroidApp` nicht — der Bau schlüge fehl, nicht nur die Prüfung.
+| Baustein | Fassung | Ort |
+|---|---|---|
+| `com.google.devtools.ksp` | 2.0.21-1.0.28 | Wurzel-`build.gradle.kts` |
+| `com.google.dagger.hilt.android` | 2.57.2 | Wurzel-`build.gradle.kts` |
+| `androidx.room:room-runtime` / `-ktx` / `-compiler` | 2.7.2 | `app/build.gradle.kts` |
+| `com.google.dagger:hilt-android` / `hilt-compiler` | 2.57.2 | `app/build.gradle.kts` |
+| `androidx.hilt:hilt-navigation-compose` | 1.3.0 | `app/build.gradle.kts` |
 
-2. **Abhängigkeitssperre.** `app/build.gradle.kts` schaltet
-   `dependencyLocking { lockAllConfigurations() }` ein, `app/gradle.lockfile`
-   hält die vier App-Klassenpfade fest. Jede neue Abhängigkeit lässt die
-   Auflösung scheitern, solange die Lockdatei nicht neu erzeugt ist. Das geht
-   nur mit einem Gradle-Lauf.
-
-Solange beides gilt, wäre jedes Eintragen von Room- oder Hilt-Quellcode ein
-sicher kaputter Bau. Deshalb steht hier ein Plan statt halber Dateien.
-
-## Schritt 1 — Wurzel-`build.gradle.kts`
-
-```kotlin
-plugins {
-    id("com.android.application") version "8.13.2" apply false
-    id("com.android.library") version "8.13.2" apply false
-    id("org.jetbrains.kotlin.android") version "2.0.21" apply false
-    id("org.jetbrains.kotlin.plugin.compose") version "2.0.21" apply false
-    id("com.google.devtools.ksp") version "<KSP>" apply false
-    id("com.google.dagger.hilt.android") version "<HILT>" apply false
-}
-```
-
-`<KSP>` muss zur Kotlin-Fassung 2.0.21 passen; die KSP-Versionen tragen die
-Kotlin-Fassung im Namen (`2.0.21-…`). `<HILT>` muss eine Fassung sein, die
-Kotlin 2.0 und KSP unterstützt. **Beide Nummern sind an der Quelle zu prüfen**
-(`https://dl.google.com/dl/android/maven2/`, `https://repo1.maven.org/maven2/`);
-aus dieser Sitzung heraus war kein Netzzugriff möglich, deshalb stehen hier
-Platzhalter statt geratener Zahlen.
-
-## Schritt 2 — `app/build.gradle.kts`
-
-Im `plugins`-Block:
-
-```kotlin
-id("com.google.devtools.ksp")
-id("com.google.dagger.hilt.android")
-```
-
-Im `dependencies`-Block:
-
-```kotlin
-implementation("androidx.room:room-runtime:<ROOM>")
-implementation("androidx.room:room-ktx:<ROOM>")
-ksp("androidx.room:room-compiler:<ROOM>")
-
-implementation("com.google.dagger:hilt-android:<HILT>")
-ksp("com.google.dagger:hilt-compiler:<HILT>")
-implementation("androidx.hilt:hilt-navigation-compose:<HILT_NAV>")
-
-testImplementation("androidx.room:room-testing:<ROOM>")
-```
-
-Das Schema der Datenbank gehört ins Repository, damit spätere Fassungen
-gegen es wandern können:
-
-```kotlin
-ksp {
-    arg("room.schemaLocation", "$projectDir/schemas")
-}
-```
-
-## Schritt 3 — Lockdatei neu erzeugen
-
-```bash
-./gradlew :app:dependencies --write-locks
-```
-
-Ohne diesen Lauf scheitert jede Auflösung. Er braucht Netzzugriff auf
+`2.0.21-1.0.28` ist die KSP-Fassung zur Kotlin-Fassung 2.0.21 — KSP trägt die
+Kotlin-Fassung im Namen. Die Abhängigkeitssperre (`app/gradle.lockfile`) wird
+bei einem Lauf mit Änderungsauftrag vor dem Bau neu geschrieben
+(`./gradlew :app:dependencies --write-locks`); dafür braucht es Netzzugriff auf
 `google()` und `mavenCentral()`.
 
-## Schritt 4 — Quellcode
+Der Paketname bleibt `de.rechenwerk.mathe`. Der Gradle-Wrapper ist unberührt.
 
-Erst nach Schritt 1 bis 3 übersetzt das Folgende. Paketname bleibt
-`de.rechenwerk.mathe`.
+## Die Datenbank — `daten/raum/`
 
-**`daten/raum/` — die Datenbank.** Vier Entitäten, die den heutigen
-`Ablage`-Datentypen eins zu eins entsprechen (`daten/Ablage.kt`):
+| Datei | Inhalt |
+|---|---|
+| `Zeilen.kt` | Die fünf `@Entity`-Klassen und die Umrechnung von und nach `daten/Ablage.kt` |
+| `Tafeln.kt` | Vier `@Dao`-Schnittstellen; lesende Abfragen geben `Flow` zurück |
+| `RechenwerkRaum.kt` | Die `@Database`-Klasse, Fassung 1, `exportSchema = true` |
+| `Lernablage.kt` | Das Repository: kapselt die Tafeln, liefert `Flow<Lernstand>` |
+| `AltdatenUebernahme.kt` | Der einmalige Schritt vom JSON-Stand in die Tabellen |
 
-| Entität | entspricht heute | Schlüssel |
+| Entität | entspricht | Schlüssel |
 |---|---|---|
 | `KompetenzStandZeile` | `KompetenzStand` | `kennung` |
 | `FehlerartZeile` | `KompetenzStand.fehlerarten` | `kennung` + `art` |
 | `VerlaufZeile` | `Verlaufseintrag` | fortlaufende Nummer |
 | `LaufendZeile` | `Laufend` | feste Zeile 0 |
+| `WerteZeile` | `Werte` | feste Zeile 0 |
 
-Wiederholungstermine stecken bereits als `naechsteWdh` und `stufe` im
-`KompetenzStand` und brauchen keine eigene Tabelle. Dazu ein DAO je Bereich
-und eine `@Database(version = 1)`-Klasse mit `exportSchema = true`.
+Die Wiederholungstermine stecken als `naechsteWdh` und `stufe` im
+Kompetenzstand und brauchen keine eigene Tabelle. Das Schema wird über
+`room.schemaLocation` nach `app/src/main/schemas/` ausgegeben, damit spätere Fassungen
+dagegen wandern können. `fallbackToDestructiveMigration` kommt nicht vor.
 
-**Der Tresor bleibt.** Punkt 6 verlangt beides nebeneinander: Room führt die
-Lerndaten, der Tresor des Suite-Kerns führt weiterhin Profil und
-Erscheinungsbild und schreibt den Export als JSON-Datei. `daten/Ablage.kt`
-(`Papier.schreibe` / `Papier.lies`) bleibt dafür unverändert das Format —
-der Export muss den vollständigen Lernstand enthalten, also die Room-Daten
-mit ausgeben und beim Import zurückschreiben.
+Eine beantwortete Aufgabe schreibt vier Dinge auf einmal: Kompetenzstand,
+Gesamtzahlen, Verlaufseintrag und das Ende der offenen Aufgabe. Das steht in
+`Lernablage.schreibeAntwort` in einer Transaktion — einzeln geschrieben meldete
+die Datenbank Zwischenstände, und die Serien-Strecke zuckte.
 
-**Einmalige Übernahme.** Beim ersten Start mit Room wird eine vorhandene
-Tresor-Datei gelesen und ihr Inhalt nach Room geschrieben, danach ein
-Merkzeichen im Tresor gesetzt (etwa `"nachRaumUebernommen": true`), damit die
-Übernahme nicht zweimal läuft. Niemand darf dabei Fortschritt verlieren.
+## Der Tresor bleibt
 
-**Hilt.** Anwendungsklasse mit `@HiltAndroidApp` (neu, muss zusätzlich ins
-Manifest als `android:name`), `MainActivity` mit `@AndroidEntryPoint`, ein
-`@Module @InstallIn(SingletonComponent::class)`, das Datenbank, DAOs und
-Ablagen bereitstellt, und `Werk` als `@HiltViewModel` mit eingespritztem
-Konstruktor statt `viewModel()` mit Standardkonstruktor.
+Der Suite-Kern führt weiterhin Profil, Erscheinungsbild und das Merkzeichen der
+Übernahme (`daten/Einstellungsspeicher.kt`). Jede Änderung einer Einstellung
+schreibt ihn sofort, so dass nach Tod und Neustart eine gültige JSON-Datei unter
+`files/` liegt. Die Room-Datei liegt daneben unter `databases/`.
 
-> Achtung: `android:name` im `<application>`-Element zu setzen ist erlaubt —
-> gesperrt ist nur der **Paketname** im Manifest. Er bleibt
-> `de.rechenwerk.mathe`.
+`Ablage.nurEinstellungen()` schneidet den Tresor-Teil heraus: im Tresor stehen
+keine fachlichen Daten mehr, damit nicht zwei Speicher dieselbe Wahrheit
+behaupten. Export und Import gehen dagegen weiter über die vollständige
+`Ablage` — eine exportierte Datei enthält den ganzen Lernstand.
 
-**Tests.** `app/src/test` deckt heute die JSON-Schicht ab. Dazu kommen Tests
-für die Übernahme Tresor → Room und für Export und Import über beide
-Speicher hinweg.
+## Die Übernahme
+
+Beim ersten Start mit Room liest `Werk.init` den Tresor, in dem noch der
+vollständige alte Stand steht, und schreibt ihn über
+`AltdatenUebernahme.fuehreAus` in die Tabellen. Danach setzt es
+`nachRaumUebernommen` im Tresor; eine zweite Übernahme würde frischen
+Fortschritt mit altem Stand überschreiben und läuft deshalb nicht.
+
+Die Umrechnung `AltdatenUebernahme.zeilenAus` ist eine reine Funktion und wird
+ohne Gerät und ohne Datenbank geprüft: `app/src/test/.../RaumTest.kt`.
+
+## Hilt
+
+- `RechenwerkAnwendung` trägt `@HiltAndroidApp` und steht in
+  `AndroidManifest.xml` als `android:name`. Der Paketname im Manifest bleibt
+  unverändert.
+- `MainActivity` trägt `@AndroidEntryPoint`.
+- `Werk` trägt `@HiltViewModel` mit `@Inject constructor` und wird über
+  `hiltViewModel()` geholt.
+- `daten/DatenModul.kt` ist das `@Module @InstallIn(SingletonComponent::class)`
+  und stellt Datenbank, die vier Tafeln und den Tresor bereit; `Lernablage` ist
+  `@Singleton` mit eingespritztem Konstruktor.

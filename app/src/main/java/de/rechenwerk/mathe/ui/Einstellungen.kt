@@ -106,9 +106,10 @@ fun EinstellungenBildschirm(
 
         item {
             Kachel {
-                Wahlreihe(
+                Wahlraster(
                     werte = Modus.entries.toList(),
                     gewaehlt = werk.ablage.modus,
+                    spalten = 3,
                     beschriftung = { name(it) },
                     aufWahl = { werk.setzeModus(it) },
                 )
@@ -220,7 +221,12 @@ fun EinstellungenBildschirm(
 
 private const val DATEINAME = "rechenwerk.json"
 
-/** Der Spaltenaufbau wird auch vom Onboarding genutzt. */
+/**
+ * Der Spaltenaufbau wird auch vom Onboarding genutzt. Jede Gruppe liegt in
+ * einem eigenen Raster mit gleich breiten Feldern; die Spaltenzahl ist so
+ * gewaehlt, dass in keiner Gruppe ein einzelnes Feld allein in der letzten
+ * Reihe steht: eine Schulart-Reihe traegt zwei, Klassen und Niveaus drei.
+ */
 @Composable
 fun ProfilFelder(
     profil: Profil,
@@ -228,57 +234,54 @@ fun ProfilFelder(
     modifier: Modifier = Modifier,
 ) {
     Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(Abstand.l)) {
-        Column(verticalArrangement = Arrangement.spacedBy(Abstand.s)) {
-            Text(
-                text = stringResource(R.string.onboarding_bundesland),
-                style = MaterialTheme.typography.titleSmall,
-                color = MaterialTheme.colorScheme.onSurface,
-            )
-            Wahlreihe(
+        Wahlgruppe(titel = stringResource(R.string.onboarding_bundesland)) {
+            Wahlraster(
                 werte = listOf("BW"),
                 gewaehlt = profil.bundesland,
+                spalten = 1,
                 beschriftung = { bundeslandName() },
                 aufWahl = { aufProfil(profil.copy(bundesland = it)) },
             )
         }
-        Column(verticalArrangement = Arrangement.spacedBy(Abstand.s)) {
-            Text(
-                text = stringResource(R.string.onboarding_schulart),
-                style = MaterialTheme.typography.titleSmall,
-                color = MaterialTheme.colorScheme.onSurface,
-            )
-            Wahlreihe(
+        Wahlgruppe(titel = stringResource(R.string.onboarding_schulart)) {
+            Wahlraster(
                 werte = Schulart.entries.toList(),
                 gewaehlt = profil.schulart,
+                spalten = 2,
                 beschriftung = { name(it) },
                 aufWahl = { aufProfil(profil.copy(schulart = it)) },
             )
         }
-        Column(verticalArrangement = Arrangement.spacedBy(Abstand.s)) {
-            Text(
-                text = stringResource(R.string.onboarding_klasse),
-                style = MaterialTheme.typography.titleSmall,
-                color = MaterialTheme.colorScheme.onSurface,
-            )
-            Wahlreihe(
+        Wahlgruppe(titel = stringResource(R.string.onboarding_klasse)) {
+            Wahlraster(
                 werte = (5..10).toList(),
                 gewaehlt = profil.klasse,
+                spalten = 3,
                 beschriftung = { it.toString() },
                 aufWahl = { aufProfil(profil.copy(klasse = it)) },
             )
         }
-        Column(verticalArrangement = Arrangement.spacedBy(Abstand.s)) {
-            Text(
-                text = stringResource(R.string.onboarding_niveau),
-                style = MaterialTheme.typography.titleSmall,
-                color = MaterialTheme.colorScheme.onSurface,
-            )
-            Wahlreihe(
+        Wahlgruppe(titel = stringResource(R.string.onboarding_niveau)) {
+            Wahlraster(
                 werte = Niveau.entries.toList(),
                 gewaehlt = profil.niveau,
+                spalten = 3,
                 beschriftung = { name(it) },
                 aufWahl = { aufProfil(profil.copy(niveau = it)) },
             )
         }
+    }
+}
+
+/** Ueberschrift und Raster einer Wahlgruppe -- immer im selben Abstand. */
+@Composable
+private fun Wahlgruppe(titel: String, inhalt: @Composable () -> Unit) {
+    Column(verticalArrangement = Arrangement.spacedBy(Abstand.s)) {
+        Text(
+            text = titel,
+            style = MaterialTheme.typography.titleSmall,
+            color = MaterialTheme.colorScheme.onSurface,
+        )
+        inhalt()
     }
 }

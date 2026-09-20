@@ -8,6 +8,7 @@
     -->
 
     <application
+        android:name=".RechenwerkAnwendung"
         android:localeConfig="@xml/locales_config"
         android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"

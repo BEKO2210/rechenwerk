@@ -4,8 +4,10 @@ Mathematik üben für die Klassen 5 bis 10. Ohne Konto, ohne Werbung, ohne
 Netzzugriff. Alle Daten bleiben auf dem Gerät.
 
 Die App richtet sich an Jugendliche, nicht an Grundschulkinder: ruhige
-Typografie, dunkle Oberfläche als Standard, keine Maskottchen, keine Punkte-
-und Belohnungsmechanik.
+Typografie, dunkles Glas als gestalterischer Ausgangspunkt, keine Maskottchen,
+keine Comicoptik. Belohnt wird trotzdem sichtbar — aber im Ton der Marke: ein
+Segmentring, der um ein Segment wächst, eine Serien-Strecke und ein
+Abschlussbild, kein Punktestand und keine Trophäen.
 
 ---
 
@@ -56,14 +58,39 @@ Schwächen.
 **Deutsche Schreibweise.** Komma als Dezimaltrennzeichen, eigene
 Bildschirmtastatur mit Komma statt Punkt.
 
-**Glas und Tiefe.** Dunkel ist der Standard einer neuen Installation, nicht
-"wie das System". Der Grund ist ein vertikaler Verlauf von `#0E1A17` nach
-`#060B0A`, dahinter wandern drei weich auslaufende Lichtblasen aus den beiden
-Akzenttönen langsam und gegenläufig. Karten, obere Leiste und untere
-Navigationsleiste sind Glasflächen mit Haarrand und Lichtverlauf an der
-Oberkante; ab Android 12 mit echtem Weichzeichner, darunter mit einer zweiten
-halbtransparenten Lage. Diese Fallunterscheidung steht an genau einer Stelle,
-in `ui/Glas.kt`. Der helle Modus ist gleichwertig gepflegt.
+**Belohnung im Ton der Marke.** Nach einer richtigen Antwort wächst der
+Segmentring im Training um ein Segment, begleitet von einem kurzen Aufleuchten
+der Akzentfarbe (220 ms) und einer Tastrücksprache. Eine falsche Antwort gibt
+keinen Rot-Schock, sondern lässt das Eingabefeld zweimal je 120 ms zur Seite
+wanken und nennt die erkannte Fehlvorstellung in einem ganzen Satz. Über dem
+Aufgabenfeld läuft eine schmale Serien-Strecke mit, die bei jedem Treffer
+weiterwächst und bei einem Fehler sichtbar zurückfällt. Am Ende einer Einheit
+steht ein eigenes Abschlussbild mit hochzählenden Zahlen und einem Satz, was
+als Nächstes fällig ist. Serie und Abschlussbild tragen den zweiten,
+wärmeren Markenton Bernstein (`#F5A524`, im hellen Modus tiefer gezogen).
+
+**Glas und Tiefe.** Das Erscheinungsbild folgt ab Werk dem System; dunkel und
+hell stehen gleichwertig daneben und lassen sich in den Einstellungen wählen.
+Der dunkle Grund ist ein vertikaler Verlauf von `#0E1A17` nach `#09130F`,
+dahinter wandern drei weich auslaufende Lichtblasen aus den beiden Akzenttönen
+langsam und gegenläufig. Karten, obere Leiste und untere Navigationsleiste sind
+Glasflächen mit Haarrand und Lichtverlauf an der Oberkante; ab Android 12 mit
+echtem Weichzeichner, darunter mit einer zweiten halbtransparenten Lage. Diese
+Fallunterscheidung steht an genau einer Stelle, in `ui/Glas.kt`.
+
+**Die Schrift liegt im Paket.** Manrope, als variable Schriftdatei mit allen
+Gewichten in einer Datei (165 KB, im Release 88 KB). Titel und Fließtext
+kommen daraus. Vorher wurde die Markenschrift über `DeviceFontFamilyName`
+angefragt, also als Schrift, die auf dem Gerät installiert sein muss — auf
+so gut wie keinem Android-Gerät ist sie das, und Android setzte still Roboto
+ein. Die Typografie der Marke stand damit nur in `marke.json`, nie auf dem
+Bildschirm.
+
+**Gleiche Felder statt ausgefranster Reihen.** Die Wahlknöpfe für Schulart,
+Klasse und Niveau liegen in einem festen Raster mit gleich breiten Feldern und
+gleichen Abständen. Eine zu lange Beschriftung bricht innerhalb ihres Feldes
+um, statt das Feld zu verbreitern; keine Gruppe endet mit einem einzelnen
+übrigen Feld am Rand.
 
 **Eigenschaftsbasierte Tests.** Neun Prüfungen lassen jeden der 26 Generatoren
 über 1000 verschiedene Startwerte und alle drei Niveaus laufen. Geprüft wird
@@ -74,32 +101,31 @@ Startwert liefert zweimal exakt dasselbe.
 
 ---
 
-## Was noch fehlt
-
-Dieser Punkt des Auftrags ist nicht umgesetzt. Er steht hier, damit niemand
-ihn beim Lesen des Codes sucht.
-
-- **Room und Hilt werden nicht verwendet.** Statt einer SQLite-Datenbank
-  speichert die App eine JSON-Datei, statt eines Einspritzrahmens genügt der
-  Standardkonstruktor des Ansichtsmodells. Beides braucht Einträge in
-  `app/build.gradle.kts` (KSP-Plugin, `androidx.room:*`,
-  `com.google.dagger:hilt-android`) und eine neu erzeugte
-  `app/gradle.lockfile`. Beide Dateien liegen außerhalb dessen, was dieser
-  Arbeitsschritt schreiben darf. Was genau einzutragen ist, steht in
-  [docs/ROOM_HILT_NACHTRAG.md](docs/ROOM_HILT_NACHTRAG.md).
-
----
-
 ## Technik
 
 Kotlin mit Jetpack Compose und Material 3. Die Oberfläche ist vollständig
 deklarativ, der Zustand liegt in einem Ansichtsmodell.
 
-Gespeichert wird über eine kleine gemeinsame Bibliothek der Suite. Sie legt
-eine JSON-Datei im privaten Verzeichnis der App ab und schreibt atomar über
-eine temporäre Datei mit anschließendem Umbenennen, sodass ein Absturz
-mitten im Schreiben keinen halben Datenbestand hinterlässt. Geschrieben wird
-außerhalb des Hauptstrangs.
+**Zwei Speicher nebeneinander.** Die fachlichen Daten — Kompetenzstände,
+Antwortverlauf, Fehlerarten, Wiederholungstermine und die Gesamtzahlen — führt
+eine Room-Datenbank in Fassung 1 unter `databases/`. Sie exportiert ihr Schema
+nach `app/src/main/schemas/`, damit spätere Fassungen dagegen wandern können;
+`fallbackToDestructiveMigration` kommt nicht vor. Daneben bleibt der Tresor der
+Suite zuständig für Profil, Erscheinungsbild sowie Export und Import: eine
+JSON-Datei im privaten Verzeichnis, atomar über eine temporäre Datei mit
+anschließendem Umbenennen geschrieben, sodass ein Absturz mitten im Schreiben
+keinen halben Datenbestand hinterlässt. Jede Änderung einer Einstellung
+schreibt ihn sofort. Geschrieben wird außerhalb des Hauptstrangs.
+
+**Einmalige Übernahme.** Beim ersten Start mit Room liest
+`daten/raum/AltdatenUebernahme.kt` den vorhandenen JSON-Stand und schreibt ihn
+vollständig in die Tabellen; danach ist die Datenbank die Wahrheit. Ein
+Merkzeichen im Tresor (`nachRaumUebernommen`) verhindert eine zweite Übernahme.
+Niemand verliert dabei Fortschritt — ein Unit-Test deckt die Umrechnung ab.
+
+**Hilt.** Datenbank, DAOs, Ablage und Tresor kommen aus
+`daten/DatenModul.kt`; das Ansichtsmodell trägt `@HiltViewModel` und wird über
+`hiltViewModel()` geholt. Im Code steht keine manuelle Konstruktion mehr.
 
 Es gibt keine einzige Berechtigung im Manifest und keinen Netzzugriff.
 

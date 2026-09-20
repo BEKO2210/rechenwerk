@@ -27,11 +27,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import de.rechenwerk.mathe.daten.Art
 import de.rechenwerk.mathe.daten.Bereich
 import de.rechenwerk.mathe.daten.Katalog
 import de.rechenwerk.mathe.daten.Werk
+import de.rechenwerk.mathe.ui.AbschlussBildschirm
 import de.rechenwerk.mathe.ui.Abstand
 import de.rechenwerk.mathe.ui.BereichBildschirm
 import de.rechenwerk.mathe.ui.EinstellungenBildschirm
@@ -47,12 +49,15 @@ import de.rechenwerk.mathe.ui.Sym
 import de.rechenwerk.mathe.ui.TrainingBildschirm
 import de.rechenwerk.mathe.ui.istDunkel
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(zustand: Bundle?) {
         enableEdgeToEdge()
         super.onCreate(zustand)
         setContent {
-            val werk: Werk = viewModel()
+            // Das Ansichtsmodell kommt von Hilt samt Datenbank, Tafeln und
+            // Tresor -- kein Standardkonstruktor, keine Handarbeit.
+            val werk: Werk = hiltViewModel()
             // Die Systemleisten folgen dem gewaehlten Erscheinungsbild, nicht
             // dem des Systems -- sonst staenden dunkle Symbole auf dunklem Glas.
             val dunkel = istDunkel(werk.ablage.modus)
@@ -119,8 +124,20 @@ private fun Rahmen(werk: Werk) {
     }
 
     BackHandler(enabled = ort != Ort.Reiterflaeche) {
-        if (ort == Ort.Training) werk.beendeSitzung()
-        ort = Ort.Reiterflaeche
+        when {
+            // Aus dem Abschlussbild geht es auf die Reiterflaeche zurueck.
+            ort == Ort.Training && werk.bilanz != null -> {
+                werk.verwirfBilanz()
+                ort = Ort.Reiterflaeche
+            }
+            // Aus dem Training zuerst auf das Abschlussbild -- es sei denn, es
+            // wurde noch nichts gerechnet, dann gibt es nichts zu zeigen.
+            ort == Ort.Training -> {
+                werk.beendeSitzung()
+                if (werk.bilanz == null) ort = Ort.Reiterflaeche
+            }
+            else -> ort = Ort.Reiterflaeche
+        }
     }
 
     Scaffold(
@@ -138,6 +155,11 @@ private fun Rahmen(werk: Werk) {
                         .fillMaxWidth()
                         .padding(horizontal = Abstand.l),
                     form = MaterialTheme.shapes.extraLarge,
+                    // Die Leiste steht ueber scrollendem Inhalt: mit der
+                    // gewoehnlichen Deckkraft las man die Kachel darunter
+                    // durch das Glas hindurch mit. Sie bekommt deshalb die
+                    // hervorgehobene Fuellung der Glasebene.
+                    hervorgehoben = true,
                 ) {
                     NavigationBar(
                         containerColor = Color.Transparent,
@@ -176,11 +198,27 @@ private fun Rahmen(werk: Werk) {
         },
     ) { innenrand ->
         when (val hier = ort) {
-            Ort.Training -> TrainingBildschirm(
-                werk = werk,
-                aufEnde = { ort = Ort.Reiterflaeche },
-                innenrand = innenrand,
-            )
+            Ort.Training -> {
+                // Am Ende einer Einheit tritt das Abschlussbild an die Stelle
+                // des Trainings -- ein eigener Bildschirm, kein Einschub.
+                val bilanz = werk.bilanz
+                if (bilanz != null) {
+                    AbschlussBildschirm(
+                        bilanz = bilanz,
+                        aufFertig = {
+                            werk.verwirfBilanz()
+                            ort = Ort.Reiterflaeche
+                        },
+                        innenrand = innenrand,
+                    )
+                } else {
+                    TrainingBildschirm(
+                        werk = werk,
+                        aufEnde = { ort = Ort.Reiterflaeche },
+                        innenrand = innenrand,
+                    )
+                }
+            }
 
             is Ort.Bereichsliste -> BereichBildschirm(
                 ablage = werk.ablage,

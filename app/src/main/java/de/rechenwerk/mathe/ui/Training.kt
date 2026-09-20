@@ -2,6 +2,7 @@ package de.rechenwerk.mathe.ui
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
@@ -60,15 +61,34 @@ fun TrainingBildschirm(
     modifier: Modifier = Modifier,
 ) {
     val haptik = LocalHapticFeedback.current
-    val bilanz = werk.bilanz
     val aufgabe = werk.aufgabe
     val rueckmeldung = werk.rueckmeldung
 
+    // Die Belohnung: ein kurzes Aufleuchten der Akzentfarbe nach jedem Treffer.
+    val leuchten = remember { Animatable(0f) }
+    // Der Fehler: kein Rot-Schock, sondern ein ruhiges seitliches Wanken.
+    val wanken = remember { Animatable(0f) }
+
     // Nach einer richtigen Antwort geht es von selbst weiter.
     LaunchedEffect(rueckmeldung) {
-        if (rueckmeldung != null && rueckmeldung.richtig) {
+        if (rueckmeldung == null) return@LaunchedEffect
+        if (rueckmeldung.richtig) {
+            haptik.performHapticFeedback(HapticFeedbackType.LongPress)
+            leuchten.snapTo(1f)
+            leuchten.animateTo(
+                targetValue = 0f,
+                animationSpec = tween(Bewegung.AUFLEUCHTEN_MS, easing = Bewegung.eintritt),
+            )
             delay(750L)
             if (werk.zeitUm()) werk.beendeSitzung() else werk.naechsteAufgabe()
+        } else {
+            // Zweimal zur Seite, je 120 Millisekunden, dann zurueck in die Mitte.
+            val halb = Bewegung.WANKEN_MS / 2
+            repeat(2) {
+                wanken.animateTo(1f, tween(halb))
+                wanken.animateTo(-1f, tween(halb))
+            }
+            wanken.animateTo(0f, tween(halb))
         }
     }
 
@@ -81,14 +101,12 @@ fun TrainingBildschirm(
             ),
     ) {
         Kopfzeile(
-            titel = when {
-                bilanz != null -> stringResource(R.string.training_bilanz_titel)
-                aufgabe != null -> stringResource(
-                    Katalog.finde(aufgabe.kompetenz)?.name ?: R.string.training_titel
-                )
-                else -> stringResource(R.string.training_titel)
+            titel = if (aufgabe != null) {
+                stringResource(Katalog.finde(aufgabe.kompetenz)?.name ?: R.string.training_titel)
+            } else {
+                stringResource(R.string.training_titel)
             },
-            zaehler = if (bilanz == null && aufgabe != null) {
+            zaehler = if (aufgabe != null) {
                 // Solange die Rueckmeldung steht, ist die gezaehlte Aufgabe noch
                 // die auf dem Schirm -- erst die naechste hebt die Nummer.
                 val nummer = if (rueckmeldung == null) {
@@ -106,27 +124,11 @@ fun TrainingBildschirm(
             },
             aufSchliessen = {
                 haptik.performHapticFeedback(HapticFeedbackType.LongPress)
-                if (bilanz != null) {
-                    werk.verwirfBilanz()
-                    aufEnde()
-                } else {
-                    werk.beendeSitzung()
-                }
+                werk.beendeSitzung()
             },
         )
 
         when {
-            bilanz != null -> Bilanzkarte(
-                gestellt = bilanz.gestellt,
-                richtig = bilanz.anzahlRichtig,
-                dauerMs = bilanz.dauerMs,
-                aufFertig = {
-                    werk.verwirfBilanz()
-                    aufEnde()
-                },
-                modifier = Modifier.padding(Abstand.l),
-            )
-
             aufgabe == null -> Leerzustand(
                 titel = stringResource(R.string.leer_training_titel),
                 einladung = stringResource(R.string.leer_training_text),
@@ -135,6 +137,20 @@ fun TrainingBildschirm(
             )
 
             else -> {
+                // Ueber dem Aufgabenfeld: links der Segmentring, der je
+                // richtiger Antwort um ein Segment waechst, rechts die
+                // Serien-Strecke -- wie viele Aufgaben hintereinander sassen.
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = Abstand.l, vertical = Abstand.s),
+                    horizontalArrangement = Arrangement.spacedBy(Abstand.l),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Werkring(segmente = werk.sitzungRichtig, leuchten = leuchten.value)
+                    Serienstrecke(serie = werk.serie, modifier = Modifier.weight(1f))
+                }
+
                 Column(
                     modifier = Modifier
                         .weight(1f)
@@ -149,13 +165,16 @@ fun TrainingBildschirm(
                         style = MaterialTheme.typography.displayMedium,
                         color = MaterialTheme.colorScheme.onBackground,
                         textAlign = TextAlign.Center,
-                        modifier = Modifier.padding(vertical = Abstand.xl),
+                        modifier = Modifier.padding(vertical = Abstand.l),
                     )
 
                     Eingabefeld(
                         eingabe = werk.eingabe,
                         form = aufgabe.form,
                         gesperrt = rueckmeldung != null,
+                        modifier = Modifier.graphicsLayer {
+                            translationX = wanken.value * Masse.wanken.toPx()
+                        },
                     )
 
                     AnimatedVisibility(
@@ -401,42 +420,5 @@ private fun Rueckmeldekarte(
                 Rechenweg(aufgabe = aufgabe, modifier = Modifier.padding(top = Abstand.s))
             }
         }
-    }
-}
-
-@Composable
-private fun Bilanzkarte(
-    gestellt: Int,
-    richtig: Int,
-    dauerMs: Long,
-    aufFertig: () -> Unit,
-    modifier: Modifier = Modifier,
-) {
-    Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(Abstand.l)) {
-        Kachel(hervorgehoben = true) {
-            Text(
-                text = stringResource(R.string.training_bilanz_kopf),
-                style = MaterialTheme.typography.titleMedium,
-                color = MaterialTheme.colorScheme.onSurface,
-            )
-            Spacer(Modifier.height(Abstand.m))
-            Wertzeile(
-                bezeichnung = stringResource(R.string.training_bilanz_aufgaben),
-                wert = gestellt.toString(),
-            )
-            Wertzeile(
-                bezeichnung = stringResource(R.string.training_bilanz_richtig),
-                wert = richtig.toString(),
-            )
-            Wertzeile(
-                bezeichnung = stringResource(R.string.training_bilanz_dauer),
-                wert = dauer(dauerMs),
-            )
-        }
-        Werktaste(
-            text = stringResource(R.string.training_bilanz_fertig),
-            modifier = Modifier.fillMaxWidth(),
-            aufDruck = aufFertig,
-        )
     }
 }

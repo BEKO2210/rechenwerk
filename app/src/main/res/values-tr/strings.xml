@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="abbrechen">İptal</string>
+    <string name="abschluss_naechstes">Sırada %1$s var, %2$s.</string>
+    <string name="abschluss_naechstes_offen">Devam etmek için başlangıç ekranından bir alan seç.</string>
+    <string name="abschluss_segmente">Segmentler</string>
+    <string name="abschluss_serie">En iyi seri</string>
     <string name="app_name">Rechenwerk</string>
     <string name="bereich_brueche">Kesirler</string>
     <string name="bereich_dezimal">Ondalık sayılar</string>
+    <string name="bereich_geometrie">Geometri</string>
     <string name="bereich_gleichungen">İfadeler ve denklemler</string>
     <string name="bereich_grundrechnen">Temel işlemler</string>
     <string name="bereich_negativ">Negatif sayılar</string>
+    <string name="bereich_potenzen">Üslü sayılar ve kökler</string>
     <string name="bereich_prozent">Yüzde</string>
     <string name="bundesland_bw">Baden-Württemberg</string>
     <string name="detail_fehlerarten">Son gözlenen hata türleri</string>
@@ -22,10 +28,6 @@
     <string name="detail_zeit">Ortalama cevap süresi</string>
     <string name="einordnung_arbeit">devam ediyor</string>
     <string name="einordnung_offen">henüz başlanmadı</string>
-    <plurals name="einordnung_offene">
-        <item quantity="one">%1$d yetkinlik hâlâ çalışma gerektiriyor</item>
-        <item quantity="other">%1$d yetkinlik hâlâ çalışma gerektiriyor</item>
-    </plurals>
     <string name="einordnung_sicher">sağlam</string>
     <string name="einordnung_traegt">oluyor ama henüz sağlam değil</string>
     <string name="einordnung_training">çalışma gerekiyor</string>
@@ -53,13 +55,28 @@
     <string name="einst_zuruecksetzen_taste">Yerel verileri sıfırla</string>
     <string name="f_als_dezimalzahl">%1$s ondalık sayı olarak</string>
     <string name="f_ausdruck">%1$s</string>
+    <string name="f_ge_koe_dreieck">Tabanı %1$s cm, yüksekliği %2$s cm olan üçgen. Alanı kaç santimetrekaredir?</string>
+    <string name="f_ge_koe_quader">%1$s cm, %2$s cm ve %3$s cm ölçülerinde dikdörtgenler prizması. Hacmi kaç santimetreküptür?</string>
+    <string name="f_ge_koe_rechteck">%1$s cm uzunluğunda ve %2$s cm genişliğinde dikdörtgen. Alanı kaç santimetrekaredir?</string>
+    <string name="f_ge_koe_rest">%1$s cm, %2$s cm ve %3$s cm ölçülerindeki bir prizmadan %4$s cm, %5$s cm ve %6$s cm ölçülerinde bir prizma çıkarılmış. Kalan hacim kaç santimetreküptür?</string>
+    <string name="f_ge_pyt_hypotenuse">Dik üçgen, dik kenarlar a = %1$s ve b = %2$s. Hipotenüs c kaç birimdir?</string>
+    <string name="f_ge_pyt_kathete">Dik üçgen, hipotenüs c = %1$s, dik kenar a = %2$s. Dik kenar b kaç birimdir?</string>
+    <string name="f_ge_str_erster">S noktasından çıkan iki ışın, iki paralel doğruyla kesiliyor. SA = %1$s, SC = %2$s, SD = %3$s. SB kaç birimdir?</string>
+    <string name="f_ge_str_zweiter">S noktasından çıkan iki ışın, iki paralel doğruyla kesiliyor. SA = %1$s, SB = %2$s, SC = %3$s. SD kaç birimdir?</string>
     <string name="f_geteilt">%1$s : %2$s</string>
+    <string name="f_gl_lgs_x">%1$s ve %2$s — x kaçtır?</string>
+    <string name="f_gl_qua_groessere">%1$s — büyük olan çözümü yaz.</string>
     <string name="f_kuerzen">%1$s tamamen sadeleştir</string>
     <string name="f_mal">%1$s · %2$s</string>
     <string name="f_minus">%1$s − %2$s</string>
     <string name="f_plus">%1$s + %2$s</string>
+    <string name="f_po_rat_hoch">%1$s üzeri %2$s</string>
+    <string name="f_po_wur_bruch">%1$s sayısının karekökü</string>
+    <string name="f_po_wur_zahl">%1$s sayısının karekökü</string>
     <string name="f_prozent_von">%2$s sayısının %% %1$s\'i</string>
     <string name="f_prozentsatz">%1$s, %2$s sayısının yüzde kaçıdır?</string>
+    <string name="f_pz_zin_einfach">%1$s avro, %2$s yıl boyunca %3$s %% ile işletiliyor, faizler anaparaya eklenmiyor. Sonunda kaç avro olur?</string>
+    <string name="f_pz_zin_zinseszins">%1$s avro, %2$s yıl boyunca %3$s %% ile işletiliyor, faizler anaparaya ekleniyor. Sonunda kaç avro olur?</string>
     <string name="f_term_fuer_x">x = %2$s için %1$s</string>
     <string name="fa_addiert_statt_mal">Çarpmak yerine topladı</string>
     <string name="fa_bezug_vertauscht">Taban değer ile yüzde değeri karıştırıldı</string>
@@ -68,10 +85,14 @@
     <string name="fa_durch_hundert_vergessen">100\'e bölme unutuldu</string>
     <string name="fa_einer_vergessen">Birler basamağı hesaba katılmadı</string>
     <string name="fa_entbuendeln_vergessen">Onluk bozulmadı, küçük basamak büyükten çıkarıldı</string>
+    <string name="fa_exponent_als_faktor">Üs, çarpan gibi kullanıldı</string>
     <string name="fa_falsche_gegenrechnung">Yanlış yönde çözüldü</string>
     <string name="fa_falschen_bruch_gedreht">Yanlış kesir ters çevrildi</string>
     <string name="fa_falsches_vorzeichen_umgestellt">Çözerken işaret ters çevrildi</string>
+    <string name="fa_flaeche_statt_volumen">Hacim yerine alan hesaplandı</string>
     <string name="fa_geteilt_statt_mal">Çarpmak yerine böldü</string>
+    <string name="fa_halbierung_vergessen">İkiye bölmek unutuldu</string>
+    <string name="fa_kathete_als_hypotenuse">Karelerin yerine uzunluklar çıkarıldı</string>
     <string name="fa_kehrwert_vergessen">Ters çevirme unutuldu, doğrudan çarpıldı</string>
     <string name="fa_klammer_nicht_beachtet">Parantez bir bütün olarak ele alınmadı</string>
     <string name="fa_komma_verrutscht">Virgül kaydı</string>
@@ -83,19 +104,30 @@
     <string name="fa_minus_uebersehen">Eksi işareti gözden kaçtı</string>
     <string name="fa_nenner_erweitert_zaehler_nicht">Payda genişletildi, pay genişletilmedi</string>
     <string name="fa_nicht_fertig_gekuerzt">Tamamen sadeleştirilmedi</string>
+    <string name="fa_nur_eine_gleichung">Yalnızca birinci denklem kullanıldı</string>
+    <string name="fa_nur_einmal_verzinst">Yalnızca bir yıllık faiz hesaplandı</string>
     <string name="fa_nur_zaehler_gekuerzt">Sadece pay sadeleştirildi</string>
     <string name="fa_nur_zaehler_multipliziert">Sadece pay çarpıldı</string>
     <string name="fa_punkt_vor_strich_missachtet">İşlem önceliği göz ardı edildi</string>
+    <string name="fa_quadriert_statt_addiert">Kenarların kareleri yerine kendileri toplandı</string>
     <string name="fa_reihe_verzaehlt">Bir satır eksik hesaplandı</string>
     <string name="fa_stellen_nicht_ausgerichtet">Virgüller alt alta yazılmadı</string>
     <string name="fa_stellenwert_verloren">Onlar basamağının basamak değeri kayboldu</string>
+    <string name="fa_strecken_addiert">Oran yerine parçalar toplandı</string>
     <string name="fa_subtrahiert_statt_geteilt">Bölmek yerine çıkardı</string>
     <string name="fa_summand_uebersehen">Toplanan diğer tarafa atılmadı</string>
     <string name="fa_uebertrag_vergessen">Elde unutuldu</string>
     <string name="fa_um_zehn_daneben">On kadar yanında</string>
+    <string name="fa_verhaeltnis_gedreht">Oran ters kuruldu</string>
+    <string name="fa_vorzeichen_der_wurzel">Çözümün işareti ters çevrildi</string>
     <string name="fa_vorzeichen_vertauscht">İşaretler karıştırıldı</string>
     <string name="fa_vorzeichenregel_verwechselt">İşaret kuralı karıştırıldı</string>
+    <string name="fa_wurzel_halbiert">Kök almak ile ikiye bölmek karıştırıldı</string>
+    <string name="fa_wurzel_vergessen">Sonda kök almak unutuldu</string>
+    <string name="fa_x_und_y_vertauscht">x ile y yer değiştirdi</string>
     <string name="fa_zaehler_und_nenner_verrechnet">Pay ve payda ayrı ayrı hesaplandı</string>
+    <string name="fa_zinseszins_als_summe">Bileşik faiz basit toplam gibi hesaplandı</string>
+    <string name="fa_zweite_loesung_genommen">Küçük olan çözüm verildi</string>
     <string name="fortschritt_aufgaben">Görevler</string>
     <string name="fortschritt_beherrscht">Öğrenildi</string>
     <string name="fortschritt_beste_serie">En uzun doğru cevap dizisi</string>
@@ -129,10 +161,33 @@
     <string name="h_dz_bru_1_c">%1$s ile genişleterek paydayı %2$s yap.</string>
     <string name="h_dz_mul_1_a">Önce işlemi tamamen virgülsüz hesapla.</string>
     <string name="h_dz_mul_1_b">İki sayının ondalık basamaklarını topla, sonuçta o kadar olur.</string>
+    <string name="h_ge_koe_1_a">Önce alanın mı yoksa hacmin mi sorulduğunu belirle.</string>
+    <string name="h_ge_koe_1_b">Dikdörtgenin alanı uzunluk çarpı genişliktir.</string>
+    <string name="h_ge_koe_1_c">%1$s · %2$s işlemini yap.</string>
+    <string name="h_ge_koe_1_d">Üçgende çarpmadan sonra bir de yarısı alınır.</string>
+    <string name="h_ge_koe_1_e">Taban çarpı yükseklik %1$s eder. Şimdi ikiye böl.</string>
+    <string name="h_ge_koe_1_f">Prizmada üç ayrıtın hepsi çarpılır.</string>
+    <string name="h_ge_koe_1_g">Taban alanı %1$s, geriye yükseklik kaldı.</string>
+    <string name="h_ge_koe_1_h">Önce tüm prizmayı, sonra boşluğu, sonra farkı hesapla.</string>
+    <string name="h_ge_koe_1_i">Tüm prizma %1$s eder. Bundan boşluk çıkar.</string>
+    <string name="h_ge_pyt_1_a">Üçgeni çiz ve dik açıyı işaretle.</string>
+    <string name="h_ge_pyt_1_b">Hipotenüs dik açının karşısındadır. İki dik kenarın karelerini topla.</string>
+    <string name="h_ge_pyt_1_c">Karelerin toplamı %1$s. Geriye kök almak kaldı.</string>
+    <string name="h_ge_pyt_1_d">Aranan bir dik kenar: teoremi ona göre düzenle ve bilinen dik kenarın karesini çıkar.</string>
+    <string name="h_ge_pyt_1_e">Çıkarma sonrası %1$s kalır. Geriye kök almak kaldı.</string>
+    <string name="h_ge_str_1_a">İki ışını ve paralelleri çiz; hangi parçanın hangisine ait olduğunu not et.</string>
+    <string name="h_ge_str_1_b">Her iki ışında da parçalar aynı orandadır.</string>
+    <string name="h_ge_str_1_c">İki paralel arasındaki büyütme katsayısı %1$s.</string>
     <string name="h_gl_kla_1_a">Parantez bir bütün olarak %1$s ile çarpılıyor.</string>
     <string name="h_gl_kla_1_b">Önce parantezin önündeki çarpana böl, parantez bu sırada bir arada kalır.</string>
+    <string name="h_gl_lgs_1_a">İki denklem, iki bilinmeyen: önce biri yok edilmeli.</string>
+    <string name="h_gl_lgs_1_b">İki denklemi aynı sayıda y içerecek hâle getir ve birbirinden çıkar.</string>
+    <string name="h_gl_lgs_1_c">Çıkarma sonrası %1$sx = %2$s kalır.</string>
     <string name="h_gl_lin_1_a">x\'in önünde daha ne var?</string>
     <string name="h_gl_lin_1_b">Önce sayıyı diğer tarafa taşı, sonra çarpana böl.</string>
+    <string name="h_gl_qua_1_a">Toplamı x\'in önündeki sayıya, çarpımı son sayıya eşit olan iki sayı ara.</string>
+    <string name="h_gl_qua_1_b">İki sayının toplamı %1$s, çarpımı %2$s.</string>
+    <string name="h_gl_qua_1_c">İki çözümden biri %1$s. Aranan diğeri.</string>
     <string name="h_gl_ter_1_a">Sayıyı x yerine koy ve ifadeyi yeniden yaz.</string>
     <string name="h_gl_ter_1_b">İşlem önceliği: önce çarp, sonra topla veya çıkar.</string>
     <string name="h_gl_zwischenschritt">İlk adımdan sonra denklem şöyle görünüyor: %1$s</string>
@@ -154,12 +209,23 @@
     <string name="h_nz_mul_1_a">Önce işaretsiz hesapla.</string>
     <string name="h_nz_mul_1_b">Eksi işaretlerini say: çift sayı artı, tek sayı eksi verir.</string>
     <string name="h_nz_mul_1_c">Mutlak değer %1$s, sadece işaret eksik.</string>
+    <string name="h_po_rat_1_a">Üsteki kesir hem kök hem kuvvet demektir.</string>
+    <string name="h_po_rat_1_b">Payda %1$s kök, pay %2$s kuvvettir.</string>
+    <string name="h_po_rat_1_c">Kök %1$s verir. Şimdi sıra kuvvette.</string>
+    <string name="h_po_wur_1_a">Kök şunu sorar: hangi sayı kendisiyle çarpılınca bunu verir?</string>
+    <string name="h_po_wur_1_b">Doğru olanı bulana kadar tam kare sayıları gözden geçir.</string>
+    <string name="h_po_wur_1_c">%1$s sayısına daha yakından bak.</string>
     <string name="h_pz_sat_1_a">Önce oranı kesir olarak yaz.</string>
     <string name="h_pz_sat_1_b">Yüzde değeri taban değere böl, sonra 100 ile çarp.</string>
     <string name="h_pz_sat_1_c">%1$s : %2$s = %3$s</string>
     <string name="h_pz_von_1_a">Tek bir yüzde ne kadar?</string>
     <string name="h_pz_von_1_b">Taban değeri 100\'e böl, sonra yüzde oranıyla çarp.</string>
     <string name="h_pz_von_1_c">Bir yüzde %1$s eder.</string>
+    <string name="h_pz_zin_1_a">Tek adımda değil, yıl yıl hesapla.</string>
+    <string name="h_pz_zin_1_b">Faiz anaparaya eklenmezse her yıl faiz aynı kalır.</string>
+    <string name="h_pz_zin_1_c">Bir yıl %1$s avro faiz getirir.</string>
+    <string name="h_pz_zin_1_d">Faiz anaparaya eklenirse her yıl büyümüş anapara işletilir.</string>
+    <string name="h_pz_zin_1_e">Yıllık katsayı %1$s.</string>
     <string name="h_rechnung_mal">İlk adım: %1$s · %2$s = %3$s</string>
     <string name="h_rechnung_minus">İlk adım: %1$s − %2$s = %3$s</string>
     <string name="h_rechnung_plus">İlk adım: %1$s + %2$s = %3$s</string>
@@ -171,8 +237,13 @@
     <string name="k_dz_add_1">Ondalık sayıları toplama ve çıkarma</string>
     <string name="k_dz_bru_1">Kesirleri ondalık sayı olarak yazma</string>
     <string name="k_dz_mul_1">Ondalık sayıları çarpma</string>
+    <string name="k_ge_koe_1">Alanlar ve cisimler</string>
+    <string name="k_ge_pyt_1">Pisagor teoremi</string>
+    <string name="k_ge_str_1">Thales teoremi</string>
     <string name="k_gl_kla_1">Parantezli denklemler</string>
+    <string name="k_gl_lgs_1">Doğrusal denklem sistemleri</string>
     <string name="k_gl_lin_1">Doğrusal denklemleri çözme</string>
+    <string name="k_gl_qua_1">İkinci dereceden denklemler</string>
     <string name="k_gl_ter_1">İfadelere değer koyma ve hesaplama</string>
     <string name="k_gr_add_1">1000\'e kadar toplama ve çıkarma</string>
     <string name="k_gr_div_1">144\'e kadar sayı alanında bölme</string>
@@ -180,8 +251,11 @@
     <string name="k_gr_mul_2">İki basamaklı çarpı bir basamaklı</string>
     <string name="k_nz_add_1">Negatif sayıları toplama ve çıkarma</string>
     <string name="k_nz_mul_1">Çarpma ve bölmede işaret kuralları</string>
+    <string name="k_po_rat_1">Rasyonel üslü sayılar</string>
+    <string name="k_po_wur_1">Köklü ifadeler</string>
     <string name="k_pz_sat_1">Yüzde oranını hesaplama</string>
     <string name="k_pz_von_1">Yüzde değerini hesaplama</string>
+    <string name="k_pz_zin_1">Birkaç yıl boyunca faiz</string>
     <string name="leer_basis_taste">İlk görevi çöz</string>
     <string name="leer_basis_text">İlk görevi çözdüğünde burada her yetkinlik alanı için bir kart oluşacak.</string>
     <string name="leer_basis_titel">Henüz temel kaydedilmedi</string>
@@ -226,12 +300,14 @@
     <string name="schulart_gymnasium">Gymnasium</string>
     <string name="schulart_hauptschule">Hauptschule / Werkrealschule</string>
     <string name="schulart_realschule">Realschule</string>
+    <string name="serie_titel">Seri</string>
+    <string name="serie_wert">%1$s arka arkaya</string>
     <string name="start_basis">Temelin</string>
     <string name="start_fuenf_minuten">Beş dakika çalış</string>
     <string name="start_gruss">İyi günler</string>
     <string name="start_profil">Sınıf %1$s · %2$s · Seviye %3$s</string>
     <string name="start_schwaechen">Zayıflıkları kapat</string>
-    <string name="start_weiterlernen">Öğrenmeye devam et</string>
+    <string name="start_weiterlernen">Devam et</string>
     <string name="taste_loeschen">Son karakteri sil</string>
     <string name="training_beenden">Oturumu bitir</string>
     <string name="training_bilanz_aufgaben">Görevler</string>
@@ -280,9 +356,19 @@
     <string name="w_gl_klammer_ausgleichen">İki tarafta da − %1$s hesapla: x = %2$s</string>
     <string name="w_gl_klammer_teilen">%1$s sayısına böl: x + %2$s = %3$s</string>
     <string name="w_gl_punkt_vor_strich">İşlem önceliği: %1$s · %2$s = %3$s</string>
+    <string name="w_koe_dreieck">Üçgenin alanı: taban çarpı yükseklik, sonra yarısı.</string>
+    <string name="w_koe_gross">Büyük prizma: %1$s · %2$s · %3$s = %4$s</string>
+    <string name="w_koe_halbieren">%1$s sayısının yarısı %2$s.</string>
+    <string name="w_koe_klein">Çıkarılan prizma: %1$s · %2$s · %3$s = %4$s</string>
+    <string name="w_koe_quader">Dikdörtgenler prizmasının hacmi: uzunluk çarpı genişlik çarpı yükseklik.</string>
+    <string name="w_koe_rechteck">Dikdörtgenin alanı: uzunluk çarpı genişlik.</string>
     <string name="w_kue_ergebnis">Sonuç: %1$s</string>
     <string name="w_kue_ggt">%1$s ve %2$s sayılarının en büyük ortak böleni %3$s.</string>
     <string name="w_kue_teilen">%1$s : %2$s = %3$s ve %4$s : %2$s = %5$s</string>
+    <string name="w_lgs_gleichnamig">Birinci denklem %1$s ile, ikinci denklem %2$s ile çarpılır.</string>
+    <string name="w_lgs_x">Yani x = %1$s</string>
+    <string name="w_lgs_y">Yerine konunca y = %1$s bulunur.</string>
+    <string name="w_lgs_y_faellt_weg">Çıkarma yapınca y kaybolur: %1$sx = %2$s</string>
     <string name="w_mal_zerlegen">%1$s · %2$s, %1$s · %3$s ve bir kez daha %1$s demektir.</string>
     <string name="w_nz_also">Yani %1$s</string>
     <string name="w_nz_betraege_geteilt">Mutlak değerler hesaplandı: %1$s : %2$s = %3$s</string>
@@ -292,144 +378,52 @@
     <string name="w_nz_nach_rechts">%1$s noktasından başla, sonra %2$s adım sağa.</string>
     <string name="w_nz_regel_gleich">Aynı işaretler artı verir.</string>
     <string name="w_nz_regel_ungleich">Farklı işaretler eksi verir.</string>
+    <string name="w_pyt_quadrate">%1$s² = %2$s ve %3$s² = %4$s</string>
+    <string name="w_pyt_satz">Dik üçgende a² + b² = c² geçerlidir.</string>
+    <string name="w_pyt_umstellen">Düzenlenmiş hâli: b² = c² − a² = %1$s − %2$s = %3$s</string>
+    <string name="w_pyt_wurzel">%1$s sayısının karekökü %2$s.</string>
     <string name="w_pz_anteil">Oran: %1$s : %2$s = %3$s</string>
     <string name="w_pz_ein_prozent">%1$s sayısının %% 1\'i %2$s eder.</string>
     <string name="w_pz_mal_hundert">%1$s · 100 = %% %2$s</string>
+    <string name="w_qua_groesser">Büyük olan çözüm %1$s.</string>
+    <string name="w_qua_produkt">Çarpanlardan biri sıfırsa çarpım sıfırdır: x = %1$s veya x = %2$s.</string>
+    <string name="w_qua_vieta">Toplamı %1$s, çarpımı %2$s olan iki sayı aranıyor.</string>
+    <string name="w_qua_zerlegt">Bunlar %1$s ve %2$s.</string>
+    <string name="w_rat_negativ">Negatif üs sonucu tersine çevirir: %1$s</string>
+    <string name="w_rat_potenz">Üsteki pay kuvvettir: %1$s üzeri %2$s = %3$s</string>
+    <string name="w_rat_wurzel">Üsteki %1$s paydası köktür: %2$s sayısının %1$s. dereceden kökü %3$s.</string>
     <string name="w_rechnung_mal">%1$s · %2$s = %3$s</string>
     <string name="w_rechnung_minus">%1$s − %2$s = %3$s</string>
     <string name="w_rechnung_plus">%1$s + %2$s = %3$s</string>
+    <string name="w_str_aufloesen">Çözülünce: %1$s · %2$s : %3$s = %4$s</string>
+    <string name="w_str_einsetzen_erster">Yerine konunca: %1$s : SB = %2$s : %3$s</string>
+    <string name="w_str_einsetzen_zweiter">Yerine konunca: %1$s : %2$s = %3$s : SD</string>
+    <string name="w_str_verhaeltnis">Thales teoremine göre SA : SB = SC : SD.</string>
+    <string name="w_wur_bruch">Pay ve payda ayrı ayrı: %1$s sayısının kökü %2$s, %3$s sayısının kökü %4$s.</string>
+    <string name="w_wur_ergebnis">Kök bu durumda %1$s.</string>
+    <string name="w_wur_quadratzahl">%1$s = %2$s · %3$s.</string>
+    <string name="w_zin_ein_jahr">%2$s avronun %1$s %% kadarı yılda %3$s avro faiz eder.</string>
+    <string name="w_zin_faktor">Her yıl %1$s ile çarpılır.</string>
+    <string name="w_zin_jahr">%1$s. yılın sonunda: %2$s avro</string>
+    <string name="w_zin_mal_jahre">%1$s · %2$s yıl = toplam %3$s avro faiz</string>
     <string name="wann_faellig">şimdi zamanı</string>
     <string name="wann_gestern">dün</string>
     <string name="wann_heute">bugün</string>
-    <plurals name="wann_in_tagen">
-        <item quantity="one">%1$d gün sonra</item>
-        <item quantity="other">%1$d gün sonra</item>
-    </plurals>
     <string name="wann_nie">hiç</string>
-    <plurals name="wann_vor_tagen">
-        <item quantity="one">%1$d gün önce</item>
-        <item quantity="other">%1$d gün önce</item>
-    </plurals>
     <string name="zeit_minuten">%1$s dk</string>
     <string name="zeit_sekunden">%1$s sn</string>
     <string name="zeit_stunden">%1$s sa %2$s dk</string>
     <string name="zurueck">Geri</string>
-
-    <!-- Yetkinlik alanları, 9. ve 10. sınıf -->
-    <string name="bereich_potenzen">Üslü sayılar ve kökler</string>
-    <string name="bereich_geometrie">Geometri</string>
-
-    <!-- Yetkinlikler, 9. ve 10. sınıf -->
-    <string name="k_ge_pyt_1">Pisagor teoremi</string>
-    <string name="k_po_wur_1">Köklü ifadeler</string>
-    <string name="k_ge_str_1">Thales teoremi</string>
-    <string name="k_pz_zin_1">Birkaç yıl boyunca faiz</string>
-    <string name="k_gl_qua_1">İkinci dereceden denklemler</string>
-    <string name="k_ge_koe_1">Alanlar ve cisimler</string>
-    <string name="k_gl_lgs_1">Doğrusal denklem sistemleri</string>
-    <string name="k_po_rat_1">Rasyonel üslü sayılar</string>
-
-    <!-- Sorular, 9. ve 10. sınıf -->
-    <string name="f_ge_pyt_hypotenuse">Dik üçgen, dik kenarlar a = %1$s ve b = %2$s. Hipotenüs c kaç birimdir?</string>
-    <string name="f_ge_pyt_kathete">Dik üçgen, hipotenüs c = %1$s, dik kenar a = %2$s. Dik kenar b kaç birimdir?</string>
-    <string name="f_po_wur_zahl">%1$s sayısının karekökü</string>
-    <string name="f_po_wur_bruch">%1$s sayısının karekökü</string>
-    <string name="f_ge_str_zweiter">S noktasından çıkan iki ışın, iki paralel doğruyla kesiliyor. SA = %1$s, SB = %2$s, SC = %3$s. SD kaç birimdir?</string>
-    <string name="f_ge_str_erster">S noktasından çıkan iki ışın, iki paralel doğruyla kesiliyor. SA = %1$s, SC = %2$s, SD = %3$s. SB kaç birimdir?</string>
-    <string name="f_pz_zin_einfach">%1$s avro, %2$s yıl boyunca %3$s %% ile işletiliyor, faizler anaparaya eklenmiyor. Sonunda kaç avro olur?</string>
-    <string name="f_pz_zin_zinseszins">%1$s avro, %2$s yıl boyunca %3$s %% ile işletiliyor, faizler anaparaya ekleniyor. Sonunda kaç avro olur?</string>
-    <string name="f_gl_qua_groessere">%1$s — büyük olan çözümü yaz.</string>
-    <string name="f_ge_koe_rechteck">%1$s cm uzunluğunda ve %2$s cm genişliğinde dikdörtgen. Alanı kaç santimetrekaredir?</string>
-    <string name="f_ge_koe_dreieck">Tabanı %1$s cm, yüksekliği %2$s cm olan üçgen. Alanı kaç santimetrekaredir?</string>
-    <string name="f_ge_koe_quader">%1$s cm, %2$s cm ve %3$s cm ölçülerinde dikdörtgenler prizması. Hacmi kaç santimetreküptür?</string>
-    <string name="f_ge_koe_rest">%1$s cm, %2$s cm ve %3$s cm ölçülerindeki bir prizmadan %4$s cm, %5$s cm ve %6$s cm ölçülerinde bir prizma çıkarılmış. Kalan hacim kaç santimetreküptür?</string>
-    <string name="f_gl_lgs_x">%1$s ve %2$s — x kaçtır?</string>
-    <string name="f_po_rat_hoch">%1$s üzeri %2$s</string>
-
-    <!-- Çözüm adımları, 9. ve 10. sınıf -->
-    <string name="w_pyt_satz">Dik üçgende a² + b² = c² geçerlidir.</string>
-    <string name="w_pyt_quadrate">%1$s² = %2$s ve %3$s² = %4$s</string>
-    <string name="w_pyt_wurzel">%1$s sayısının karekökü %2$s.</string>
-    <string name="w_pyt_umstellen">Düzenlenmiş hâli: b² = c² − a² = %1$s − %2$s = %3$s</string>
-    <string name="w_wur_quadratzahl">%1$s = %2$s · %3$s.</string>
-    <string name="w_wur_ergebnis">Kök bu durumda %1$s.</string>
-    <string name="w_wur_bruch">Pay ve payda ayrı ayrı: %1$s sayısının kökü %2$s, %3$s sayısının kökü %4$s.</string>
-    <string name="w_str_verhaeltnis">Thales teoremine göre SA : SB = SC : SD.</string>
-    <string name="w_str_einsetzen_zweiter">Yerine konunca: %1$s : %2$s = %3$s : SD</string>
-    <string name="w_str_einsetzen_erster">Yerine konunca: %1$s : SB = %2$s : %3$s</string>
-    <string name="w_str_aufloesen">Çözülünce: %1$s · %2$s : %3$s = %4$s</string>
-    <string name="w_zin_ein_jahr">%2$s avronun %1$s %% kadarı yılda %3$s avro faiz eder.</string>
-    <string name="w_zin_mal_jahre">%1$s · %2$s yıl = toplam %3$s avro faiz</string>
-    <string name="w_zin_faktor">Her yıl %1$s ile çarpılır.</string>
-    <string name="w_zin_jahr">%1$s. yılın sonunda: %2$s avro</string>
-    <string name="w_qua_vieta">Toplamı %1$s, çarpımı %2$s olan iki sayı aranıyor.</string>
-    <string name="w_qua_zerlegt">Bunlar %1$s ve %2$s.</string>
-    <string name="w_qua_produkt">Çarpanlardan biri sıfırsa çarpım sıfırdır: x = %1$s veya x = %2$s.</string>
-    <string name="w_qua_groesser">Büyük olan çözüm %1$s.</string>
-    <string name="w_koe_rechteck">Dikdörtgenin alanı: uzunluk çarpı genişlik.</string>
-    <string name="w_koe_dreieck">Üçgenin alanı: taban çarpı yükseklik, sonra yarısı.</string>
-    <string name="w_koe_halbieren">%1$s sayısının yarısı %2$s.</string>
-    <string name="w_koe_quader">Dikdörtgenler prizmasının hacmi: uzunluk çarpı genişlik çarpı yükseklik.</string>
-    <string name="w_koe_gross">Büyük prizma: %1$s · %2$s · %3$s = %4$s</string>
-    <string name="w_koe_klein">Çıkarılan prizma: %1$s · %2$s · %3$s = %4$s</string>
-    <string name="w_lgs_gleichnamig">Birinci denklem %1$s ile, ikinci denklem %2$s ile çarpılır.</string>
-    <string name="w_lgs_y_faellt_weg">Çıkarma yapınca y kaybolur: %1$sx = %2$s</string>
-    <string name="w_lgs_x">Yani x = %1$s</string>
-    <string name="w_lgs_y">Yerine konunca y = %1$s bulunur.</string>
-    <string name="w_rat_wurzel">Üsteki %1$s paydası köktür: %2$s sayısının %1$s. dereceden kökü %3$s.</string>
-    <string name="w_rat_potenz">Üsteki pay kuvvettir: %1$s üzeri %2$s = %3$s</string>
-    <string name="w_rat_negativ">Negatif üs sonucu tersine çevirir: %1$s</string>
-
-    <!-- Kademeli yardım, 9. ve 10. sınıf -->
-    <string name="h_ge_pyt_1_a">Üçgeni çiz ve dik açıyı işaretle.</string>
-    <string name="h_ge_pyt_1_b">Hipotenüs dik açının karşısındadır. İki dik kenarın karelerini topla.</string>
-    <string name="h_ge_pyt_1_c">Karelerin toplamı %1$s. Geriye kök almak kaldı.</string>
-    <string name="h_ge_pyt_1_d">Aranan bir dik kenar: teoremi ona göre düzenle ve bilinen dik kenarın karesini çıkar.</string>
-    <string name="h_ge_pyt_1_e">Çıkarma sonrası %1$s kalır. Geriye kök almak kaldı.</string>
-    <string name="h_po_wur_1_a">Kök şunu sorar: hangi sayı kendisiyle çarpılınca bunu verir?</string>
-    <string name="h_po_wur_1_b">Doğru olanı bulana kadar tam kare sayıları gözden geçir.</string>
-    <string name="h_po_wur_1_c">%1$s sayısına daha yakından bak.</string>
-    <string name="h_ge_str_1_a">İki ışını ve paralelleri çiz; hangi parçanın hangisine ait olduğunu not et.</string>
-    <string name="h_ge_str_1_b">Her iki ışında da parçalar aynı orandadır.</string>
-    <string name="h_ge_str_1_c">İki paralel arasındaki büyütme katsayısı %1$s.</string>
-    <string name="h_pz_zin_1_a">Tek adımda değil, yıl yıl hesapla.</string>
-    <string name="h_pz_zin_1_b">Faiz anaparaya eklenmezse her yıl faiz aynı kalır.</string>
-    <string name="h_pz_zin_1_c">Bir yıl %1$s avro faiz getirir.</string>
-    <string name="h_pz_zin_1_d">Faiz anaparaya eklenirse her yıl büyümüş anapara işletilir.</string>
-    <string name="h_pz_zin_1_e">Yıllık katsayı %1$s.</string>
-    <string name="h_gl_qua_1_a">Toplamı x\'in önündeki sayıya, çarpımı son sayıya eşit olan iki sayı ara.</string>
-    <string name="h_gl_qua_1_b">İki sayının toplamı %1$s, çarpımı %2$s.</string>
-    <string name="h_gl_qua_1_c">İki çözümden biri %1$s. Aranan diğeri.</string>
-    <string name="h_ge_koe_1_a">Önce alanın mı yoksa hacmin mi sorulduğunu belirle.</string>
-    <string name="h_ge_koe_1_b">Dikdörtgenin alanı uzunluk çarpı genişliktir.</string>
-    <string name="h_ge_koe_1_c">%1$s · %2$s işlemini yap.</string>
-    <string name="h_ge_koe_1_d">Üçgende çarpmadan sonra bir de yarısı alınır.</string>
-    <string name="h_ge_koe_1_e">Taban çarpı yükseklik %1$s eder. Şimdi ikiye böl.</string>
-    <string name="h_ge_koe_1_f">Prizmada üç ayrıtın hepsi çarpılır.</string>
-    <string name="h_ge_koe_1_g">Taban alanı %1$s, geriye yükseklik kaldı.</string>
-    <string name="h_ge_koe_1_h">Önce tüm prizmayı, sonra boşluğu, sonra farkı hesapla.</string>
-    <string name="h_ge_koe_1_i">Tüm prizma %1$s eder. Bundan boşluk çıkar.</string>
-    <string name="h_gl_lgs_1_a">İki denklem, iki bilinmeyen: önce biri yok edilmeli.</string>
-    <string name="h_gl_lgs_1_b">İki denklemi aynı sayıda y içerecek hâle getir ve birbirinden çıkar.</string>
-    <string name="h_gl_lgs_1_c">Çıkarma sonrası %1$sx = %2$s kalır.</string>
-    <string name="h_po_rat_1_a">Üsteki kesir hem kök hem kuvvet demektir.</string>
-    <string name="h_po_rat_1_b">Payda %1$s kök, pay %2$s kuvvettir.</string>
-    <string name="h_po_rat_1_c">Kök %1$s verir. Şimdi sıra kuvvette.</string>
-
-    <!-- Hata türleri, 9. ve 10. sınıf -->
-    <string name="fa_quadriert_statt_addiert">Kenarların kareleri yerine kendileri toplandı</string>
-    <string name="fa_wurzel_vergessen">Sonda kök almak unutuldu</string>
-    <string name="fa_kathete_als_hypotenuse">Karelerin yerine uzunluklar çıkarıldı</string>
-    <string name="fa_wurzel_halbiert">Kök almak ile ikiye bölmek karıştırıldı</string>
-    <string name="fa_verhaeltnis_gedreht">Oran ters kuruldu</string>
-    <string name="fa_strecken_addiert">Oran yerine parçalar toplandı</string>
-    <string name="fa_nur_einmal_verzinst">Yalnızca bir yıllık faiz hesaplandı</string>
-    <string name="fa_zinseszins_als_summe">Bileşik faiz basit toplam gibi hesaplandı</string>
-    <string name="fa_zweite_loesung_genommen">Küçük olan çözüm verildi</string>
-    <string name="fa_vorzeichen_der_wurzel">Çözümün işareti ters çevrildi</string>
-    <string name="fa_nur_eine_gleichung">Yalnızca birinci denklem kullanıldı</string>
-    <string name="fa_x_und_y_vertauscht">x ile y yer değiştirdi</string>
-    <string name="fa_exponent_als_faktor">Üs, çarpan gibi kullanıldı</string>
-    <string name="fa_halbierung_vergessen">İkiye bölmek unutuldu</string>
-    <string name="fa_flaeche_statt_volumen">Hacim yerine alan hesaplandı</string>
+    <plurals name="wann_vor_tagen">
+        <item quantity="one">%1$d gün önce</item>
+        <item quantity="other">%1$d gün önce</item>
+    </plurals>
+    <plurals name="wann_in_tagen">
+        <item quantity="one">%1$d gün sonra</item>
+        <item quantity="other">%1$d gün sonra</item>
+    </plurals>
+    <plurals name="einordnung_offene">
+        <item quantity="one">%1$d yetkinlik hâlâ çalışma gerektiriyor</item>
+        <item quantity="other">%1$d yetkinlik hâlâ çalışma gerektiriyor</item>
+    </plurals>
 </resources>

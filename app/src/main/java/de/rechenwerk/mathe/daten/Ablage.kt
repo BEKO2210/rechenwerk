@@ -39,16 +39,37 @@ data class KompetenzStand(
     val beruehrt: Boolean get() = versuche > 0
 }
 
-/** Zahlen ueber alle Kompetenzen hinweg. Eine frische Installation hat hier ueberall 0. */
+/**
+ * Zahlen ueber alle Kompetenzen hinweg. Eine frische Installation hat hier
+ * ueberall 0. [serie] ist die laufende Strecke richtiger Antworten,
+ * [besteSerie] ihr Hoechststand.
+ */
 data class Werte(
     val lernzeitMs: Long = 0L,
     val versuche: Int = 0,
     val treffer: Int = 0,
     val wiederholungen: Int = 0,
+    val serie: Int = 0,
     val besteSerie: Int = 0,
     val schnellsteMs: Long = 0L,
     val sitzungen: Int = 0,
 )
+
+/**
+ * Die Serie: wie viele Aufgaben hintereinander richtig waren. Jeder Treffer
+ * verlaengert sie um eins, ein Fehler wirft sie auf null zurueck. Der
+ * Hoechststand bleibt stehen -- eine verlorene Serie loescht keinen Bestwert.
+ */
+object Serie {
+
+    fun nachAntwort(werte: Werte, richtig: Boolean): Werte {
+        val laufend = if (richtig) werte.serie + 1 else 0
+        return werte.copy(serie = laufend, besteSerie = maxOf(werte.besteSerie, laufend))
+    }
+
+    /** So viele Segmente hat eine Runde auf der Serien-Strecke. */
+    const val RUNDE = 8
+}
 
 /**
  * Eine beantwortete Aufgabe in der Historie. Gespeichert wird nicht die Aufgabe
@@ -73,17 +94,34 @@ data class Laufend(
     val niveau: Niveau,
 )
 
-/** Alles, was einen Neustart ueberlebt. Liegt als JSON im Tresor. */
+/**
+ * Alles, was einen Neustart ueberlebt. Zwei Speicher tragen sie gemeinsam:
+ * [profil], [modus] und [nachRaumUebernommen] liegen als JSON im Suite-Tresor,
+ * die fachlichen Felder in der Room-Datenbank. Beim Export und beim Import
+ * steht sie vollstaendig in einer Datei.
+ */
 data class Ablage(
     val profil: Profil = Profil(),
-    // Eine frische Installation startet dunkel, nicht "wie das System".
-    val modus: Modus = Modus.DUNKEL,
+    // Eine frische Installation folgt dem Anzeigemodus des Systems. Der dunkle
+    // Entwurf bleibt der gestalterische Ausgangspunkt, aber wer sein Telefon
+    // hell gestellt hat, bekommt eine helle Oberflaeche.
+    val modus: Modus = Modus.SYSTEM,
     val staende: Map<String, KompetenzStand> = emptyMap(),
     val werte: Werte = Werte(),
     val verlauf: List<Verlaufseintrag> = emptyList(),
     val laufend: Laufend? = null,
+    /** Merkzeichen: der alte JSON-Stand ist einmalig nach Room gewandert. */
+    val nachRaumUebernommen: Boolean = false,
 ) {
     fun stand(kennung: String): KompetenzStand = staende[kennung] ?: KompetenzStand(kennung)
+
+    /**
+     * Der Teil, der im Suite-Tresor steht: Profil, Erscheinungsbild und das
+     * Merkzeichen der Uebernahme. Die fachlichen Felder fuehrt Room; im Tresor
+     * bleiben sie leer, damit nicht zwei Speicher dieselbe Wahrheit behaupten.
+     */
+    fun nurEinstellungen(): Ablage =
+        Ablage(profil = profil, modus = modus, nachRaumUebernommen = nachRaumUebernommen)
 
     /** Haengt einen Eintrag an die Historie und haelt sie auf [VERLAUF_MAX] kurz. */
     fun mitVerlauf(eintrag: Verlaufseintrag): List<Verlaufseintrag> =
@@ -103,13 +141,18 @@ object Papier {
 
     const val FORMAT = "rechenwerk"
 
-    /** Fassung 2 fuehrt die Aufgabenhistorie mit Startwerten. Fassung 1 wird weiter gelesen. */
-    const val FASSUNG = 2
+    /**
+     * Fassung 2 fuehrt die Aufgabenhistorie mit Startwerten, Fassung 3 die
+     * laufende Serie und das Merkzeichen der Room-Uebernahme. Aeltere
+     * Fassungen werden weiter gelesen; ihre neuen Felder stehen auf null.
+     */
+    const val FASSUNG = 3
 
     fun schreibe(ablage: Ablage): String {
         val wurzel = JSONObject()
         wurzel.put("format", FORMAT)
         wurzel.put("fassung", FASSUNG)
+        wurzel.put("nachRaumUebernommen", ablage.nachRaumUebernommen)
 
         val profil = JSONObject()
         profil.put("bundesland", ablage.profil.bundesland)
@@ -126,6 +169,7 @@ object Papier {
         werte.put("versuche", ablage.werte.versuche)
         werte.put("treffer", ablage.werte.treffer)
         werte.put("wiederholungen", ablage.werte.wiederholungen)
+        werte.put("serie", ablage.werte.serie)
         werte.put("besteSerie", ablage.werte.besteSerie)
         werte.put("schnellsteMs", ablage.werte.schnellsteMs)
         werte.put("sitzungen", ablage.werte.sitzungen)
@@ -208,6 +252,7 @@ object Papier {
             versuche = werteJson.optInt("versuche", 0).coerceAtLeast(0),
             treffer = werteJson.optInt("treffer", 0).coerceAtLeast(0),
             wiederholungen = werteJson.optInt("wiederholungen", 0).coerceAtLeast(0),
+            serie = werteJson.optInt("serie", 0).coerceAtLeast(0),
             besteSerie = werteJson.optInt("besteSerie", 0).coerceAtLeast(0),
             schnellsteMs = werteJson.optLong("schnellsteMs", 0L).coerceAtLeast(0L),
             sitzungen = werteJson.optInt("sitzungen", 0).coerceAtLeast(0),
@@ -269,11 +314,12 @@ object Papier {
 
         return Ablage(
             profil = profil,
-            modus = wahl(wurzel.optString("modus"), Modus.entries, Modus.DUNKEL),
+            modus = wahl(wurzel.optString("modus"), Modus.entries, Modus.SYSTEM),
             staende = staende,
             werte = werte,
             verlauf = verlauf.takeLast(Ablage.VERLAUF_MAX),
             laufend = laufend,
+            nachRaumUebernommen = wurzel.optBoolean("nachRaumUebernommen", false),
         )
     }
 

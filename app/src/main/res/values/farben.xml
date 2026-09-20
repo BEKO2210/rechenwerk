@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Grundflaeche des Fensters, bevor Compose zeichnet. Dunkel wie der
-         Standardmodus einer neuen Installation, damit beim Start nichts
-         aufblitzt. Es ist der obere Ton des Grundverlaufs, nicht Schwarz. -->
-    <color name="fenster_grund">#0E1A17</color>
+    <!-- Grundflaeche des Fensters, bevor Compose zeichnet. Das Erscheinungsbild
+         folgt ab Werk dem System, deshalb steht hier der obere Ton des hellen
+         Grundverlaufs und unter values-night der des dunklen. So blitzt beim
+         Start in keinem der beiden Modi die falsche Flaeche auf. -->
+    <color name="fenster_grund">#F8FAF9</color>
 </resources>

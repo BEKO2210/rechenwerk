@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="abbrechen">Anuluj</string>
+    <string name="abschluss_naechstes">Teraz kolej na %1$s, %2$s.</string>
+    <string name="abschluss_naechstes_offen">Wybierz obszar na ekranie startowym, aby kontynuować.</string>
+    <string name="abschluss_segmente">Segmenty</string>
+    <string name="abschluss_serie">Najlepsza seria</string>
     <string name="app_name">Rechenwerk</string>
     <string name="bereich_brueche">Ułamki</string>
     <string name="bereich_dezimal">Liczby dziesiętne</string>
+    <string name="bereich_geometrie">Geometria</string>
     <string name="bereich_gleichungen">Wyrażenia i równania</string>
     <string name="bereich_grundrechnen">Podstawowe działania</string>
     <string name="bereich_negativ">Liczby ujemne</string>
+    <string name="bereich_potenzen">Potęgi i pierwiastki</string>
     <string name="bereich_prozent">Procenty</string>
     <string name="bundesland_bw">Badenia-Wirtembergia</string>
     <string name="detail_fehlerarten">Ostatnio zauważone rodzaje błędów</string>
@@ -22,12 +28,6 @@
     <string name="detail_zeit">Średni czas odpowiedzi</string>
     <string name="einordnung_arbeit">w toku</string>
     <string name="einordnung_offen">jeszcze nie rozpoczęte</string>
-    <plurals name="einordnung_offene">
-        <item quantity="one">%1$d kompetencja wymaga jeszcze treningu</item>
-        <item quantity="few">%1$d kompetencje wymagają jeszcze treningu</item>
-        <item quantity="many">%1$d kompetencji wymaga jeszcze treningu</item>
-        <item quantity="other">%1$d kompetencji wymaga jeszcze treningu</item>
-    </plurals>
     <string name="einordnung_sicher">pewne</string>
     <string name="einordnung_traegt">opanowane, ale jeszcze niepewne</string>
     <string name="einordnung_training">wymaga treningu</string>
@@ -55,13 +55,28 @@
     <string name="einst_zuruecksetzen_taste">Zresetuj dane lokalne</string>
     <string name="f_als_dezimalzahl">%1$s jako liczba dziesiętna</string>
     <string name="f_ausdruck">%1$s</string>
+    <string name="f_ge_koe_dreieck">Trójkąt o podstawie %1$s cm i wysokości %2$s cm. Jakie jest pole w centymetrach kwadratowych?</string>
+    <string name="f_ge_koe_quader">Prostopadłościan o wymiarach %1$s cm, %2$s cm i %3$s cm. Jaka jest objętość w centymetrach sześciennych?</string>
+    <string name="f_ge_koe_rechteck">Prostokąt o długości %1$s cm i szerokości %2$s cm. Jakie jest pole w centymetrach kwadratowych?</string>
+    <string name="f_ge_koe_rest">Z prostopadłościanu o wymiarach %1$s cm, %2$s cm i %3$s cm wycięto prostopadłościan o wymiarach %4$s cm, %5$s cm i %6$s cm. Jaka jest pozostała objętość w centymetrach sześciennych?</string>
+    <string name="f_ge_pyt_hypotenuse">Trójkąt prostokątny, przyprostokątne a = %1$s i b = %2$s. Jak długa jest przeciwprostokątna c?</string>
+    <string name="f_ge_pyt_kathete">Trójkąt prostokątny, przeciwprostokątna c = %1$s, przyprostokątna a = %2$s. Jak długa jest przyprostokątna b?</string>
+    <string name="f_ge_str_erster">Dwie półproste z S, przecięte dwiema prostymi równoległymi. SA = %1$s, SC = %2$s, SD = %3$s. Jak długi jest SB?</string>
+    <string name="f_ge_str_zweiter">Dwie półproste z S, przecięte dwiema prostymi równoległymi. SA = %1$s, SB = %2$s, SC = %3$s. Jak długi jest SD?</string>
     <string name="f_geteilt">%1$s : %2$s</string>
+    <string name="f_gl_lgs_x">%1$s oraz %2$s — ile wynosi x?</string>
+    <string name="f_gl_qua_groessere">%1$s — podaj większe rozwiązanie.</string>
     <string name="f_kuerzen">Skróć %1$s całkowicie</string>
     <string name="f_mal">%1$s · %2$s</string>
     <string name="f_minus">%1$s − %2$s</string>
     <string name="f_plus">%1$s + %2$s</string>
+    <string name="f_po_rat_hoch">%1$s do potęgi %2$s</string>
+    <string name="f_po_wur_bruch">Pierwiastek kwadratowy z %1$s</string>
+    <string name="f_po_wur_zahl">Pierwiastek kwadratowy z %1$s</string>
     <string name="f_prozent_von">%1$s %% z %2$s</string>
     <string name="f_prozentsatz">Ile procent stanowi %1$s z %2$s?</string>
+    <string name="f_pz_zin_einfach">%1$s euro na %3$s %% przez %2$s lata, odsetki nie są dopisywane do kapitału. Ile euro jest na koniec?</string>
+    <string name="f_pz_zin_zinseszins">%1$s euro na %3$s %% przez %2$s lata, odsetki są dopisywane do kapitału. Ile euro jest na koniec?</string>
     <string name="f_term_fuer_x">%1$s dla x = %2$s</string>
     <string name="fa_addiert_statt_mal">Dodano zamiast pomnożyć</string>
     <string name="fa_bezug_vertauscht">Pomylono wartość podstawową z wartością procentową</string>
@@ -70,10 +85,14 @@
     <string name="fa_durch_hundert_vergessen">Nie podzielono przez 100</string>
     <string name="fa_einer_vergessen">Nie uwzględniono jedności</string>
     <string name="fa_entbuendeln_vergessen">Brak rozbicia na rzędy, odjęto mniejszą cyfrę od większej</string>
+    <string name="fa_exponent_als_faktor">Wykładnik potraktowany jak czynnik</string>
     <string name="fa_falsche_gegenrechnung">Przekształcono w złą stronę</string>
     <string name="fa_falschen_bruch_gedreht">Odwrócono niewłaściwy ułamek</string>
     <string name="fa_falsches_vorzeichen_umgestellt">Przy przekształcaniu zmieniono znak</string>
+    <string name="fa_flaeche_statt_volumen">Policzono pole zamiast objętości</string>
     <string name="fa_geteilt_statt_mal">Podzielono zamiast pomnożyć</string>
+    <string name="fa_halbierung_vergessen">Zapomniano podzielić przez dwa</string>
+    <string name="fa_kathete_als_hypotenuse">Odjęto długości zamiast ich kwadratów</string>
     <string name="fa_kehrwert_vergessen">Zapomniano o odwrotności, pomnożono bezpośrednio</string>
     <string name="fa_klammer_nicht_beachtet">Nie potraktowano nawiasu jako całości</string>
     <string name="fa_komma_verrutscht">Przecinek przesunięty</string>
@@ -85,19 +104,30 @@
     <string name="fa_minus_uebersehen">Przeoczono znak minus</string>
     <string name="fa_nenner_erweitert_zaehler_nicht">Rozszerzono mianownik, ale nie licznik</string>
     <string name="fa_nicht_fertig_gekuerzt">Nie skrócono do końca</string>
+    <string name="fa_nur_eine_gleichung">Użyto tylko pierwszego równania</string>
+    <string name="fa_nur_einmal_verzinst">Policzono odsetki tylko za jeden rok</string>
     <string name="fa_nur_zaehler_gekuerzt">Skrócono tylko licznik</string>
     <string name="fa_nur_zaehler_multipliziert">Pomnożono tylko licznik</string>
     <string name="fa_punkt_vor_strich_missachtet">Nie zachowano kolejności działań</string>
+    <string name="fa_quadriert_statt_addiert">Dodano boki zamiast ich kwadratów</string>
     <string name="fa_reihe_verzaehlt">Policzono o jeden rząd za mało</string>
     <string name="fa_stellen_nicht_ausgerichtet">Przecinki nie ustawione jeden pod drugim</string>
     <string name="fa_stellenwert_verloren">Utracono wartość pozycyjną dziesiątek</string>
+    <string name="fa_strecken_addiert">Dodano odcinki zamiast użyć stosunku</string>
     <string name="fa_subtrahiert_statt_geteilt">Odjęto zamiast podzielić</string>
     <string name="fa_summand_uebersehen">Nie odjęto składnika</string>
     <string name="fa_uebertrag_vergessen">Zapomniano o przeniesieniu</string>
     <string name="fa_um_zehn_daneben">Wynik o dziesięć obok</string>
+    <string name="fa_verhaeltnis_gedreht">Stosunek ustawiony odwrotnie</string>
+    <string name="fa_vorzeichen_der_wurzel">Odwrócony znak rozwiązania</string>
     <string name="fa_vorzeichen_vertauscht">Pomylono znaki</string>
     <string name="fa_vorzeichenregel_verwechselt">Pomylono regułę znaków</string>
+    <string name="fa_wurzel_halbiert">Pomylono pierwiastek z połową</string>
+    <string name="fa_wurzel_vergessen">Zapomniano o pierwiastku na końcu</string>
+    <string name="fa_x_und_y_vertauscht">Zamieniono x i y</string>
     <string name="fa_zaehler_und_nenner_verrechnet">Licznik i mianownik policzono osobno</string>
+    <string name="fa_zinseszins_als_summe">Procent składany potraktowany jak zwykła suma</string>
+    <string name="fa_zweite_loesung_genommen">Podano mniejsze rozwiązanie</string>
     <string name="fortschritt_aufgaben">Zadania</string>
     <string name="fortschritt_beherrscht">Opanowane</string>
     <string name="fortschritt_beste_serie">Najdłuższa seria poprawnych odpowiedzi</string>
@@ -131,10 +161,33 @@
     <string name="h_dz_bru_1_c">Rozszerz przez %1$s do mianownika %2$s.</string>
     <string name="h_dz_mul_1_a">Policz zadanie najpierw całkowicie bez przecinka.</string>
     <string name="h_dz_mul_1_b">Zsumuj miejsca po przecinku obu liczb — tyle miejsc ma wynik.</string>
+    <string name="h_ge_koe_1_a">Ustal najpierw, czy szukane jest pole, czy objętość.</string>
+    <string name="h_ge_koe_1_b">Pole prostokąta to długość razy szerokość.</string>
+    <string name="h_ge_koe_1_c">Oblicz %1$s · %2$s.</string>
+    <string name="h_ge_koe_1_d">W trójkącie po mnożeniu trzeba jeszcze wziąć połowę.</string>
+    <string name="h_ge_koe_1_e">Podstawa razy wysokość daje %1$s. Teraz podziel przez dwa.</string>
+    <string name="h_ge_koe_1_f">W prostopadłościanie mnoży się wszystkie trzy krawędzie.</string>
+    <string name="h_ge_koe_1_g">Pole podstawy to %1$s, brakuje jeszcze wysokości.</string>
+    <string name="h_ge_koe_1_h">Policz najpierw cały prostopadłościan, potem wycięcie, potem różnicę.</string>
+    <string name="h_ge_koe_1_i">Cały prostopadłościan ma %1$s. Od tego odejmuje się wycięcie.</string>
+    <string name="h_ge_pyt_1_a">Naszkicuj trójkąt i zaznacz kąt prosty.</string>
+    <string name="h_ge_pyt_1_b">Przeciwprostokątna leży naprzeciw kąta prostego. Dodaj kwadraty obu przyprostokątnych.</string>
+    <string name="h_ge_pyt_1_c">Suma kwadratów wynosi %1$s. Brakuje jeszcze pierwiastka.</string>
+    <string name="h_ge_pyt_1_d">Szukana jest przyprostokątna: przekształć twierdzenie i odejmij kwadrat znanej przyprostokątnej.</string>
+    <string name="h_ge_pyt_1_e">Po odjęciu zostaje %1$s. Brakuje jeszcze pierwiastka.</string>
+    <string name="h_ge_str_1_a">Narysuj obie półproste i równoległe; zapisz, który odcinek należy do której.</string>
+    <string name="h_ge_str_1_b">Na obu półprostych odcinki są w tym samym stosunku.</string>
+    <string name="h_ge_str_1_c">Skala między dwiema równoległymi wynosi %1$s.</string>
     <string name="h_gl_kla_1_a">Nawias jako całość jest mnożony przez %1$s.</string>
     <string name="h_gl_kla_1_b">Najpierw podziel przez czynnik przed nawiasem, nawias pozostaje w całości.</string>
+    <string name="h_gl_lgs_1_a">Dwa równania, dwie niewiadome: jedna z nich musi najpierw zniknąć.</string>
+    <string name="h_gl_lgs_1_b">Doprowadź oba równania do tej samej liczby y i odejmij je od siebie.</string>
+    <string name="h_gl_lgs_1_c">Po odjęciu zostaje %1$sx = %2$s.</string>
     <string name="h_gl_lin_1_a">Co jeszcze przeszkadza x?</string>
     <string name="h_gl_lin_1_b">Najpierw przenieś liczbę na drugą stronę, potem podziel przez czynnik.</string>
+    <string name="h_gl_qua_1_a">Szukaj dwóch liczb, których suma to wartość przed x, a iloczyn to ostatnia wartość.</string>
+    <string name="h_gl_qua_1_b">Te dwie liczby dają w sumie %1$s, a w iloczynie %2$s.</string>
+    <string name="h_gl_qua_1_c">Jedno z dwóch rozwiązań to %1$s. Szukane jest drugie.</string>
     <string name="h_gl_ter_1_a">Podstaw liczbę za x i zapisz wyrażenie na nowo.</string>
     <string name="h_gl_ter_1_b">Kolejność działań: najpierw mnożenie, potem dodawanie lub odejmowanie.</string>
     <string name="h_gl_zwischenschritt">Tak wygląda równanie po pierwszym kroku: %1$s</string>
@@ -156,12 +209,23 @@
     <string name="h_nz_mul_1_a">Policz najpierw bez znaków.</string>
     <string name="h_nz_mul_1_b">Policz znaki minus: parzysta liczba daje plus, nieparzysta minus.</string>
     <string name="h_nz_mul_1_c">Wartość bezwzględna to %1$s, brakuje tylko znaku.</string>
+    <string name="h_po_rat_1_a">Ułamek w wykładniku to pierwiastek i potęga naraz.</string>
+    <string name="h_po_rat_1_b">Mianownik %1$s to pierwiastek, licznik %2$s to potęga.</string>
+    <string name="h_po_rat_1_c">Pierwiastek daje %1$s. Teraz kolej na potęgę.</string>
+    <string name="h_po_wur_1_a">Pierwiastek pyta: jaka liczba pomnożona przez siebie daje ten wynik?</string>
+    <string name="h_po_wur_1_b">Przejdź po kwadratach liczb, aż znajdziesz właściwy.</string>
+    <string name="h_po_wur_1_c">Przyjrzyj się dokładniej liczbie %1$s.</string>
     <string name="h_pz_sat_1_a">Najpierw zapisz część jako ułamek.</string>
     <string name="h_pz_sat_1_b">Wartość procentowa przez wartość podstawową, potem razy 100.</string>
     <string name="h_pz_sat_1_c">%1$s : %2$s = %3$s</string>
     <string name="h_pz_von_1_a">Ile wynosi jeden procent?</string>
     <string name="h_pz_von_1_b">Wartość podstawowa przez 100, potem razy procent.</string>
     <string name="h_pz_von_1_c">Jeden procent to %1$s.</string>
+    <string name="h_pz_zin_1_a">Licz rok po roku, nie w jednym kroku.</string>
+    <string name="h_pz_zin_1_b">Bez kapitalizacji odsetki są co roku takie same.</string>
+    <string name="h_pz_zin_1_c">Jeden rok daje %1$s euro odsetek.</string>
+    <string name="h_pz_zin_1_d">Przy kapitalizacji co roku oprocentowany jest już powiększony kapitał.</string>
+    <string name="h_pz_zin_1_e">Współczynnik na rok wynosi %1$s.</string>
     <string name="h_rechnung_mal">Pierwszy krok: %1$s · %2$s = %3$s</string>
     <string name="h_rechnung_minus">Pierwszy krok: %1$s − %2$s = %3$s</string>
     <string name="h_rechnung_plus">Pierwszy krok: %1$s + %2$s = %3$s</string>
@@ -173,8 +237,13 @@
     <string name="k_dz_add_1">Dodawanie i odejmowanie liczb dziesiętnych</string>
     <string name="k_dz_bru_1">Ułamki jako liczby dziesiętne</string>
     <string name="k_dz_mul_1">Mnożenie liczb dziesiętnych</string>
+    <string name="k_ge_koe_1">Pola i bryły</string>
+    <string name="k_ge_pyt_1">Twierdzenie Pitagorasa</string>
+    <string name="k_ge_str_1">Twierdzenie Talesa</string>
     <string name="k_gl_kla_1">Równania z nawiasem</string>
+    <string name="k_gl_lgs_1">Układy równań liniowych</string>
     <string name="k_gl_lin_1">Rozwiązywanie równań liniowych</string>
+    <string name="k_gl_qua_1">Równania kwadratowe</string>
     <string name="k_gl_ter_1">Podstawianie i obliczanie wyrażeń</string>
     <string name="k_gr_add_1">Dodawanie i odejmowanie do 1000</string>
     <string name="k_gr_div_1">Dzielenie w zakresie do 144</string>
@@ -182,8 +251,11 @@
     <string name="k_gr_mul_2">Dwucyfrowa razy jednocyfrowa</string>
     <string name="k_nz_add_1">Dodawanie i odejmowanie liczb ujemnych</string>
     <string name="k_nz_mul_1">Reguły znaków przy mnożeniu i dzieleniu</string>
+    <string name="k_po_rat_1">Potęgi o wykładnikach wymiernych</string>
+    <string name="k_po_wur_1">Wyrażenia z pierwiastkami</string>
     <string name="k_pz_sat_1">Obliczanie procentu</string>
     <string name="k_pz_von_1">Obliczanie wartości procentowej</string>
+    <string name="k_pz_zin_1">Odsetki przez kilka lat</string>
     <string name="leer_basis_taste">Rozwiąż pierwsze zadanie</string>
     <string name="leer_basis_text">Gdy rozwiążesz pierwsze zadanie, pojawi się tu karta dla każdego obszaru kompetencji.</string>
     <string name="leer_basis_titel">Brak zarejestrowanej podstawy</string>
@@ -228,6 +300,8 @@
     <string name="schulart_gymnasium">Gimnazjum</string>
     <string name="schulart_hauptschule">Szkoła podstawowa zawodowa / Werkrealschule</string>
     <string name="schulart_realschule">Realschule</string>
+    <string name="serie_titel">Seria</string>
+    <string name="serie_wert">%1$s z rzędu</string>
     <string name="start_basis">Twoja podstawa</string>
     <string name="start_fuenf_minuten">Pięć minut treningu</string>
     <string name="start_gruss">Dzień dobry</string>
@@ -282,9 +356,19 @@
     <string name="w_gl_klammer_ausgleichen">Po obu stronach − %1$s: x = %2$s</string>
     <string name="w_gl_klammer_teilen">Podziel przez %1$s: x + %2$s = %3$s</string>
     <string name="w_gl_punkt_vor_strich">Kolejność działań: %1$s · %2$s = %3$s</string>
+    <string name="w_koe_dreieck">Pole trójkąta: podstawa razy wysokość, a z tego połowa.</string>
+    <string name="w_koe_gross">Duży prostopadłościan: %1$s · %2$s · %3$s = %4$s</string>
+    <string name="w_koe_halbieren">Połowa z %1$s to %2$s.</string>
+    <string name="w_koe_klein">Wycięty prostopadłościan: %1$s · %2$s · %3$s = %4$s</string>
+    <string name="w_koe_quader">Objętość prostopadłościanu: długość razy szerokość razy wysokość.</string>
+    <string name="w_koe_rechteck">Pole prostokąta: długość razy szerokość.</string>
     <string name="w_kue_ergebnis">Wynik: %1$s</string>
     <string name="w_kue_ggt">Największy wspólny dzielnik %1$s i %2$s to %3$s.</string>
     <string name="w_kue_teilen">%1$s : %2$s = %3$s i %4$s : %2$s = %5$s</string>
+    <string name="w_lgs_gleichnamig">Pierwsze równanie razy %1$s, drugie równanie razy %2$s.</string>
+    <string name="w_lgs_x">Zatem x = %1$s</string>
+    <string name="w_lgs_y">Po podstawieniu wychodzi y = %1$s.</string>
+    <string name="w_lgs_y_faellt_weg">Po odjęciu y znika: %1$sx = %2$s</string>
     <string name="w_mal_zerlegen">%1$s · %2$s to %1$s · %3$s i jeszcze raz %1$s.</string>
     <string name="w_nz_also">Zatem %1$s</string>
     <string name="w_nz_betraege_geteilt">Wartości bezwzględne policzone: %1$s : %2$s = %3$s</string>
@@ -294,148 +378,58 @@
     <string name="w_nz_nach_rechts">Start na %1$s, potem %2$s kroków w prawo.</string>
     <string name="w_nz_regel_gleich">Jednakowe znaki dają plus.</string>
     <string name="w_nz_regel_ungleich">Różne znaki dają minus.</string>
+    <string name="w_pyt_quadrate">%1$s² = %2$s oraz %3$s² = %4$s</string>
+    <string name="w_pyt_satz">W trójkącie prostokątnym zachodzi a² + b² = c².</string>
+    <string name="w_pyt_umstellen">Po przekształceniu: b² = c² − a² = %1$s − %2$s = %3$s</string>
+    <string name="w_pyt_wurzel">Pierwiastek kwadratowy z %1$s to %2$s.</string>
     <string name="w_pz_anteil">Część: %1$s : %2$s = %3$s</string>
     <string name="w_pz_ein_prozent">1 %% z %1$s to %2$s.</string>
     <string name="w_pz_mal_hundert">%1$s · 100 = %2$s procent</string>
+    <string name="w_qua_groesser">Większe rozwiązanie to %1$s.</string>
+    <string name="w_qua_produkt">Iloczyn jest zerem, gdy jeden z czynników jest zerem: x = %1$s lub x = %2$s.</string>
+    <string name="w_qua_vieta">Szukamy dwóch liczb, których suma wynosi %1$s, a iloczyn %2$s.</string>
+    <string name="w_qua_zerlegt">To %1$s i %2$s.</string>
+    <string name="w_rat_negativ">Ujemny wykładnik odwraca wynik: %1$s</string>
+    <string name="w_rat_potenz">Licznik w wykładniku to potęga: %1$s do potęgi %2$s = %3$s</string>
+    <string name="w_rat_wurzel">Mianownik %1$s w wykładniku to pierwiastek: pierwiastek %1$s stopnia z %2$s to %3$s.</string>
     <string name="w_rechnung_mal">%1$s · %2$s = %3$s</string>
     <string name="w_rechnung_minus">%1$s − %2$s = %3$s</string>
     <string name="w_rechnung_plus">%1$s + %2$s = %3$s</string>
+    <string name="w_str_aufloesen">Rozwiązane: %1$s · %2$s : %3$s = %4$s</string>
+    <string name="w_str_einsetzen_erster">Po podstawieniu: %1$s : SB = %2$s : %3$s</string>
+    <string name="w_str_einsetzen_zweiter">Po podstawieniu: %1$s : %2$s = %3$s : SD</string>
+    <string name="w_str_verhaeltnis">Z twierdzenia Talesa wynika SA : SB = SC : SD.</string>
+    <string name="w_wur_bruch">Licznik i mianownik osobno: pierwiastek z %1$s to %2$s, pierwiastek z %3$s to %4$s.</string>
+    <string name="w_wur_ergebnis">Pierwiastek wynosi więc %1$s.</string>
+    <string name="w_wur_quadratzahl">%1$s to %2$s · %3$s.</string>
+    <string name="w_zin_ein_jahr">%1$s %% z %2$s euro to %3$s euro odsetek rocznie.</string>
+    <string name="w_zin_faktor">Każdy rok mnoży się przez %1$s.</string>
+    <string name="w_zin_jahr">Po roku %1$s: %2$s euro</string>
+    <string name="w_zin_mal_jahre">%1$s · %2$s lata = %3$s euro odsetek łącznie</string>
     <string name="wann_faellig">termin teraz</string>
     <string name="wann_gestern">wczoraj</string>
     <string name="wann_heute">dziś</string>
-    <plurals name="wann_in_tagen">
-        <item quantity="one">za %1$d dzień</item>
-        <item quantity="few">za %1$d dni</item>
-        <item quantity="many">za %1$d dni</item>
-        <item quantity="other">za %1$d dnia</item>
-    </plurals>
     <string name="wann_nie">nigdy</string>
+    <string name="zeit_minuten">%1$s min</string>
+    <string name="zeit_sekunden">%1$s s</string>
+    <string name="zeit_stunden">%1$s h %2$s min</string>
+    <string name="zurueck">Wstecz</string>
     <plurals name="wann_vor_tagen">
         <item quantity="one">%1$d dzień temu</item>
         <item quantity="few">%1$d dni temu</item>
         <item quantity="many">%1$d dni temu</item>
         <item quantity="other">%1$d dnia temu</item>
     </plurals>
-    <string name="zeit_minuten">%1$s min</string>
-    <string name="zeit_sekunden">%1$s s</string>
-    <string name="zeit_stunden">%1$s h %2$s min</string>
-    <string name="zurueck">Wstecz</string>
-
-    <!-- Obszary kompetencji, klasy 9 i 10 -->
-    <string name="bereich_potenzen">Potęgi i pierwiastki</string>
-    <string name="bereich_geometrie">Geometria</string>
-
-    <!-- Kompetencje, klasy 9 i 10 -->
-    <string name="k_ge_pyt_1">Twierdzenie Pitagorasa</string>
-    <string name="k_po_wur_1">Wyrażenia z pierwiastkami</string>
-    <string name="k_ge_str_1">Twierdzenie Talesa</string>
-    <string name="k_pz_zin_1">Odsetki przez kilka lat</string>
-    <string name="k_gl_qua_1">Równania kwadratowe</string>
-    <string name="k_ge_koe_1">Pola i bryły</string>
-    <string name="k_gl_lgs_1">Układy równań liniowych</string>
-    <string name="k_po_rat_1">Potęgi o wykładnikach wymiernych</string>
-
-    <!-- Polecenia, klasy 9 i 10 -->
-    <string name="f_ge_pyt_hypotenuse">Trójkąt prostokątny, przyprostokątne a = %1$s i b = %2$s. Jak długa jest przeciwprostokątna c?</string>
-    <string name="f_ge_pyt_kathete">Trójkąt prostokątny, przeciwprostokątna c = %1$s, przyprostokątna a = %2$s. Jak długa jest przyprostokątna b?</string>
-    <string name="f_po_wur_zahl">Pierwiastek kwadratowy z %1$s</string>
-    <string name="f_po_wur_bruch">Pierwiastek kwadratowy z %1$s</string>
-    <string name="f_ge_str_zweiter">Dwie półproste z S, przecięte dwiema prostymi równoległymi. SA = %1$s, SB = %2$s, SC = %3$s. Jak długi jest SD?</string>
-    <string name="f_ge_str_erster">Dwie półproste z S, przecięte dwiema prostymi równoległymi. SA = %1$s, SC = %2$s, SD = %3$s. Jak długi jest SB?</string>
-    <string name="f_pz_zin_einfach">%1$s euro na %3$s %% przez %2$s lata, odsetki nie są dopisywane do kapitału. Ile euro jest na koniec?</string>
-    <string name="f_pz_zin_zinseszins">%1$s euro na %3$s %% przez %2$s lata, odsetki są dopisywane do kapitału. Ile euro jest na koniec?</string>
-    <string name="f_gl_qua_groessere">%1$s — podaj większe rozwiązanie.</string>
-    <string name="f_ge_koe_rechteck">Prostokąt o długości %1$s cm i szerokości %2$s cm. Jakie jest pole w centymetrach kwadratowych?</string>
-    <string name="f_ge_koe_dreieck">Trójkąt o podstawie %1$s cm i wysokości %2$s cm. Jakie jest pole w centymetrach kwadratowych?</string>
-    <string name="f_ge_koe_quader">Prostopadłościan o wymiarach %1$s cm, %2$s cm i %3$s cm. Jaka jest objętość w centymetrach sześciennych?</string>
-    <string name="f_ge_koe_rest">Z prostopadłościanu o wymiarach %1$s cm, %2$s cm i %3$s cm wycięto prostopadłościan o wymiarach %4$s cm, %5$s cm i %6$s cm. Jaka jest pozostała objętość w centymetrach sześciennych?</string>
-    <string name="f_gl_lgs_x">%1$s oraz %2$s — ile wynosi x?</string>
-    <string name="f_po_rat_hoch">%1$s do potęgi %2$s</string>
-
-    <!-- Kroki obliczeń, klasy 9 i 10 -->
-    <string name="w_pyt_satz">W trójkącie prostokątnym zachodzi a² + b² = c².</string>
-    <string name="w_pyt_quadrate">%1$s² = %2$s oraz %3$s² = %4$s</string>
-    <string name="w_pyt_wurzel">Pierwiastek kwadratowy z %1$s to %2$s.</string>
-    <string name="w_pyt_umstellen">Po przekształceniu: b² = c² − a² = %1$s − %2$s = %3$s</string>
-    <string name="w_wur_quadratzahl">%1$s to %2$s · %3$s.</string>
-    <string name="w_wur_ergebnis">Pierwiastek wynosi więc %1$s.</string>
-    <string name="w_wur_bruch">Licznik i mianownik osobno: pierwiastek z %1$s to %2$s, pierwiastek z %3$s to %4$s.</string>
-    <string name="w_str_verhaeltnis">Z twierdzenia Talesa wynika SA : SB = SC : SD.</string>
-    <string name="w_str_einsetzen_zweiter">Po podstawieniu: %1$s : %2$s = %3$s : SD</string>
-    <string name="w_str_einsetzen_erster">Po podstawieniu: %1$s : SB = %2$s : %3$s</string>
-    <string name="w_str_aufloesen">Rozwiązane: %1$s · %2$s : %3$s = %4$s</string>
-    <string name="w_zin_ein_jahr">%1$s %% z %2$s euro to %3$s euro odsetek rocznie.</string>
-    <string name="w_zin_mal_jahre">%1$s · %2$s lata = %3$s euro odsetek łącznie</string>
-    <string name="w_zin_faktor">Każdy rok mnoży się przez %1$s.</string>
-    <string name="w_zin_jahr">Po roku %1$s: %2$s euro</string>
-    <string name="w_qua_vieta">Szukamy dwóch liczb, których suma wynosi %1$s, a iloczyn %2$s.</string>
-    <string name="w_qua_zerlegt">To %1$s i %2$s.</string>
-    <string name="w_qua_produkt">Iloczyn jest zerem, gdy jeden z czynników jest zerem: x = %1$s lub x = %2$s.</string>
-    <string name="w_qua_groesser">Większe rozwiązanie to %1$s.</string>
-    <string name="w_koe_rechteck">Pole prostokąta: długość razy szerokość.</string>
-    <string name="w_koe_dreieck">Pole trójkąta: podstawa razy wysokość, a z tego połowa.</string>
-    <string name="w_koe_halbieren">Połowa z %1$s to %2$s.</string>
-    <string name="w_koe_quader">Objętość prostopadłościanu: długość razy szerokość razy wysokość.</string>
-    <string name="w_koe_gross">Duży prostopadłościan: %1$s · %2$s · %3$s = %4$s</string>
-    <string name="w_koe_klein">Wycięty prostopadłościan: %1$s · %2$s · %3$s = %4$s</string>
-    <string name="w_lgs_gleichnamig">Pierwsze równanie razy %1$s, drugie równanie razy %2$s.</string>
-    <string name="w_lgs_y_faellt_weg">Po odjęciu y znika: %1$sx = %2$s</string>
-    <string name="w_lgs_x">Zatem x = %1$s</string>
-    <string name="w_lgs_y">Po podstawieniu wychodzi y = %1$s.</string>
-    <string name="w_rat_wurzel">Mianownik %1$s w wykładniku to pierwiastek: pierwiastek %1$s stopnia z %2$s to %3$s.</string>
-    <string name="w_rat_potenz">Licznik w wykładniku to potęga: %1$s do potęgi %2$s = %3$s</string>
-    <string name="w_rat_negativ">Ujemny wykładnik odwraca wynik: %1$s</string>
-
-    <!-- Pomoc stopniowana, klasy 9 i 10 -->
-    <string name="h_ge_pyt_1_a">Naszkicuj trójkąt i zaznacz kąt prosty.</string>
-    <string name="h_ge_pyt_1_b">Przeciwprostokątna leży naprzeciw kąta prostego. Dodaj kwadraty obu przyprostokątnych.</string>
-    <string name="h_ge_pyt_1_c">Suma kwadratów wynosi %1$s. Brakuje jeszcze pierwiastka.</string>
-    <string name="h_ge_pyt_1_d">Szukana jest przyprostokątna: przekształć twierdzenie i odejmij kwadrat znanej przyprostokątnej.</string>
-    <string name="h_ge_pyt_1_e">Po odjęciu zostaje %1$s. Brakuje jeszcze pierwiastka.</string>
-    <string name="h_po_wur_1_a">Pierwiastek pyta: jaka liczba pomnożona przez siebie daje ten wynik?</string>
-    <string name="h_po_wur_1_b">Przejdź po kwadratach liczb, aż znajdziesz właściwy.</string>
-    <string name="h_po_wur_1_c">Przyjrzyj się dokładniej liczbie %1$s.</string>
-    <string name="h_ge_str_1_a">Narysuj obie półproste i równoległe; zapisz, który odcinek należy do której.</string>
-    <string name="h_ge_str_1_b">Na obu półprostych odcinki są w tym samym stosunku.</string>
-    <string name="h_ge_str_1_c">Skala między dwiema równoległymi wynosi %1$s.</string>
-    <string name="h_pz_zin_1_a">Licz rok po roku, nie w jednym kroku.</string>
-    <string name="h_pz_zin_1_b">Bez kapitalizacji odsetki są co roku takie same.</string>
-    <string name="h_pz_zin_1_c">Jeden rok daje %1$s euro odsetek.</string>
-    <string name="h_pz_zin_1_d">Przy kapitalizacji co roku oprocentowany jest już powiększony kapitał.</string>
-    <string name="h_pz_zin_1_e">Współczynnik na rok wynosi %1$s.</string>
-    <string name="h_gl_qua_1_a">Szukaj dwóch liczb, których suma to wartość przed x, a iloczyn to ostatnia wartość.</string>
-    <string name="h_gl_qua_1_b">Te dwie liczby dają w sumie %1$s, a w iloczynie %2$s.</string>
-    <string name="h_gl_qua_1_c">Jedno z dwóch rozwiązań to %1$s. Szukane jest drugie.</string>
-    <string name="h_ge_koe_1_a">Ustal najpierw, czy szukane jest pole, czy objętość.</string>
-    <string name="h_ge_koe_1_b">Pole prostokąta to długość razy szerokość.</string>
-    <string name="h_ge_koe_1_c">Oblicz %1$s · %2$s.</string>
-    <string name="h_ge_koe_1_d">W trójkącie po mnożeniu trzeba jeszcze wziąć połowę.</string>
-    <string name="h_ge_koe_1_e">Podstawa razy wysokość daje %1$s. Teraz podziel przez dwa.</string>
-    <string name="h_ge_koe_1_f">W prostopadłościanie mnoży się wszystkie trzy krawędzie.</string>
-    <string name="h_ge_koe_1_g">Pole podstawy to %1$s, brakuje jeszcze wysokości.</string>
-    <string name="h_ge_koe_1_h">Policz najpierw cały prostopadłościan, potem wycięcie, potem różnicę.</string>
-    <string name="h_ge_koe_1_i">Cały prostopadłościan ma %1$s. Od tego odejmuje się wycięcie.</string>
-    <string name="h_gl_lgs_1_a">Dwa równania, dwie niewiadome: jedna z nich musi najpierw zniknąć.</string>
-    <string name="h_gl_lgs_1_b">Doprowadź oba równania do tej samej liczby y i odejmij je od siebie.</string>
-    <string name="h_gl_lgs_1_c">Po odjęciu zostaje %1$sx = %2$s.</string>
-    <string name="h_po_rat_1_a">Ułamek w wykładniku to pierwiastek i potęga naraz.</string>
-    <string name="h_po_rat_1_b">Mianownik %1$s to pierwiastek, licznik %2$s to potęga.</string>
-    <string name="h_po_rat_1_c">Pierwiastek daje %1$s. Teraz kolej na potęgę.</string>
-
-    <!-- Rodzaje błędów, klasy 9 i 10 -->
-    <string name="fa_quadriert_statt_addiert">Dodano boki zamiast ich kwadratów</string>
-    <string name="fa_wurzel_vergessen">Zapomniano o pierwiastku na końcu</string>
-    <string name="fa_kathete_als_hypotenuse">Odjęto długości zamiast ich kwadratów</string>
-    <string name="fa_wurzel_halbiert">Pomylono pierwiastek z połową</string>
-    <string name="fa_verhaeltnis_gedreht">Stosunek ustawiony odwrotnie</string>
-    <string name="fa_strecken_addiert">Dodano odcinki zamiast użyć stosunku</string>
-    <string name="fa_nur_einmal_verzinst">Policzono odsetki tylko za jeden rok</string>
-    <string name="fa_zinseszins_als_summe">Procent składany potraktowany jak zwykła suma</string>
-    <string name="fa_zweite_loesung_genommen">Podano mniejsze rozwiązanie</string>
-    <string name="fa_vorzeichen_der_wurzel">Odwrócony znak rozwiązania</string>
-    <string name="fa_nur_eine_gleichung">Użyto tylko pierwszego równania</string>
-    <string name="fa_x_und_y_vertauscht">Zamieniono x i y</string>
-    <string name="fa_exponent_als_faktor">Wykładnik potraktowany jak czynnik</string>
-    <string name="fa_halbierung_vergessen">Zapomniano podzielić przez dwa</string>
-    <string name="fa_flaeche_statt_volumen">Policzono pole zamiast objętości</string>
+    <plurals name="wann_in_tagen">
+        <item quantity="one">za %1$d dzień</item>
+        <item quantity="few">za %1$d dni</item>
+        <item quantity="many">za %1$d dni</item>
+        <item quantity="other">za %1$d dnia</item>
+    </plurals>
+    <plurals name="einordnung_offene">
+        <item quantity="one">%1$d kompetencja wymaga jeszcze treningu</item>
+        <item quantity="few">%1$d kompetencje wymagają jeszcze treningu</item>
+        <item quantity="many">%1$d kompetencji wymaga jeszcze treningu</item>
+        <item quantity="other">%1$d kompetencji wymaga jeszcze treningu</item>
+    </plurals>
 </resources>

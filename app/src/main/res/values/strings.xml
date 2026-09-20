@@ -412,15 +412,23 @@
     <string name="training_hilfe_stufe">Hilfe, Stufe %1$s von 4</string>
     <string name="training_richtig">Richtig</string>
     <string name="training_loesung">Richtig wäre %1$s</string>
-    <string name="training_fehlerart">Beobachtet: %1$s</string>
+    <string name="training_fehlerart">Das sieht nach einem bekannten Muster aus: %1$s.</string>
     <string name="training_warum">Warum</string>
     <string name="taste_loeschen">Letztes Zeichen löschen</string>
-    <string name="training_bilanz_titel">Sitzung beendet</string>
+    <string name="training_bilanz_titel">Einheit geschafft</string>
     <string name="training_bilanz_kopf">Das hast du gerade gemacht</string>
     <string name="training_bilanz_aufgaben">Aufgaben</string>
     <string name="training_bilanz_richtig">Davon richtig</string>
-    <string name="training_bilanz_dauer">Dauer</string>
+    <string name="training_bilanz_dauer">Zeit</string>
     <string name="training_bilanz_fertig">Fertig</string>
+
+    <!-- Serie und Abschlussbild -->
+    <string name="serie_titel">Serie</string>
+    <string name="serie_wert">%1$s in Folge</string>
+    <string name="abschluss_segmente">Segmente</string>
+    <string name="abschluss_serie">Beste Serie</string>
+    <string name="abschluss_naechstes">Als Nächstes ist %1$s dran, %2$s.</string>
+    <string name="abschluss_naechstes_offen">Such dir im Start einen Bereich aus, dann geht es weiter.</string>
 
     <!-- Fortschritt -->
     <string name="fortschritt_titel">Fortschritt</string>

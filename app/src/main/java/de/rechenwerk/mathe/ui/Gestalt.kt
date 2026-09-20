@@ -1,5 +1,6 @@
 package de.rechenwerk.mathe.ui
 
+import androidx.compose.animation.core.CubicBezierEasing
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
@@ -12,12 +13,13 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.DeviceFontFamilyName
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontVariation
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import de.rechenwerk.mathe.R
 import de.rechenwerk.mathe.daten.Modus
 
 /**
@@ -48,8 +50,30 @@ object Masse {
     val held = 264.dp
     val heldStrich = 14.dp
     val balken = 10.dp
+    /** Die schmale Serien-Strecke ueber dem Aufgabenfeld. */
+    val strecke = 6.dp
     val strich = 1.dp
     val tasteHoehe = 56.dp
+    /** Der kleine Segmentring im Training, der nach jedem Treffer waechst. */
+    val werkring = 88.dp
+    val werkringStrich = 7.dp
+    /** Ausschlag des seitlichen Wankens nach einer falschen Antwort. */
+    val wanken = 10.dp
+}
+
+/**
+ * Die einzige Bewegungsskala. Eintritt weich und lang, Austritt schneller;
+ * Zahlen zaehlen in [ZAEHLEN_MS] hoch, die Belohnung leuchtet in
+ * [AUFLEUCHTEN_MS] auf, ein Fehler laesst das Eingabefeld zweimal je
+ * [WANKEN_MS] zur Seite wanken.
+ */
+object Bewegung {
+    val eintritt = CubicBezierEasing(0.16f, 1f, 0.3f, 1f)
+    const val AUFTRITT_MS = 380
+    const val VERSATZ_MS = 60L
+    const val ZAEHLEN_MS = 400
+    const val AUFLEUCHTEN_MS = 220
+    const val WANKEN_MS = 120
 }
 
 /** Die einzige Formskala. Kacheln bekommen [Formen.large], Tasten [Formen.small]. */
@@ -78,6 +102,17 @@ private val AkzentDunkel = Color(0xFF4FC3A1)
 // das ist die offene Rueckfrage zur unteren Grundfarbe im Pflichtenheft.
 private val GrundOben = Color(0xFF0E1A17)
 private val GrundUnten = Color(0xFF09130F)
+
+// Der zweite, warme Belohnungston der Marke: Bernstein. Er gehoert allein der
+// Serien-Strecke und dem Abschlussbild und traegt dort Balken, Segmente und
+// Symbole -- nie eine Flaeche, auf der Text steht. Auf hellem Grund waere
+// #F5A524 als Schriftfarbe unlesbar, deshalb hat der helle Entwurf einen
+// eigenen, tiefer gezogenen Wert desselben Tons.
+private val BernsteinDunkel = Color(0xFFF5A524)
+private val BernsteinHell = Color(0xFF8A5309)
+
+/** Der Belohnungston des gerade gewaehlten Erscheinungsbilds. */
+val LocalBernstein = staticCompositionLocalOf { BernsteinDunkel }
 
 private val DunkleFarben = darkColorScheme(
     primary = AkzentDunkel,
@@ -183,21 +218,25 @@ private val GlasHell = Glasrezept(
 
 val LocalGlas = staticCompositionLocalOf { GlasDunkel }
 
-// Die Markenschriften werden als Geraeteschriften angefragt; fehlen sie,
-// setzt Android von sich aus die Systemschrift derselben Gattung ein.
+// Die Markenschrift liegt als Datei im Paket. Vorher wurde sie ueber
+// DeviceFontFamilyName angefragt -- eine Schrift, die auf dem Geraet
+// installiert sein muss. "Space Grotesk", "Source Serif 4" und "Inter" sind
+// auf so gut wie keinem Android-Geraet vorhanden, Android setzte still
+// Roboto ein, und die Typografie der Marke stand nur in marke.json.
+// Manrope ist eine variable Schrift: eine Datei traegt alle Gewichte.
+
+/** Ein Gewicht der Markenschrift aus der variablen Schriftdatei. */
+private fun manrope(gewicht: Int) = Font(
+    R.font.manrope_variable,
+    FontWeight(gewicht),
+    variationSettings = FontVariation.Settings(FontVariation.weight(gewicht)),
+)
 
 /** Titelschrift der Marke: display, headline und title. */
-private val Titelschrift = FontFamily(
-    Font(DeviceFontFamilyName("Space Grotesk"), FontWeight.Medium),
-    Font(DeviceFontFamilyName("Space Grotesk"), FontWeight.SemiBold),
-)
+private val Titelschrift = FontFamily(manrope(500), manrope(600), manrope(700))
 
 /** Textschrift der Marke: body und label. */
-private val Textschrift = FontFamily(
-    Font(DeviceFontFamilyName("Inter"), FontWeight.Normal),
-    Font(DeviceFontFamilyName("Inter"), FontWeight.Medium),
-    Font(DeviceFontFamilyName("Inter"), FontWeight.SemiBold),
-)
+private val Textschrift = FontFamily(manrope(400), manrope(500), manrope(600))
 
 /** Ziffern in gleicher Breite -- Zahlen springen beim Zaehlen nicht. */
 private const val TABELLARISCH = "tnum"
@@ -257,7 +296,10 @@ fun istDunkel(modus: Modus): Boolean = when (modus) {
 @Composable
 fun RechenwerkTheme(modus: Modus, inhalt: @Composable () -> Unit) {
     val dunkel = istDunkel(modus)
-    CompositionLocalProvider(LocalGlas provides if (dunkel) GlasDunkel else GlasHell) {
+    CompositionLocalProvider(
+        LocalGlas provides if (dunkel) GlasDunkel else GlasHell,
+        LocalBernstein provides if (dunkel) BernsteinDunkel else BernsteinHell,
+    ) {
         MaterialTheme(
             colorScheme = if (dunkel) DunkleFarben else HelleFarben,
             typography = Typografie,

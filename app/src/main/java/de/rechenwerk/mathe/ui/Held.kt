@@ -29,6 +29,7 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import de.rechenwerk.mathe.R
+import de.rechenwerk.mathe.daten.Serie
 
 /** Wie weit das laufende Band der Bahn reicht. */
 private const val LAEUFER_WEITE = 140f
@@ -186,5 +187,83 @@ fun Held(gesamt: Double, segmente: List<Double>, modifier: Modifier = Modifier) 
                 textAlign = TextAlign.Center,
             )
         }
+    }
+}
+
+/**
+ * Derselbe Segmentring, klein, im Training: nach jeder richtigen Antwort
+ * waechst er um ein Segment. Eine volle Runde faengt wieder von vorn an, die
+ * Zahl in der Mitte zaehlt weiter. [leuchten] ist das kurze Aufleuchten der
+ * Akzentfarbe unmittelbar nach dem Treffer.
+ */
+@Composable
+fun Werkring(segmente: Int, leuchten: Float, modifier: Modifier = Modifier) {
+    val akzent = MaterialTheme.colorScheme.primary
+    val spur = MaterialTheme.colorScheme.surfaceContainerHigh
+    val erreicht = if (segmente > 0 && segmente % Serie.RUNDE == 0) Serie.RUNDE else segmente % Serie.RUNDE
+    val gefuellt by animateFloatAsState(
+        targetValue = erreicht.toFloat(),
+        animationSpec = spring(dampingRatio = Spring.DampingRatioMediumBouncy, stiffness = Spring.StiffnessMediumLow),
+        label = "werkring",
+    )
+
+    Box(
+        modifier = modifier.size(Masse.werkring),
+        contentAlignment = Alignment.Center,
+    ) {
+        Canvas(modifier = Modifier.fillMaxSize()) {
+            val strich = Masse.werkringStrich.toPx()
+            val mitte = Offset(size.width / 2f, size.height / 2f)
+            val radius = (size.minDimension - strich) / 2f - Abstand.xs.toPx()
+            val ecke = Offset(mitte.x - radius, mitte.y - radius)
+            val kasten = Size(radius * 2f, radius * 2f)
+
+            // Das Aufleuchten: ein weicher Schein aus der Akzentfarbe, der in
+            // wenigen Hundertstelsekunden wieder vergeht.
+            if (leuchten > 0f) {
+                drawCircle(
+                    brush = Brush.radialGradient(
+                        colors = listOf(akzent.copy(alpha = 0.45f * leuchten), Color.Transparent),
+                        center = mitte,
+                        radius = radius * 1.25f,
+                    ),
+                    radius = radius * 1.35f,
+                    center = mitte,
+                )
+            }
+
+            val luecke = 8f
+            val teil = 360f / Serie.RUNDE
+            for (i in 0 until Serie.RUNDE) {
+                val start = -90f + i * teil + luecke / 2f
+                val weite = teil - luecke
+                drawArc(
+                    color = spur,
+                    startAngle = start,
+                    sweepAngle = weite,
+                    useCenter = false,
+                    topLeft = ecke,
+                    size = kasten,
+                    style = Stroke(width = strich, cap = StrokeCap.Round),
+                )
+                val anteil = (gefuellt - i).coerceIn(0f, 1f)
+                if (anteil > 0f) {
+                    drawArc(
+                        color = akzent,
+                        startAngle = start,
+                        sweepAngle = weite * anteil,
+                        useCenter = false,
+                        topLeft = ecke,
+                        size = kasten,
+                        style = Stroke(width = strich, cap = StrokeCap.Round),
+                    )
+                }
+            }
+        }
+        Text(
+            text = segmente.toString(),
+            style = MaterialTheme.typography.headlineSmall,
+            color = MaterialTheme.colorScheme.onSurface,
+        )
     }
 }

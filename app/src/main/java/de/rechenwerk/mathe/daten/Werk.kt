@@ -1,12 +1,15 @@
 package de.rechenwerk.mathe.daten
 
-import android.app.Application
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import de.ithandwerkstuttgart.suitekern.Tresor
+import dagger.hilt.android.lifecycle.HiltViewModel
+import de.rechenwerk.mathe.daten.raum.AltdatenUebernahme
+import de.rechenwerk.mathe.daten.raum.Lernablage
+import de.rechenwerk.mathe.daten.raum.Lernstand
+import javax.inject.Inject
 import kotlin.random.Random
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.NonCancellable
@@ -20,8 +23,20 @@ enum class Art { FUENF_MINUTEN, WEITERLERNEN, SCHWAECHEN, GEZIELT }
 
 data class Rueckmeldung(val richtig: Boolean, val gegeben: Bruch?, val fehlbild: Fehlbild?)
 
-/** Wie eine Sitzung ausgegangen ist -- fuer die Abschlusskarte im Training. */
-data class Bilanz(val gestellt: Int, val anzahlRichtig: Int, val dauerMs: Long)
+/**
+ * Wie eine Sitzung ausgegangen ist -- die Zahlen des Abschlussbilds.
+ * [segmente] sind die erreichten Segmente, also die richtigen Antworten dieser
+ * Einheit; [serie] ist die laengste Strecke darin. [naechsteKennung] und
+ * [naechsteWdh] sagen, was als naechstes faellig ist.
+ */
+data class Bilanz(
+    val gestellt: Int,
+    val segmente: Int,
+    val serie: Int,
+    val dauerMs: Long,
+    val naechsteKennung: String?,
+    val naechsteWdh: Long,
+)
 
 /**
  * Waehlt die naechste Kompetenz. Faelliges zuerst, danach das Schwaechste --
@@ -80,29 +95,34 @@ object Auswahl {
 }
 
 /**
- * Der Zustand der App. Alles Dauerhafte liegt als JSON im Tresor; der
- * Sitzungszustand lebt hier und ueberdauert Drehungen des Geraets.
+ * Der Zustand der App. Die fachlichen Daten fuehrt die Room-Datenbank ueber
+ * [Lernablage], die Einstellungen der Suite-Tresor ueber
+ * [Einstellungsspeicher]. Beide werden eingespritzt; der Sitzungszustand lebt
+ * hier und ueberdauert Drehungen des Geraets.
  */
-class Werk(anwendung: Application) : AndroidViewModel(anwendung) {
+@HiltViewModel
+class Werk @Inject constructor(
+    private val einstellungen: Einstellungsspeicher,
+    private val lernablage: Lernablage,
+) : ViewModel() {
 
-    private val tresor = Tresor(anwendung, "rechenwerk")
     private val zufall = Random(System.nanoTime())
 
     /** Haelt die Schreibvorgaenge in der Reihenfolge, in der sie ausgeloest wurden. */
     private val schreibsperre = Mutex()
 
-    var ablage by mutableStateOf(lade())
+    /**
+     * Der Start liest den Tresor: vor der Uebernahme steht dort noch der
+     * vollstaendige alte Stand, danach nur noch Profil und Erscheinungsbild.
+     * So steht das Profil sofort -- die Einrichtung blitzt nicht kurz auf,
+     * waehrend die Datenbank oeffnet.
+     */
+    var ablage by mutableStateOf(einstellungen.lies())
         private set
 
     // ---- Trainingssitzung ---------------------------------------------------
 
-    /**
-     * Eine offene Aufgabe aus dem Tresor wird aus ihrem Startwert neu gebaut.
-     * Wer mitten in einer Aufgabe die App verliert, findet genau sie wieder.
-     */
-    var aufgabe by mutableStateOf(
-        ablage.laufend?.let { Werkbank.erzeuge(it.kompetenz, it.niveau, it.startwert) }
-    )
+    var aufgabe by mutableStateOf<Aufgabe?>(null)
         private set
     var eingabe by mutableStateOf("")
         private set
@@ -120,24 +140,57 @@ class Werk(anwendung: Application) : AndroidViewModel(anwendung) {
 
     private var gestellt = 0
     private var anzahlRichtig = 0
-    private var serie = 0
+    private var sitzungSerie = 0
     private var aufgabeBegonnen = 0L
     private var sitzungBegonnen = 0L
     private var zuletzt: String? = null
 
+    /** Die offene Aufgabe wird genau einmal wiederhergestellt, nicht bei jedem Fluss. */
+    private var wiederaufgenommen = false
+
     init {
-        // Eine aus dem Tresor wiederhergestellte Aufgabe faengt jetzt an zu
-        // laufen, nicht 1970 -- sonst zaehlte die Pause als Bearbeitungszeit.
-        val wiederaufgenommen = aufgabe
-        if (wiederaufgenommen != null) {
-            aufgabeBegonnen = System.currentTimeMillis()
-            sitzungBegonnen = aufgabeBegonnen
-            zuletzt = wiederaufgenommen.kompetenz
+        viewModelScope.launch {
+            // Erst die einmalige Uebernahme, dann der Fluss -- und unter
+            // derselben Sperre wie jeder andere Schreibvorgang, damit keine
+            // fruehe Eingabe an ihr vorbeizieht.
+            schreibsperre.withLock {
+                if (AltdatenUebernahme.fuehreAus(lernablage, ablage)) {
+                    val gemerkt = ablage.copy(nachRaumUebernommen = true)
+                    ablage = gemerkt
+                    withContext(Dispatchers.IO) { einstellungen.schreibe(gemerkt) }
+                }
+            }
+            lernablage.stand.collect { stand -> uebernimmStand(stand) }
         }
+    }
+
+    /**
+     * Uebernimmt einen Stand aus der Datenbank in den Speicher. Beim ersten Mal
+     * wird eine offene Aufgabe aus ihrem Startwert neu gebaut: wer mitten in
+     * einer Aufgabe die App verliert, findet genau sie wieder -- und sie faengt
+     * jetzt an zu laufen, nicht 1970, sonst zaehlte die Pause als Bearbeitungszeit.
+     */
+    private fun uebernimmStand(stand: Lernstand) {
+        ablage = ablage.copy(
+            staende = stand.staende,
+            werte = stand.werte,
+            verlauf = stand.verlauf,
+            laufend = stand.laufend,
+        )
+        if (wiederaufgenommen) return
+        wiederaufgenommen = true
+        val offen = stand.laufend ?: return
+        aufgabe = Werkbank.erzeuge(offen.kompetenz, offen.niveau, offen.startwert)
+        aufgabeBegonnen = System.currentTimeMillis()
+        sitzungBegonnen = aufgabeBegonnen
+        zuletzt = offen.kompetenz
     }
 
     val sitzungGestellt: Int get() = gestellt
     val sitzungRichtig: Int get() = anzahlRichtig
+
+    /** Die laufende Serie -- die Strecke ueber dem Aufgabenfeld liest sie. */
+    val serie: Int get() = ablage.werte.serie
 
     // ---- Einstufung ---------------------------------------------------------
 
@@ -149,51 +202,64 @@ class Werk(anwendung: Application) : AndroidViewModel(anwendung) {
     private val pruefBenutzt = mutableSetOf<String>()
     private val pruefErgebnis = mutableMapOf<String, Boolean>()
 
-    private fun lade(): Ablage {
-        val roh = tresor.lesen() ?: return Ablage()
-        return try {
-            Papier.lies(roh)
-        } catch (fehler: IllegalArgumentException) {
-            Ablage()
+    /**
+     * Uebernimmt den neuen Stand sofort in den Speicher und schreibt ihn
+     * abseits des Hauptfadens weg. Der Tresor macht ein fsync, das je nach
+     * Geraet Hunderte Millisekunden dauert -- im Hauptfaden staut das die
+     * Eingaben bis zum ANR. [NonCancellable] sorgt dafuer, dass ein bereits
+     * ausgeloester Schreibvorgang auch dann fertig wird, wenn das Werk gerade
+     * abgeraeumt wird.
+     */
+    private fun schreibe(arbeit: suspend () -> Unit) {
+        viewModelScope.launch(NonCancellable) {
+            schreibsperre.withLock { arbeit() }
         }
     }
 
-    /**
-     * Uebernimmt den neuen Stand sofort in den Speicher und schreibt ihn
-     * abseits des Hauptfadens auf die Platte. Der Tresor macht ein fsync, das
-     * je nach Geraet Hunderte Millisekunden dauert -- bei jeder Antwort und
-     * jeder Profilaenderung im Hauptfaden staut das die Eingaben bis zum ANR.
-     * [NonCancellable] sorgt dafuer, dass ein bereits ausgeloester Schreibvorgang
-     * auch dann fertig wird, wenn das Werk gerade abgeraeumt wird.
-     */
-    private fun sichere(neu: Ablage) {
+    /** Eine Aenderung an den Einstellungen: Speicher und Tresor, sofort. */
+    private fun sichereEinstellungen(neu: Ablage) {
         ablage = neu
-        viewModelScope.launch(NonCancellable) {
-            schreibsperre.withLock {
-                withContext(Dispatchers.IO) { tresor.schreiben(Papier.schreibe(neu)) }
-            }
-        }
+        schreibe { withContext(Dispatchers.IO) { einstellungen.schreibe(neu) } }
     }
 
     // ---- Profil und Einstellungen -------------------------------------------
 
-    fun setzeProfil(profil: Profil) = sichere(ablage.copy(profil = profil))
+    fun setzeProfil(profil: Profil) = sichereEinstellungen(ablage.copy(profil = profil))
 
-    fun setzeModus(modus: Modus) = sichere(ablage.copy(modus = modus))
+    fun setzeModus(modus: Modus) = sichereEinstellungen(ablage.copy(modus = modus))
 
     fun alsText(): String = Papier.schreibe(ablage)
 
     /** Uebernimmt eine importierte Datei. Gibt false zurueck, wenn sie unbrauchbar ist. */
-    fun uebernimm(text: String): Boolean = try {
-        sichere(Papier.lies(text))
-        true
-    } catch (fehler: IllegalArgumentException) {
-        false
+    fun uebernimm(text: String): Boolean {
+        val gelesen = try {
+            Papier.lies(text)
+        } catch (fehler: IllegalArgumentException) {
+            return false
+        }
+        // Die Datei ist ab jetzt der Stand -- sie noch einmal uebernehmen zu
+        // wollen, waere ein zweiter Durchlauf mit demselben Inhalt.
+        val neu = gelesen.copy(nachRaumUebernommen = true)
+        beendeSitzungStill()
+        ablage = neu
+        schreibe {
+            lernablage.ersetzeAlles(AltdatenUebernahme.zeilenAus(neu))
+            withContext(Dispatchers.IO) { einstellungen.schreibe(neu) }
+        }
+        return true
     }
 
     fun setzeZurueck() {
-        beendeSitzung()
-        sichere(Ablage())
+        beendeSitzungStill()
+        bilanz = null
+        // Das Merkzeichen bleibt: die Datenbank steht, sie ist nur leer. Ohne
+        // es liefe beim naechsten Start die Uebernahme noch einmal an.
+        val leer = Ablage(nachRaumUebernommen = true)
+        ablage = leer
+        schreibe {
+            lernablage.ersetzeAlles(AltdatenUebernahme.zeilenAus(leer))
+            withContext(Dispatchers.IO) { einstellungen.schreibe(leer) }
+        }
     }
 
     // ---- Training -----------------------------------------------------------
@@ -203,11 +269,13 @@ class Werk(anwendung: Application) : AndroidViewModel(anwendung) {
         ziel = kennung
         gestellt = 0
         anzahlRichtig = 0
-        serie = 0
+        sitzungSerie = 0
         zuletzt = null
         bilanz = null
         sitzungBegonnen = System.currentTimeMillis()
-        sichere(ablage.copy(werte = ablage.werte.copy(sitzungen = ablage.werte.sitzungen + 1)))
+        val werte = ablage.werte.copy(sitzungen = ablage.werte.sitzungen + 1)
+        ablage = ablage.copy(werte = werte)
+        schreibe { lernablage.schreibeWerte(werte) }
         naechsteAufgabe()
     }
 
@@ -223,7 +291,9 @@ class Werk(anwendung: Application) : AndroidViewModel(anwendung) {
         hilfestufe = 0
         rueckmeldung = null
         aufgabeBegonnen = jetzt
-        sichere(ablage.copy(laufend = Laufend(kennung, startwert, niveau)))
+        val laufend = Laufend(kennung, startwert, niveau)
+        ablage = ablage.copy(laufend = laufend)
+        schreibe { lernablage.setzeLaufend(laufend) }
     }
 
     fun tippe(zeichen: String) {
@@ -267,11 +337,23 @@ class Werk(anwendung: Application) : AndroidViewModel(anwendung) {
             neu = neu.copy(fehlerarten = gezaehlt)
         }
 
-        serie = if (richtig) serie + 1 else 0
         gestellt += 1
         if (richtig) anzahlRichtig += 1
 
-        val werte = ablage.werte
+        val alteWerte = ablage.werte
+        val werte = Serie.nachAntwort(alteWerte, richtig).copy(
+            lernzeitMs = alteWerte.lernzeitMs + dauer,
+            versuche = alteWerte.versuche + 1,
+            treffer = alteWerte.treffer + if (richtig) 1 else 0,
+            wiederholungen = alteWerte.wiederholungen + if (alt.beruehrt) 1 else 0,
+            schnellsteMs = if (richtig && dauer > 0L) {
+                if (alteWerte.schnellsteMs == 0L) dauer else minOf(alteWerte.schnellsteMs, dauer)
+            } else {
+                alteWerte.schnellsteMs
+            },
+        )
+        sitzungSerie = maxOf(sitzungSerie, werte.serie)
+
         val eintrag = Verlaufseintrag(
             kompetenz = laufend.kompetenz,
             startwert = laufend.startwert,
@@ -279,25 +361,13 @@ class Werk(anwendung: Application) : AndroidViewModel(anwendung) {
             richtig = richtig,
             zeitpunkt = jetzt,
         )
-        sichere(
-            ablage.copy(
-                staende = ablage.staende + (laufend.kompetenz to neu),
-                verlauf = ablage.mitVerlauf(eintrag),
-                laufend = null,
-                werte = werte.copy(
-                    lernzeitMs = werte.lernzeitMs + dauer,
-                    versuche = werte.versuche + 1,
-                    treffer = werte.treffer + if (richtig) 1 else 0,
-                    wiederholungen = werte.wiederholungen + if (alt.beruehrt) 1 else 0,
-                    besteSerie = maxOf(werte.besteSerie, serie),
-                    schnellsteMs = if (richtig && dauer > 0L) {
-                        if (werte.schnellsteMs == 0L) dauer else minOf(werte.schnellsteMs, dauer)
-                    } else {
-                        werte.schnellsteMs
-                    },
-                ),
-            )
+        ablage = ablage.copy(
+            staende = ablage.staende + (laufend.kompetenz to neu),
+            verlauf = ablage.mitVerlauf(eintrag),
+            laufend = null,
+            werte = werte,
         )
+        schreibe { lernablage.schreibeAntwort(neu, werte, eintrag) }
         rueckmeldung = Rueckmeldung(richtig, gegeben, fehlbild)
     }
 
@@ -306,20 +376,47 @@ class Werk(anwendung: Application) : AndroidViewModel(anwendung) {
         art == Art.FUENF_MINUTEN && System.currentTimeMillis() - sitzungBegonnen >= 5L * 60L * 1000L
 
     fun beendeSitzung() {
+        val faellig = naechsteFaellige()
         bilanz = if (gestellt > 0) {
-            Bilanz(gestellt, anzahlRichtig, System.currentTimeMillis() - sitzungBegonnen)
+            Bilanz(
+                gestellt = gestellt,
+                segmente = anzahlRichtig,
+                serie = sitzungSerie,
+                dauerMs = System.currentTimeMillis() - sitzungBegonnen,
+                naechsteKennung = faellig?.first,
+                naechsteWdh = faellig?.second ?: 0L,
+            )
         } else {
             null
         }
+        beendeSitzungStill()
+    }
+
+    /** Raeumt die Sitzung ab, ohne ein Abschlussbild zu stellen. */
+    private fun beendeSitzungStill() {
         aufgabe = null
         rueckmeldung = null
         eingabe = ""
         hilfestufe = 0
-        if (ablage.laufend != null) sichere(ablage.copy(laufend = null))
+        if (ablage.laufend != null) {
+            ablage = ablage.copy(laufend = null)
+            schreibe { lernablage.setzeLaufend(null) }
+        }
     }
 
     fun verwirfBilanz() {
         bilanz = null
+    }
+
+    /** Was als naechstes drankommt: das am laengsten Faellige, sonst das Schwaechste. */
+    private fun naechsteFaellige(): Pair<String, Long>? {
+        val pensum = Katalog.fuer(ablage.profil)
+        val gewaehlt = pensum
+            .filter { ablage.stand(it.kennung).beruehrt }
+            .minByOrNull { ablage.stand(it.kennung).naechsteWdh }
+            ?: pensum.minByOrNull { ablage.stand(it.kennung).grad }
+            ?: return null
+        return gewaehlt.kennung to ablage.stand(gewaehlt.kennung).naechsteWdh
     }
 
     // ---- Einstufungstest ----------------------------------------------------
@@ -374,12 +471,12 @@ class Werk(anwendung: Application) : AndroidViewModel(anwendung) {
         for ((kennung, richtig) in pruefErgebnis) {
             staende[kennung] = Wiederholung.ausEinstufung(kennung, richtig, jetzt)
         }
-        sichere(
-            ablage.copy(
-                profil = profil.copy(eingerichtet = true),
-                staende = staende,
-            )
-        )
+        val neu = ablage.copy(profil = profil.copy(eingerichtet = true), staende = staende)
+        ablage = neu
+        schreibe {
+            lernablage.ersetzeAlles(AltdatenUebernahme.zeilenAus(neu))
+            withContext(Dispatchers.IO) { einstellungen.schreibe(neu) }
+        }
         pruefAufgabe = null
         pruefNummer = 0
         eingabe = ""

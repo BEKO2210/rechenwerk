@@ -132,6 +132,7 @@ class DatenTest {
             versuche = 40,
             treffer = 31,
             wiederholungen = 12,
+            serie = 3,
             besteSerie = 7,
             schnellsteMs = 2_400L,
             sitzungen = 5,
@@ -141,6 +142,7 @@ class DatenTest {
             Verlaufseintrag("GL-QUA-1", 42L, Niveau.M, false, 1_700_000_060_000L),
         ),
         laufend = Laufend("GE-PYT-1", 9_876_543_210L, Niveau.E),
+        nachRaumUebernommen = true,
     )
 
     @Test
@@ -187,21 +189,22 @@ class DatenTest {
         assertEquals(Schulart.REALSCHULE, ablage.profil.schulart)
         assertEquals(10, ablage.profil.klasse)
         assertEquals(Niveau.M, ablage.profil.niveau)
-        // Unbekanntes Erscheinungsbild faellt auf den Standard zurueck: dunkel.
-        assertEquals(Modus.DUNKEL, ablage.modus)
+        // Unbekanntes Erscheinungsbild faellt auf den Standard zurueck: wie das System.
+        assertEquals(Modus.SYSTEM, ablage.modus)
         assertEquals(0, ablage.werte.versuche)
         assertEquals(1.0, ablage.stand("GR-MUL-1").grad, 0.0001)
         assertEquals(Wiederholung.STUFEN.lastIndex, ablage.stand("GR-MUL-1").stufe)
     }
 
     @Test
-    fun eineFrischeInstallationStartetDunkelUndLeer() {
+    fun eineFrischeInstallationFolgtDemSystemUndIstLeer() {
         val frisch = Ablage()
-        assertEquals(Modus.DUNKEL, frisch.modus)
+        assertEquals(Modus.SYSTEM, frisch.modus)
         assertTrue(frisch.staende.isEmpty())
         assertTrue(frisch.verlauf.isEmpty())
         assertNull(frisch.laufend)
         assertEquals(0, frisch.werte.versuche)
+        assertEquals(0, frisch.werte.serie)
     }
 
     // ---- Startwerte in der Historie -----------------------------------------

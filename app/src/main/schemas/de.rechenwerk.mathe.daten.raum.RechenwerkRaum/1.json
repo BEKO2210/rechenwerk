@@ -1,0 +1,260 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "1b778859e4c58a1ce5acd09abf661ed1",
+    "entities": [
+      {
+        "tableName": "kompetenzstand",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`kennung` TEXT NOT NULL, `grad` REAL NOT NULL, `versuche` INTEGER NOT NULL, `treffer` INTEGER NOT NULL, `zeitSummeMs` INTEGER NOT NULL, `letzterKontakt` INTEGER NOT NULL, `naechsteWdh` INTEGER NOT NULL, `stufe` INTEGER NOT NULL, `wiederholungen` INTEGER NOT NULL, PRIMARY KEY(`kennung`))",
+        "fields": [
+          {
+            "fieldPath": "kennung",
+            "columnName": "kennung",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "grad",
+            "columnName": "grad",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "versuche",
+            "columnName": "versuche",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "treffer",
+            "columnName": "treffer",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "zeitSummeMs",
+            "columnName": "zeitSummeMs",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "letzterKontakt",
+            "columnName": "letzterKontakt",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "naechsteWdh",
+            "columnName": "naechsteWdh",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "stufe",
+            "columnName": "stufe",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "wiederholungen",
+            "columnName": "wiederholungen",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "kennung"
+          ]
+        }
+      },
+      {
+        "tableName": "fehlerart",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`kennung` TEXT NOT NULL, `art` TEXT NOT NULL, `anzahl` INTEGER NOT NULL, PRIMARY KEY(`kennung`, `art`))",
+        "fields": [
+          {
+            "fieldPath": "kennung",
+            "columnName": "kennung",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "art",
+            "columnName": "art",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "anzahl",
+            "columnName": "anzahl",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "kennung",
+            "art"
+          ]
+        }
+      },
+      {
+        "tableName": "verlauf",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`nummer` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `kompetenz` TEXT NOT NULL, `startwert` INTEGER NOT NULL, `niveau` TEXT NOT NULL, `richtig` INTEGER NOT NULL, `zeitpunkt` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "nummer",
+            "columnName": "nummer",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "kompetenz",
+            "columnName": "kompetenz",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "startwert",
+            "columnName": "startwert",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "niveau",
+            "columnName": "niveau",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "richtig",
+            "columnName": "richtig",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "zeitpunkt",
+            "columnName": "zeitpunkt",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": true,
+          "columnNames": [
+            "nummer"
+          ]
+        }
+      },
+      {
+        "tableName": "laufend",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`zeile` INTEGER NOT NULL, `kompetenz` TEXT NOT NULL, `startwert` INTEGER NOT NULL, `niveau` TEXT NOT NULL, PRIMARY KEY(`zeile`))",
+        "fields": [
+          {
+            "fieldPath": "zeile",
+            "columnName": "zeile",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "kompetenz",
+            "columnName": "kompetenz",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "startwert",
+            "columnName": "startwert",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "niveau",
+            "columnName": "niveau",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "zeile"
+          ]
+        }
+      },
+      {
+        "tableName": "werte",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`zeile` INTEGER NOT NULL, `lernzeitMs` INTEGER NOT NULL, `versuche` INTEGER NOT NULL, `treffer` INTEGER NOT NULL, `wiederholungen` INTEGER NOT NULL, `serie` INTEGER NOT NULL, `besteSerie` INTEGER NOT NULL, `schnellsteMs` INTEGER NOT NULL, `sitzungen` INTEGER NOT NULL, PRIMARY KEY(`zeile`))",
+        "fields": [
+          {
+            "fieldPath": "zeile",
+            "columnName": "zeile",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "lernzeitMs",
+            "columnName": "lernzeitMs",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "versuche",
+            "columnName": "versuche",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "treffer",
+            "columnName": "treffer",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "wiederholungen",
+            "columnName": "wiederholungen",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "serie",
+            "columnName": "serie",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "besteSerie",
+            "columnName": "besteSerie",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "schnellsteMs",
+            "columnName": "schnellsteMs",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sitzungen",
+            "columnName": "sitzungen",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "autoGenerate": false,
+          "columnNames": [
+            "zeile"
+          ]
+        }
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '1b778859e4c58a1ce5acd09abf661ed1')"
+    ]
+  }
+}
