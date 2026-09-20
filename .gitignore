@@ -17,3 +17,7 @@ upload-keystore*
 .idea/
 *.iml
 .DS_Store
+
+# Arbeitsdateien der App-Fabrik (werden pro Lauf neu erzeugt)
+pflichtenheft.json
+pflichtenheft.md
