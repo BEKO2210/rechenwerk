@@ -12,7 +12,7 @@ import kotlin.random.Random
  */
 data class Txt(@StringRes val id: Int, val teile: List<String> = emptyList())
 
-private fun t(@StringRes id: Int, vararg teile: String) = Txt(id, teile.toList())
+internal fun t(@StringRes id: Int, vararg teile: String) = Txt(id, teile.toList())
 
 /** Erwartete Antwortform -- steuert nur den Hinweis unter dem Eingabefeld. */
 enum class Form { ZAHL, BRUCH, PROZENT }
@@ -28,6 +28,17 @@ data class Aufgabe(
     val weg: List<Txt>,
     val hilfen: List<Txt>,
     val fehlbilder: List<Fehlbild>,
+    /** Der Startwert, aus dem diese Aufgabe entstanden ist. */
+    val startwert: Long = 0L,
+    /** Das Niveau, mit dem sie erzeugt wurde. */
+    val niveau: Niveau = Niveau.M,
+    /**
+     * Die Gegenrechnung: setzt eine Antwort in die urspruenglichen Zahlen ein
+     * und sagt, ob die Aufgabe damit aufgeht. Sie laeuft ueber einen anderen
+     * Rechenweg als der Generator -- die Eigenschaftstests pruefen damit, dass
+     * jede erzeugte Loesung wirklich stimmt.
+     */
+    val probe: (Bruch) -> Boolean = { true },
 ) {
     /** Die Loesung so geschrieben, wie sie erwartet wird. */
     fun loesungText(): String = when (form) {
@@ -80,6 +91,21 @@ object Fehlerarten {
         "falsche_gegenrechnung" to R.string.fa_falsche_gegenrechnung,
         "klammer_nicht_beachtet" to R.string.fa_klammer_nicht_beachtet,
         "falsches_vorzeichen_umgestellt" to R.string.fa_falsches_vorzeichen_umgestellt,
+        "quadriert_statt_addiert" to R.string.fa_quadriert_statt_addiert,
+        "wurzel_vergessen" to R.string.fa_wurzel_vergessen,
+        "kathete_als_hypotenuse" to R.string.fa_kathete_als_hypotenuse,
+        "wurzel_halbiert" to R.string.fa_wurzel_halbiert,
+        "verhaeltnis_gedreht" to R.string.fa_verhaeltnis_gedreht,
+        "strecken_addiert" to R.string.fa_strecken_addiert,
+        "nur_einmal_verzinst" to R.string.fa_nur_einmal_verzinst,
+        "zinseszins_als_summe" to R.string.fa_zinseszins_als_summe,
+        "zweite_loesung_genommen" to R.string.fa_zweite_loesung_genommen,
+        "vorzeichen_der_wurzel" to R.string.fa_vorzeichen_der_wurzel,
+        "nur_eine_gleichung" to R.string.fa_nur_eine_gleichung,
+        "x_und_y_vertauscht" to R.string.fa_x_und_y_vertauscht,
+        "exponent_als_faktor" to R.string.fa_exponent_als_faktor,
+        "halbierung_vergessen" to R.string.fa_halbierung_vergessen,
+        "flaeche_statt_volumen" to R.string.fa_flaeche_statt_volumen,
     )
 
     fun name(kennung: String): Int? = namen[kennung]
@@ -88,34 +114,56 @@ object Fehlerarten {
 /**
  * Erzeugt Aufgaben. Jede Kompetenz hat einen eigenen Generator: es gibt keine
  * feste Aufgabenliste, nur Bauplaene mit Zufallszahlen in sinnvollen Grenzen.
+ *
+ * Jede Aufgabe entsteht aus genau einem Startwert. Derselbe Startwert und
+ * dieselbe Kompetenz ergeben bei gleichem Niveau immer exakt dieselbe Aufgabe.
  */
 object Werkbank {
 
-    fun erzeuge(kennung: String, zufall: Random = Random.Default): Aufgabe = when (kennung) {
-        "GR-MUL-1" -> einmaleins(zufall)
-        "GR-ADD-1" -> addierenBisTausend(zufall)
-        "GR-DIV-1" -> teilen(zufall)
-        "GR-MUL-2" -> mehrstelligMal(zufall)
-        "DZ-ADD-1" -> dezimalAddieren(zufall)
-        "DZ-MUL-1" -> dezimalMal(zufall)
-        "DZ-BRU-1" -> bruchAlsDezimal(zufall)
-        "BR-KUE-1" -> kuerzen(zufall)
-        "BR-ADD-1" -> bruecheAddieren(zufall)
-        "BR-MUL-1" -> bruecheMal(zufall)
-        "BR-DIV-1" -> bruecheGeteilt(zufall)
-        "NZ-ADD-1" -> negativAddieren(zufall)
-        "NZ-MUL-1" -> negativMal(zufall)
-        "PZ-VON-1" -> prozentwert(zufall)
-        "PZ-SAT-1" -> prozentsatz(zufall)
-        "GL-TER-1" -> termAuswerten(zufall)
-        "GL-LIN-1" -> gleichungLinear(zufall)
-        "GL-KLA-1" -> gleichungKlammer(zufall)
-        else -> einmaleins(zufall)
+    fun erzeuge(kennung: String, niveau: Niveau, startwert: Long): Aufgabe {
+        val zufall = Random(startwert)
+        val roh = when (kennung) {
+            "GR-MUL-1" -> einmaleins(zufall, niveau)
+            "GR-ADD-1" -> addierenBisTausend(zufall, niveau)
+            "GR-DIV-1" -> teilen(zufall, niveau)
+            "GR-MUL-2" -> mehrstelligMal(zufall, niveau)
+            "DZ-ADD-1" -> dezimalAddieren(zufall, niveau)
+            "DZ-MUL-1" -> dezimalMal(zufall, niveau)
+            "DZ-BRU-1" -> bruchAlsDezimal(zufall, niveau)
+            "BR-KUE-1" -> kuerzen(zufall, niveau)
+            "BR-ADD-1" -> bruecheAddieren(zufall, niveau)
+            "BR-MUL-1" -> bruecheMal(zufall, niveau)
+            "BR-DIV-1" -> bruecheGeteilt(zufall, niveau)
+            "NZ-ADD-1" -> negativAddieren(zufall, niveau)
+            "NZ-MUL-1" -> negativMal(zufall, niveau)
+            "PZ-VON-1" -> prozentwert(zufall, niveau)
+            "PZ-SAT-1" -> prozentsatz(zufall, niveau)
+            "GL-TER-1" -> termAuswerten(zufall, niveau)
+            "GL-LIN-1" -> gleichungLinear(zufall, niveau)
+            "GL-KLA-1" -> gleichungKlammer(zufall, niveau)
+            "GE-PYT-1" -> Oberstufe.pythagoras(zufall, niveau)
+            "PO-WUR-1" -> Oberstufe.wurzelterm(zufall, niveau)
+            "GE-STR-1" -> Oberstufe.strahlensatz(zufall, niveau)
+            "PZ-ZIN-1" -> Oberstufe.zinsen(zufall, niveau)
+            "GL-QUA-1" -> Oberstufe.quadratisch(zufall, niveau)
+            "GE-KOE-1" -> Oberstufe.koerper(zufall, niveau)
+            "GL-LGS-1" -> Oberstufe.gleichungssystem(zufall, niveau)
+            "PO-RAT-1" -> Oberstufe.rationalerExponent(zufall, niveau)
+            else -> einmaleins(zufall, niveau)
+        }
+        return roh.copy(startwert = startwert, niveau = niveau)
     }
 
     // ---- Bauhilfen ----------------------------------------------------------
 
-    private fun bau(
+    /** Wert je Niveau -- die eine Stelle, an der sich G, M und E unterscheiden. */
+    internal fun <T> je(niveau: Niveau, g: T, m: T, e: T): T = when (niveau) {
+        Niveau.G -> g
+        Niveau.M -> m
+        Niveau.E -> e
+    }
+
+    internal fun bau(
         kompetenz: String,
         frage: Txt,
         loesung: Bruch,
@@ -123,22 +171,40 @@ object Werkbank {
         weg: List<Txt>,
         hilfen: List<Txt>,
         fehlbilder: List<Fehlbild>,
+        probe: (Bruch) -> Boolean,
     ): Aufgabe {
         val sauber = LinkedHashMap<Bruch, Fehlbild>()
         for (bild in fehlbilder) {
             if (bild.antwort == loesung) continue
             if (!sauber.containsKey(bild.antwort)) sauber[bild.antwort] = bild
         }
-        return Aufgabe(kompetenz, frage, loesung, form, weg, hilfen, sauber.values.toList())
+        return Aufgabe(
+            kompetenz = kompetenz,
+            frage = frage,
+            loesung = loesung,
+            form = form,
+            weg = weg,
+            hilfen = hilfen,
+            fehlbilder = sauber.values.toList(),
+            probe = probe,
+        )
     }
 
-    private fun z(wert: Long): String = Bruch.ganzText(wert)
+    internal fun z(wert: Long): String = Bruch.ganzText(wert)
 
-    private fun z(wert: Int): String = Bruch.ganzText(wert.toLong())
+    internal fun z(wert: Int): String = Bruch.ganzText(wert.toLong())
 
-    private fun bruchText(zaehler: Int, nenner: Int): String = "$zaehler/$nenner"
+    /** Bruch in der Schreibweise der Aufgabentexte, mit typografischem Minus. */
+    internal fun bruchText(zaehler: Int, nenner: Int): String = "${z(zaehler)}/$nenner"
 
     private fun kgv(a: Int, b: Int): Int = (a / Bruch.ggt(a.toLong(), b.toLong()).toInt()) * b
+
+    /** Zehnerpotenz als Long -- fuer die Dezimalstellen. */
+    private fun zehn(stellen: Int): Long {
+        var wert = 1L
+        repeat(stellen) { wert *= 10L }
+        return wert
+    }
 
     /** Ziffernweise addieren ohne Uebertrag -- so rechnet, wer den Uebertrag vergisst. */
     private fun ohneUebertrag(a: Int, b: Int): Int {
@@ -170,14 +236,14 @@ object Werkbank {
         return ergebnis
     }
 
-    private fun geklammert(wert: Int): String =
+    internal fun geklammert(wert: Int): String =
         if (wert < 0) "(" + Bruch.ganzText(wert.toLong()) + ")" else wert.toString()
 
     // ---- Grundrechnen -------------------------------------------------------
 
-    private fun einmaleins(zufall: Random): Aufgabe {
-        val a = zufall.nextInt(3, 11)
-        val b = zufall.nextInt(4, 11)
+    private fun einmaleins(zufall: Random, niveau: Niveau): Aufgabe {
+        val a = zufall.nextInt(je(niveau, 2, 3, 4), je(niveau, 7, 11, 14))
+        val b = zufall.nextInt(je(niveau, 2, 4, 6), je(niveau, 7, 11, 16))
         val ergebnis = a * b
         val vorstufe = a * (b - 1)
         return bau(
@@ -199,15 +265,16 @@ object Werkbank {
                 Fehlbild("reihe_verzaehlt", R.string.fa_reihe_verzaehlt, Bruch.von(vorstufe)),
                 Fehlbild("addiert_statt_mal", R.string.fa_addiert_statt_mal, Bruch.von(a + b)),
             ),
+            probe = { x -> x / Bruch.von(a) == Bruch.von(b) },
         )
     }
 
-    private fun addierenBisTausend(zufall: Random): Aufgabe {
+    private fun addierenBisTausend(zufall: Random, niveau: Niveau): Aufgabe {
         val plus = zufall.nextBoolean()
         return if (plus) {
             // Einerziffern beider Zahlen zusammen ueber zehn: der Uebertrag ist Pflicht.
-            val a = zufall.nextInt(12, 88) * 10 + zufall.nextInt(5, 10)
-            val b = zufall.nextInt(3, 29) * 10 + zufall.nextInt(5, 10)
+            val a = zufall.nextInt(je(niveau, 2, 12, 120), je(niveau, 9, 88, 880)) * 10 + zufall.nextInt(5, 10)
+            val b = zufall.nextInt(je(niveau, 1, 3, 30), je(niveau, 8, 29, 290)) * 10 + zufall.nextInt(5, 10)
             val zehner = b - b % 10
             val einer = b % 10
             val mitte = a + zehner
@@ -231,11 +298,12 @@ object Werkbank {
                     Fehlbild("uebertrag_vergessen", R.string.fa_uebertrag_vergessen, Bruch.von(ohneUebertrag(a, b))),
                     Fehlbild("um_zehn_daneben", R.string.fa_um_zehn_daneben, Bruch.von(ergebnis - 10)),
                 ),
+                probe = { x -> x - Bruch.von(b) == Bruch.von(a) },
             )
         } else {
             // Obere Einerziffer kleiner als die untere: es muss entbuendelt werden.
-            val a = zufall.nextInt(32, 95) * 10 + zufall.nextInt(0, 5)
-            val b = zufall.nextInt(4, 29) * 10 + zufall.nextInt(5, 10)
+            val a = zufall.nextInt(je(niveau, 4, 32, 320), je(niveau, 9, 95, 950)) * 10 + zufall.nextInt(0, 5)
+            val b = zufall.nextInt(je(niveau, 1, 4, 40), je(niveau, 3, 29, 290)) * 10 + zufall.nextInt(5, 10)
             val zehner = b - b % 10
             val einer = b % 10
             val mitte = a - zehner
@@ -259,13 +327,15 @@ object Werkbank {
                     Fehlbild("entbuendeln_vergessen", R.string.fa_entbuendeln_vergessen, Bruch.von(ziffernBetrag(a, b))),
                     Fehlbild("um_zehn_daneben", R.string.fa_um_zehn_daneben, Bruch.von(ergebnis + 10)),
                 ),
+                probe = { x -> x + Bruch.von(b) == Bruch.von(a) },
             )
         }
     }
 
-    private fun teilen(zufall: Random): Aufgabe {
-        val teiler = zufall.nextInt(3, 13)
-        val ergebnis = zufall.nextInt(3, 13)
+    private fun teilen(zufall: Random, niveau: Niveau): Aufgabe {
+        val teiler = zufall.nextInt(je(niveau, 2, 3, 4), je(niveau, 7, 13, 17))
+        // Ab drei: sonst faellt bei 4 : 2 der Fehlbildwert mit der Loesung zusammen.
+        val ergebnis = zufall.nextInt(je(niveau, 3, 3, 4), je(niveau, 8, 13, 17))
         val ganzes = teiler * ergebnis
         return bau(
             kompetenz = "GR-DIV-1",
@@ -286,12 +356,13 @@ object Werkbank {
                 Fehlbild("divisor_als_ergebnis", R.string.fa_divisor_als_ergebnis, Bruch.von(teiler)),
                 Fehlbild("subtrahiert_statt_geteilt", R.string.fa_subtrahiert_statt_geteilt, Bruch.von(ganzes - teiler)),
             ),
+            probe = { x -> x * Bruch.von(teiler) == Bruch.von(ganzes) },
         )
     }
 
-    private fun mehrstelligMal(zufall: Random): Aufgabe {
-        val a = zufall.nextInt(13, 30)
-        val b = zufall.nextInt(3, 10)
+    private fun mehrstelligMal(zufall: Random, niveau: Niveau): Aufgabe {
+        val a = zufall.nextInt(je(niveau, 11, 13, 21), je(niveau, 21, 30, 61))
+        val b = zufall.nextInt(je(niveau, 2, 3, 4), je(niveau, 7, 10, 14))
         val zehner = a - a % 10
         val einer = a % 10
         val teilZehner = zehner * b
@@ -317,20 +388,35 @@ object Werkbank {
                 Fehlbild("einer_vergessen", R.string.fa_einer_vergessen, Bruch.von(teilZehner)),
                 Fehlbild("stellenwert_verloren", R.string.fa_stellenwert_verloren, Bruch.von(a / 10 * b + teilEiner)),
             ),
+            probe = { x -> x / Bruch.von(b) == Bruch.von(a) },
         )
     }
 
     // ---- Dezimalzahlen ------------------------------------------------------
 
-    private fun dezimalAddieren(zufall: Random): Aufgabe {
-        val plus = zufall.nextBoolean()
-        val k1 = zufall.nextInt(12, 99)
-        val k2 = zufall.nextInt(105, 989)
-        val a = Bruch.von(k1.toLong(), 10L)
-        val b = Bruch.von(k2.toLong(), 100L)
-        val aufgefuellt = dezimalMitStellen(k1 * 10, 2)
-        val bText = dezimalMitStellen(k2, 2)
-        return if (plus || a.alsDouble() < b.alsDouble()) {
+    /** Ganzzahl [wert] als Dezimalzahl mit genau [stellen] Nachkommastellen. */
+    private fun dezimalMitStellen(wert: Long, stellen: Int): String {
+        val faktor = zehn(stellen)
+        val vor = wert / faktor
+        val nach = (wert % faktor).toString().padStart(stellen, '0')
+        return "$vor,$nach"
+    }
+
+    private fun dezimalAddieren(zufall: Random, niveau: Niveau): Aufgabe {
+        // Unterschiedlich viele Nachkommastellen -- genau daran scheitert das
+        // Untereinanderschreiben. E rechnet mit Tausendsteln, G mit Zehnteln.
+        val stellenA = je(niveau, 1, 1, 2)
+        val stellenB = je(niveau, 2, 2, 3)
+        val gemeinsam = maxOf(stellenA, stellenB)
+        val k1 = zufall.nextInt(je(niveau, 12, 12, 105), je(niveau, 60, 99, 989)).toLong()
+        val k2 = zufall.nextInt(je(niveau, 105, 105, 1005), je(niveau, 600, 989, 8989)).toLong()
+        val a = Bruch.von(k1, zehn(stellenA))
+        val b = Bruch.von(k2, zehn(stellenB))
+        val aufgefuellt = dezimalMitStellen(k1 * zehn(gemeinsam - stellenA), gemeinsam)
+        val bText = dezimalMitStellen(k2 * zehn(gemeinsam - stellenB), gemeinsam)
+        // Wer die Kommas nicht ausrichtet, addiert die reinen Ziffernfolgen.
+        val schief = Bruch.von(k1 + k2, zehn(gemeinsam))
+        return if (zufall.nextBoolean() || a.alsDouble() < b.alsDouble()) {
             val ergebnis = a + b
             bau(
                 kompetenz = "DZ-ADD-1",
@@ -348,9 +434,10 @@ object Werkbank {
                     t(R.string.h_dz_add_1_c, aufgefuellt, bText),
                 ),
                 fehlbilder = listOf(
-                    Fehlbild("stellen_nicht_ausgerichtet", R.string.fa_stellen_nicht_ausgerichtet, Bruch.von((k1 + k2).toLong(), 100L)),
+                    Fehlbild("stellen_nicht_ausgerichtet", R.string.fa_stellen_nicht_ausgerichtet, schief),
                     Fehlbild("komma_verrutscht", R.string.fa_komma_verrutscht, ergebnis * Bruch.von(10)),
                 ),
+                probe = { x -> x - b == a },
             )
         } else {
             val ergebnis = a - b
@@ -370,29 +457,23 @@ object Werkbank {
                     t(R.string.h_dz_add_1_c, aufgefuellt, bText),
                 ),
                 fehlbilder = listOf(
-                    Fehlbild("stellen_nicht_ausgerichtet", R.string.fa_stellen_nicht_ausgerichtet, Bruch.von((k1 - k2).toLong(), 100L)),
+                    Fehlbild("stellen_nicht_ausgerichtet", R.string.fa_stellen_nicht_ausgerichtet, Bruch.von(k1 - k2, zehn(gemeinsam))),
                     Fehlbild("komma_verrutscht", R.string.fa_komma_verrutscht, ergebnis * Bruch.von(10)),
                 ),
+                probe = { x -> x + b == a },
             )
         }
     }
 
-    /** Ganzzahl [wert] als Dezimalzahl mit genau [stellen] Nachkommastellen. */
-    private fun dezimalMitStellen(wert: Int, stellen: Int): String {
-        var faktor = 1
-        repeat(stellen) { faktor *= 10 }
-        val vor = wert / faktor
-        val nach = (wert % faktor).toString().padStart(stellen, '0')
-        return "$vor,$nach"
-    }
-
-    private fun dezimalMal(zufall: Random): Aufgabe {
-        val k1 = zufall.nextInt(11, 99)
-        val k2 = zufall.nextInt(2, 10)
+    private fun dezimalMal(zufall: Random, niveau: Niveau): Aufgabe {
+        // Beide Faktoren behalten genau eine Nachkommastelle -- der Rechenweg
+        // nennt das ausdruecklich. Die Niveaus trennt der Zahlenraum.
+        val k1 = zufall.nextInt(je(niveau, 11, 11, 101), je(niveau, 41, 99, 999))
+        val k2 = zufall.nextInt(je(niveau, 2, 2, 3), je(niveau, 7, 10, 10))
         val a = Bruch.von(k1.toLong(), 10L)
         val b = Bruch.von(k2.toLong(), 10L)
         val ergebnis = a * b
-        val ohneKomma = k1 * k2
+        val ohneKomma = k1.toLong() * k2.toLong()
         return bau(
             kompetenz = "DZ-MUL-1",
             frage = t(R.string.f_mal, a.alsDezimalText(), b.alsDezimalText()),
@@ -412,13 +493,17 @@ object Werkbank {
                 Fehlbild("komma_zu_weit_rechts", R.string.fa_komma_zu_weit_rechts, ergebnis * Bruch.von(10)),
                 Fehlbild("komma_zu_weit_links", R.string.fa_komma_zu_weit_links, ergebnis / Bruch.von(10)),
             ),
+            probe = { x -> x / b == a },
         )
     }
 
-    private val dezimalNenner = listOf(2, 4, 5, 8, 10, 20, 25)
+    private val dezimalNennerG = listOf(2, 4, 5, 10)
+    private val dezimalNennerM = listOf(2, 4, 5, 8, 10, 20, 25)
+    private val dezimalNennerE = listOf(8, 16, 20, 25, 40, 50, 80, 125)
 
-    private fun bruchAlsDezimal(zufall: Random): Aufgabe {
-        val nenner = dezimalNenner[zufall.nextInt(dezimalNenner.size)]
+    private fun bruchAlsDezimal(zufall: Random, niveau: Niveau): Aufgabe {
+        val topf = je(niveau, dezimalNennerG, dezimalNennerM, dezimalNennerE)
+        val nenner = topf[zufall.nextInt(topf.size)]
         var zaehler = zufall.nextInt(1, nenner)
         while (Bruch.ggt(zaehler.toLong(), nenner.toLong()) != 1L) zaehler = zufall.nextInt(1, nenner)
         // Kleinste Zehnerpotenz, die der Nenner teilt -- 4 braucht 100, 8 braucht 1000.
@@ -444,16 +529,17 @@ object Werkbank {
                 Fehlbild("bruchstrich_verwechselt", R.string.fa_bruchstrich_verwechselt, Bruch.von(nenner, zaehler)),
                 Fehlbild("komma_verrutscht", R.string.fa_komma_verrutscht, wert * Bruch.von(10)),
             ),
+            probe = { x -> x * Bruch.von(nenner) == Bruch.von(zaehler) },
         )
     }
 
     // ---- Brueche ------------------------------------------------------------
 
-    private fun kuerzen(zufall: Random): Aufgabe {
-        val nenner = zufall.nextInt(3, 13)
+    private fun kuerzen(zufall: Random, niveau: Niveau): Aufgabe {
+        val nenner = zufall.nextInt(je(niveau, 2, 3, 3), je(niveau, 8, 13, 21))
         var zaehler = zufall.nextInt(1, nenner)
         while (Bruch.ggt(zaehler.toLong(), nenner.toLong()) != 1L) zaehler = zufall.nextInt(1, nenner)
-        val faktor = zufall.nextInt(2, 7)
+        val faktor = zufall.nextInt(je(niveau, 2, 2, 3), je(niveau, 6, 7, 14))
         val obenRoh = zaehler * faktor
         val untenRoh = nenner * faktor
         val gekuerzt = Bruch.von(zaehler, nenner)
@@ -484,6 +570,8 @@ object Werkbank {
                 t(R.string.h_br_kue_1_c, z(faktor)),
             ),
             fehlbilder = fehlbilder,
+            // Zurueckerweitern muss genau die Zahlen der Aufgabe ergeben.
+            probe = { x -> x.zaehler * faktor == obenRoh.toLong() && x.nenner * faktor == untenRoh.toLong() },
         )
     }
 
@@ -496,14 +584,17 @@ object Werkbank {
         return wert
     }
 
-    private fun bruecheAddieren(zufall: Random): Aufgabe {
-        var n1 = zufall.nextInt(2, 10)
-        var n2 = zufall.nextInt(2, 10)
-        if (n1 == n2) n2 = if (n2 < 9) n2 + 1 else n2 - 1
+    private fun bruecheAddieren(zufall: Random, niveau: Niveau): Aufgabe {
+        val obergrenze = je(niveau, 7, 10, 14)
+        var n1 = zufall.nextInt(2, obergrenze)
+        var n2 = zufall.nextInt(2, obergrenze)
+        if (n1 == n2) n2 = if (n2 < obergrenze - 1) n2 + 1 else n2 - 1
         var z1 = zufall.nextInt(1, n1)
         var z2 = zufall.nextInt(1, n2)
         val plus = zufall.nextBoolean()
-        if (!plus && Bruch.von(z1, n1).alsDouble() < Bruch.von(z2, n2).alsDouble()) {
+        // G und M bleiben im Positiven; E darf unter null rutschen.
+        val negativErlaubt = niveau == Niveau.E
+        if (!plus && !negativErlaubt && Bruch.von(z1, n1).alsDouble() < Bruch.von(z2, n2).alsDouble()) {
             val hz = z1; val hn = n1
             z1 = z2; n1 = n2
             z2 = hz; n2 = hn
@@ -513,6 +604,8 @@ object Werkbank {
         val e2 = z2 * (haupt / n2)
         val roh = if (plus) e1 + e2 else e1 - e2
         val ergebnis = Bruch.von(roh, haupt)
+        val ersterBruch = Bruch.von(z1, n1)
+        val zweiterBruch = Bruch.von(z2, n2)
         val fehlbilder = mutableListOf<Fehlbild>()
         val nennerRoh = if (plus) n1 + n2 else n1 - n2
         if (nennerRoh != 0) {
@@ -551,15 +644,21 @@ object Werkbank {
                 t(R.string.h_br_add_1_c, z(haupt)),
             ),
             fehlbilder = fehlbilder,
+            probe = { x -> if (plus) x - zweiterBruch == ersterBruch else x + zweiterBruch == ersterBruch },
         )
     }
 
-    private fun bruecheMal(zufall: Random): Aufgabe {
-        val n1 = zufall.nextInt(2, 10)
-        val n2 = zufall.nextInt(2, 10)
-        val z1 = zufall.nextInt(1, n1)
+    private fun bruecheMal(zufall: Random, niveau: Niveau): Aufgabe {
+        val obergrenze = je(niveau, 7, 10, 14)
+        val n1 = zufall.nextInt(2, obergrenze)
+        val n2 = zufall.nextInt(2, obergrenze)
+        // E rechnet auch mit einem negativen Bruch.
+        val vorzeichen = if (niveau == Niveau.E && zufall.nextBoolean()) -1 else 1
+        val z1 = zufall.nextInt(1, n1) * vorzeichen
         val z2 = zufall.nextInt(1, n2)
-        val ergebnis = Bruch.von(z1 * z2, n1 * n2)
+        val ersterBruch = Bruch.von(z1, n1)
+        val zweiterBruch = Bruch.von(z2, n2)
+        val ergebnis = ersterBruch * zweiterBruch
         return bau(
             kompetenz = "BR-MUL-1",
             frage = t(R.string.f_mal, bruchText(z1, n1), bruchText(z2, n2)),
@@ -580,15 +679,20 @@ object Werkbank {
                 Fehlbild("kreuzweise_multipliziert", R.string.fa_kreuzweise_multipliziert, Bruch.von(z1 * n2, n1 * z2)),
                 Fehlbild("nur_zaehler_multipliziert", R.string.fa_nur_zaehler_multipliziert, Bruch.von(z1 * z2, n1)),
             ),
+            probe = { x -> x / zweiterBruch == ersterBruch },
         )
     }
 
-    private fun bruecheGeteilt(zufall: Random): Aufgabe {
-        val n1 = zufall.nextInt(2, 10)
-        val n2 = zufall.nextInt(2, 10)
-        val z1 = zufall.nextInt(1, n1)
+    private fun bruecheGeteilt(zufall: Random, niveau: Niveau): Aufgabe {
+        val obergrenze = je(niveau, 7, 10, 14)
+        val n1 = zufall.nextInt(2, obergrenze)
+        val n2 = zufall.nextInt(2, obergrenze)
+        val vorzeichen = if (niveau == Niveau.E && zufall.nextBoolean()) -1 else 1
+        val z1 = zufall.nextInt(1, n1) * vorzeichen
         val z2 = zufall.nextInt(1, n2)
-        val ergebnis = Bruch.von(z1 * n2, n1 * z2)
+        val ersterBruch = Bruch.von(z1, n1)
+        val zweiterBruch = Bruch.von(z2, n2)
+        val ergebnis = ersterBruch / zweiterBruch
         return bau(
             kompetenz = "BR-DIV-1",
             frage = t(R.string.f_geteilt, bruchText(z1, n1), bruchText(z2, n2)),
@@ -610,14 +714,16 @@ object Werkbank {
                 Fehlbild("kehrwert_vergessen", R.string.fa_kehrwert_vergessen, Bruch.von(z1 * z2, n1 * n2)),
                 Fehlbild("falschen_bruch_gedreht", R.string.fa_falschen_bruch_gedreht, Bruch.von(n1 * z2, z1 * n2)),
             ),
+            probe = { x -> x * zweiterBruch == ersterBruch },
         )
     }
 
     // ---- Negative Zahlen ----------------------------------------------------
 
-    private fun negativAddieren(zufall: Random): Aufgabe {
-        val a = zufall.nextInt(-15, 16).let { if (it == 0) -7 else it }
-        val b = zufall.nextInt(2, 16)
+    private fun negativAddieren(zufall: Random, niveau: Niveau): Aufgabe {
+        val spanne = je(niveau, 10, 15, 45)
+        val a = zufall.nextInt(-spanne, spanne + 1).let { if (it == 0) -spanne / 2 else it }
+        val b = zufall.nextInt(2, je(niveau, 11, 16, 41))
         val plus = zufall.nextBoolean()
         val ergebnis = if (plus) a + b else a - b
         val schritte = b
@@ -642,13 +748,14 @@ object Werkbank {
                 Fehlbild("vorzeichen_vertauscht", R.string.fa_vorzeichen_vertauscht, Bruch.von(-ergebnis)),
                 Fehlbild("minus_uebersehen", R.string.fa_minus_uebersehen, Bruch.von(if (plus) abs(a) + b else abs(a) - b)),
             ),
+            probe = { x -> if (plus) x - Bruch.von(b) == Bruch.von(a) else x + Bruch.von(b) == Bruch.von(a) },
         )
     }
 
-    private fun negativMal(zufall: Random): Aufgabe {
+    private fun negativMal(zufall: Random, niveau: Niveau): Aufgabe {
         val mal = zufall.nextBoolean()
-        val betragA = zufall.nextInt(3, 13)
-        val betragB = zufall.nextInt(2, 10)
+        val betragA = zufall.nextInt(je(niveau, 2, 3, 3), je(niveau, 8, 13, 17))
+        val betragB = zufall.nextInt(2, je(niveau, 7, 10, 14))
         // Mindestens ein Minuszeichen, sonst waere es keine Vorzeichenaufgabe.
         val negB = zufall.nextBoolean()
         val negA = if (negB) zufall.nextBoolean() else true
@@ -676,6 +783,7 @@ object Werkbank {
                     Fehlbild("vorzeichenregel_verwechselt", R.string.fa_vorzeichenregel_verwechselt, Bruch.von(-ergebnis)),
                     Fehlbild("addiert_statt_mal", R.string.fa_addiert_statt_mal, Bruch.von(a + b)),
                 ),
+                probe = { x -> x / Bruch.von(b) == Bruch.von(a) },
             )
         } else {
             val ergebnisBetrag = betragB
@@ -703,17 +811,21 @@ object Werkbank {
                     Fehlbild("vorzeichenregel_verwechselt", R.string.fa_vorzeichenregel_verwechselt, Bruch.von(-ergebnis)),
                     Fehlbild("subtrahiert_statt_geteilt", R.string.fa_subtrahiert_statt_geteilt, Bruch.von(a - b)),
                 ),
+                probe = { x -> x * Bruch.von(b) == Bruch.von(a) },
             )
         }
     }
 
     // ---- Prozent ------------------------------------------------------------
 
-    private val prozentsaetze = listOf(5, 10, 12, 15, 18, 20, 25, 30, 40, 60, 75)
+    private val saetzeG = listOf(10, 20, 25, 50)
+    private val saetzeM = listOf(5, 10, 12, 15, 18, 20, 25, 30, 40, 60, 75)
+    private val saetzeE = listOf(3, 7, 12, 18, 23, 37, 45, 65, 85, 110, 125)
 
-    private fun prozentwert(zufall: Random): Aufgabe {
-        val satz = prozentsaetze[zufall.nextInt(prozentsaetze.size)]
-        val grund = zufall.nextInt(3, 31) * 50
+    private fun prozentwert(zufall: Random, niveau: Niveau): Aufgabe {
+        val topf = je(niveau, saetzeG, saetzeM, saetzeE)
+        val satz = topf[zufall.nextInt(topf.size)]
+        val grund = je(niveau, 100, 50, 25) * zufall.nextInt(je(niveau, 1, 3, 5), je(niveau, 10, 31, 81))
         val einProzent = Bruch.von(grund.toLong(), 100L)
         val ergebnis = einProzent * Bruch.von(satz)
         return bau(
@@ -734,15 +846,22 @@ object Werkbank {
                 Fehlbild("durch_hundert_vergessen", R.string.fa_durch_hundert_vergessen, Bruch.von(satz.toLong() * grund.toLong())),
                 Fehlbild("geteilt_statt_mal", R.string.fa_geteilt_statt_mal, Bruch.von(grund, satz)),
             ),
+            probe = { x -> x * Bruch.HUNDERT == Bruch.von(satz) * Bruch.von(grund) },
         )
     }
 
-    private val grundwerte = listOf(60, 80, 120, 150, 180, 200, 240, 250, 300, 400)
-    private val glatteSaetze = listOf(5, 10, 15, 20, 25, 40, 60, 75)
+    private val grundwerteG = listOf(100, 200, 400)
+    private val grundwerteM = listOf(60, 80, 120, 150, 180, 200, 240, 250, 300, 400)
+    private val grundwerteE = listOf(64, 96, 128, 175, 224, 320, 360, 480, 625, 800)
+    private val glatteG = listOf(10, 20, 25, 50)
+    private val glatteM = listOf(5, 10, 15, 20, 25, 40, 60, 75)
+    private val glatteE = listOf(4, 12, 24, 35, 45, 55, 65, 80, 96)
 
-    private fun prozentsatz(zufall: Random): Aufgabe {
-        val grund = grundwerte[zufall.nextInt(grundwerte.size)]
-        val satz = glatteSaetze[zufall.nextInt(glatteSaetze.size)]
+    private fun prozentsatz(zufall: Random, niveau: Niveau): Aufgabe {
+        val grundTopf = je(niveau, grundwerteG, grundwerteM, grundwerteE)
+        val satzTopf = je(niveau, glatteG, glatteM, glatteE)
+        val grund = grundTopf[zufall.nextInt(grundTopf.size)]
+        val satz = satzTopf[zufall.nextInt(satzTopf.size)]
         val wert = Bruch.von(grund.toLong() * satz.toLong(), 100L)
         val anteil = Bruch.von(satz.toLong(), 100L)
         return bau(
@@ -763,15 +882,18 @@ object Werkbank {
                 Fehlbild("bezug_vertauscht", R.string.fa_bezug_vertauscht, Bruch.von(grund.toLong(), 1L) / wert * Bruch.HUNDERT),
                 Fehlbild("mal_hundert_vergessen", R.string.fa_mal_hundert_vergessen, anteil),
             ),
+            probe = { x -> Bruch.von(grund) * x == wert * Bruch.HUNDERT },
         )
     }
 
     // ---- Terme und Gleichungen ----------------------------------------------
 
-    private fun termAuswerten(zufall: Random): Aufgabe {
-        val faktor = zufall.nextInt(2, 10)
-        val x = zufall.nextInt(2, 13)
-        val summand = zufall.nextInt(2, 16)
+    private fun termAuswerten(zufall: Random, niveau: Niveau): Aufgabe {
+        val faktor = zufall.nextInt(2, je(niveau, 7, 10, 14))
+        // Erst im erweiterten Niveau wird auch ein negatives x eingesetzt.
+        val betragX = zufall.nextInt(2, je(niveau, 8, 13, 17))
+        val x = if (niveau == Niveau.E && zufall.nextBoolean()) -betragX else betragX
+        val summand = zufall.nextInt(2, je(niveau, 11, 16, 41))
         val plus = zufall.nextBoolean()
         val produkt = faktor * x
         val ergebnis = if (plus) produkt + summand else produkt - summand
@@ -781,9 +903,9 @@ object Werkbank {
             "${faktor}x ${Bruch.MINUS} $summand"
         }
         val eingesetzt = if (plus) {
-            "$faktor · $x + $summand"
+            "$faktor · ${geklammert(x)} + $summand"
         } else {
-            "$faktor · $x ${Bruch.MINUS} $summand"
+            "$faktor · ${geklammert(x)} ${Bruch.MINUS} $summand"
         }
         return bau(
             kompetenz = "GL-TER-1",
@@ -811,13 +933,20 @@ object Werkbank {
                 ),
                 Fehlbild("mal_als_plus", R.string.fa_mal_als_plus, Bruch.von(if (plus) faktor + x + summand else faktor + x - summand)),
             ),
+            // Denselben Term noch einmal, aber exakt ueber Brueche gerechnet.
+            probe = { y ->
+                val summe = Bruch.von(faktor) * Bruch.von(x)
+                y == if (plus) summe + Bruch.von(summand) else summe - Bruch.von(summand)
+            },
         )
     }
 
-    private fun gleichungLinear(zufall: Random): Aufgabe {
-        val faktor = zufall.nextInt(2, 10)
-        val x = zufall.nextInt(2, 13)
-        val summand = zufall.nextInt(2, 16) * (if (zufall.nextBoolean()) 1 else -1)
+    private fun gleichungLinear(zufall: Random, niveau: Niveau): Aufgabe {
+        val faktor = zufall.nextInt(2, je(niveau, 7, 10, 14))
+        val betragX = zufall.nextInt(2, je(niveau, 9, 13, 21))
+        val x = if (niveau == Niveau.E && zufall.nextBoolean()) -betragX else betragX
+        val betrag = zufall.nextInt(2, je(niveau, 11, 16, 41))
+        val summand = if (niveau == Niveau.G) betrag else betrag * (if (zufall.nextBoolean()) 1 else -1)
         val rechts = faktor * x + summand
         val zeichen = if (summand >= 0) "+" else Bruch.MINUS
         val gleichung = "${faktor}x $zeichen ${abs(summand)} = ${Bruch.ganzText(rechts.toLong())}"
@@ -841,13 +970,15 @@ object Werkbank {
                 Fehlbild("summand_uebersehen", R.string.fa_summand_uebersehen, Bruch.von(rechts, faktor)),
                 Fehlbild("falsche_gegenrechnung", R.string.fa_falsche_gegenrechnung, Bruch.von(rechts + summand, faktor)),
             ),
+            // Einsetzprobe: die Gleichung muss mit der Loesung aufgehen.
+            probe = { loesung -> Bruch.von(faktor) * loesung + Bruch.von(summand) == Bruch.von(rechts) },
         )
     }
 
-    private fun gleichungKlammer(zufall: Random): Aufgabe {
-        val faktor = zufall.nextInt(2, 7)
-        val x = zufall.nextInt(2, 10)
-        val summand = zufall.nextInt(2, 10)
+    private fun gleichungKlammer(zufall: Random, niveau: Niveau): Aufgabe {
+        val faktor = zufall.nextInt(2, je(niveau, 5, 7, 11))
+        val x = zufall.nextInt(2, je(niveau, 7, 10, 17))
+        val summand = zufall.nextInt(2, je(niveau, 7, 10, 21))
         val rechts = faktor * (x + summand)
         val gleichung = "$faktor · (x + $summand) = $rechts"
         val zwischen = "x + $summand = ${rechts / faktor}"
@@ -869,6 +1000,7 @@ object Werkbank {
                 Fehlbild("klammer_nicht_beachtet", R.string.fa_klammer_nicht_beachtet, Bruch.von(rechts - summand, faktor)),
                 Fehlbild("falsches_vorzeichen_umgestellt", R.string.fa_falsches_vorzeichen_umgestellt, Bruch.von(rechts / faktor + summand)),
             ),
+            probe = { loesung -> Bruch.von(faktor) * (loesung + Bruch.von(summand)) == Bruch.von(rechts) },
         )
     }
 }

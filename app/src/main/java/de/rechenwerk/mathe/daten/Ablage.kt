@@ -50,14 +50,49 @@ data class Werte(
     val sitzungen: Int = 0,
 )
 
+/**
+ * Eine beantwortete Aufgabe in der Historie. Gespeichert wird nicht die Aufgabe
+ * selbst, sondern ihr [startwert]: aus Kompetenz, Niveau und Startwert entsteht
+ * sie jederzeit wieder Zeichen fuer Zeichen gleich.
+ */
+data class Verlaufseintrag(
+    val kompetenz: String,
+    val startwert: Long,
+    val niveau: Niveau,
+    val richtig: Boolean,
+    val zeitpunkt: Long,
+)
+
+/**
+ * Die gerade gestellte, noch unbeantwortete Aufgabe. Sie steht mit im Tresor,
+ * damit ein Neustart mitten in der Sitzung genau dieselbe Aufgabe wieder zeigt.
+ */
+data class Laufend(
+    val kompetenz: String,
+    val startwert: Long,
+    val niveau: Niveau,
+)
+
 /** Alles, was einen Neustart ueberlebt. Liegt als JSON im Tresor. */
 data class Ablage(
     val profil: Profil = Profil(),
-    val modus: Modus = Modus.SYSTEM,
+    // Eine frische Installation startet dunkel, nicht "wie das System".
+    val modus: Modus = Modus.DUNKEL,
     val staende: Map<String, KompetenzStand> = emptyMap(),
     val werte: Werte = Werte(),
+    val verlauf: List<Verlaufseintrag> = emptyList(),
+    val laufend: Laufend? = null,
 ) {
     fun stand(kennung: String): KompetenzStand = staende[kennung] ?: KompetenzStand(kennung)
+
+    /** Haengt einen Eintrag an die Historie und haelt sie auf [VERLAUF_MAX] kurz. */
+    fun mitVerlauf(eintrag: Verlaufseintrag): List<Verlaufseintrag> =
+        (verlauf + eintrag).takeLast(VERLAUF_MAX)
+
+    companion object {
+        /** So viele Aufgaben bleiben in der Historie stehen. */
+        const val VERLAUF_MAX = 200
+    }
 }
 
 /**
@@ -67,7 +102,9 @@ data class Ablage(
 object Papier {
 
     const val FORMAT = "rechenwerk"
-    const val FASSUNG = 1
+
+    /** Fassung 2 fuehrt die Aufgabenhistorie mit Startwerten. Fassung 1 wird weiter gelesen. */
+    const val FASSUNG = 2
 
     fun schreibe(ablage: Ablage): String {
         val wurzel = JSONObject()
@@ -112,6 +149,27 @@ object Papier {
             liste.put(eintrag)
         }
         wurzel.put("staende", liste)
+
+        val historie = JSONArray()
+        for (eintrag in ablage.verlauf) {
+            val satz = JSONObject()
+            satz.put("kompetenz", eintrag.kompetenz)
+            satz.put("startwert", eintrag.startwert)
+            satz.put("niveau", eintrag.niveau.name)
+            satz.put("richtig", eintrag.richtig)
+            satz.put("zeitpunkt", eintrag.zeitpunkt)
+            historie.put(satz)
+        }
+        wurzel.put("verlauf", historie)
+
+        val offen = ablage.laufend
+        if (offen != null) {
+            val satz = JSONObject()
+            satz.put("kompetenz", offen.kompetenz)
+            satz.put("startwert", offen.startwert)
+            satz.put("niveau", offen.niveau.name)
+            wurzel.put("laufend", satz)
+        }
 
         return wurzel.toString(2)
     }
@@ -183,11 +241,39 @@ object Papier {
             )
         }
 
+        val verlauf = mutableListOf<Verlaufseintrag>()
+        val historie = wurzel.optJSONArray("verlauf") ?: JSONArray()
+        for (i in 0 until historie.length()) {
+            val satz = historie.optJSONObject(i) ?: continue
+            val kompetenz = satz.optString("kompetenz")
+            if (kompetenz.isEmpty()) continue
+            verlauf += Verlaufseintrag(
+                kompetenz = kompetenz,
+                startwert = satz.optLong("startwert", 0L),
+                niveau = wahl(satz.optString("niveau"), Niveau.entries, Niveau.M),
+                richtig = satz.optBoolean("richtig", false),
+                zeitpunkt = satz.optLong("zeitpunkt", 0L).coerceAtLeast(0L),
+            )
+        }
+
+        val offenJson = wurzel.optJSONObject("laufend")
+        val laufend = if (offenJson != null && offenJson.optString("kompetenz").isNotEmpty()) {
+            Laufend(
+                kompetenz = offenJson.optString("kompetenz"),
+                startwert = offenJson.optLong("startwert", 0L),
+                niveau = wahl(offenJson.optString("niveau"), Niveau.entries, Niveau.M),
+            )
+        } else {
+            null
+        }
+
         return Ablage(
             profil = profil,
-            modus = wahl(wurzel.optString("modus"), Modus.entries, Modus.SYSTEM),
+            modus = wahl(wurzel.optString("modus"), Modus.entries, Modus.DUNKEL),
             staende = staende,
             werte = werte,
+            verlauf = verlauf.takeLast(Ablage.VERLAUF_MAX),
+            laufend = laufend,
         )
     }
 

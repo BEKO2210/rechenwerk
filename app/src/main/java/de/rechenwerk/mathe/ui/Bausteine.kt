@@ -9,6 +9,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.slideInVertically
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Arrangement
@@ -104,8 +105,8 @@ fun kuenftig(zeitpunkt: Long): String {
 }
 
 /**
- * Eine Flaeche der zweiten Ebene. Alle Kacheln der App teilen sich diese
- * Form, diesen Innenrand und diese Farbe.
+ * Eine Flaeche der zweiten Ebene. Alle Kacheln der App sind Glas und teilen
+ * sich diese Form, diesen Innenrand und dieselbe Rezeptur aus [GlasFlaeche].
  */
 @Composable
 fun Kachel(
@@ -114,27 +115,23 @@ fun Kachel(
     aufDruck: (() -> Unit)? = null,
     inhalt: @Composable ColumnScope.() -> Unit,
 ) {
-    val farbe = if (hervorgehoben) {
-        MaterialTheme.colorScheme.surfaceContainerHigh
-    } else {
-        MaterialTheme.colorScheme.surfaceContainer
-    }
+    val form = MaterialTheme.shapes.large
     val gemeinsam = modifier
         .fillMaxWidth()
         .defaultMinSize(minHeight = Masse.tippziel)
-    if (aufDruck == null) {
-        Surface(modifier = gemeinsam, shape = MaterialTheme.shapes.large, color = farbe) {
-            Column(modifier = Modifier.padding(Abstand.l), content = inhalt)
+    GlasFlaeche(modifier = gemeinsam, form = form, hervorgehoben = hervorgehoben) {
+        val innen = if (aufDruck == null) {
+            Modifier
+        } else {
+            Modifier.clickable(onClick = aufDruck)
         }
-    } else {
-        Surface(
-            onClick = aufDruck,
-            modifier = gemeinsam,
-            shape = MaterialTheme.shapes.large,
-            color = farbe,
-        ) {
-            Column(modifier = Modifier.padding(Abstand.l), content = inhalt)
-        }
+        Column(
+            modifier = innen
+                .fillMaxWidth()
+                .defaultMinSize(minHeight = Masse.tippziel)
+                .padding(Abstand.l),
+            content = inhalt,
+        )
     }
 }
 

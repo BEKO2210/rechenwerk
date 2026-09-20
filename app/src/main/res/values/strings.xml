@@ -83,6 +83,8 @@
     <string name="bereich_negativ">Negative Zahlen</string>
     <string name="bereich_prozent">Prozent</string>
     <string name="bereich_gleichungen">Terme und Gleichungen</string>
+    <string name="bereich_potenzen">Potenzen und Wurzeln</string>
+    <string name="bereich_geometrie">Geometrie</string>
 
     <!-- Kompetenzen -->
     <string name="k_gr_mul_1">Einmaleins bis 10 mal 10</string>
@@ -103,6 +105,14 @@
     <string name="k_gl_ter_1">Terme einsetzen und auswerten</string>
     <string name="k_gl_lin_1">Lineare Gleichungen lösen</string>
     <string name="k_gl_kla_1">Gleichungen mit Klammer</string>
+    <string name="k_ge_pyt_1">Satzgruppe des Pythagoras</string>
+    <string name="k_po_wur_1">Wurzelterme</string>
+    <string name="k_ge_str_1">Strahlensätze</string>
+    <string name="k_pz_zin_1">Zinsrechnung über mehrere Jahre</string>
+    <string name="k_gl_qua_1">Quadratische Gleichungen</string>
+    <string name="k_ge_koe_1">Flächen und Körper</string>
+    <string name="k_gl_lgs_1">Lineare Gleichungssysteme</string>
+    <string name="k_po_rat_1">Potenzen mit rationalen Exponenten</string>
 
     <!-- Aufgabenstellungen -->
     <string name="f_mal">%1$s · %2$s</string>
@@ -115,6 +125,23 @@
     <string name="f_prozentsatz">Wie viel Prozent sind %1$s von %2$s?</string>
     <string name="f_term_fuer_x">%1$s für x = %2$s</string>
     <string name="f_ausdruck">%1$s</string>
+
+    <!-- Aufgabenstellungen der Klassen 9 und 10 -->
+    <string name="f_ge_pyt_hypotenuse">Rechtwinkliges Dreieck, Katheten a = %1$s und b = %2$s. Wie lang ist die Hypotenuse c?</string>
+    <string name="f_ge_pyt_kathete">Rechtwinkliges Dreieck, Hypotenuse c = %1$s, Kathete a = %2$s. Wie lang ist die Kathete b?</string>
+    <string name="f_po_wur_zahl">Wurzel aus %1$s</string>
+    <string name="f_po_wur_bruch">Wurzel aus %1$s</string>
+    <string name="f_ge_str_zweiter">Zwei Strahlen ab S, geschnitten von zwei Parallelen. SA = %1$s, SB = %2$s, SC = %3$s. Wie lang ist SD?</string>
+    <string name="f_ge_str_erster">Zwei Strahlen ab S, geschnitten von zwei Parallelen. SA = %1$s, SC = %2$s, SD = %3$s. Wie lang ist SB?</string>
+    <string name="f_pz_zin_einfach">%1$s Euro, %2$s Jahre lang mit %3$s %% verzinst, die Zinsen werden nicht mitverzinst. Wie viel Euro sind es am Ende?</string>
+    <string name="f_pz_zin_zinseszins">%1$s Euro, %2$s Jahre lang mit %3$s %% verzinst, die Zinsen werden mitverzinst. Wie viel Euro sind es am Ende?</string>
+    <string name="f_gl_qua_groessere">%1$s — nenne die größere Lösung.</string>
+    <string name="f_ge_koe_rechteck">Rechteck, %1$s cm lang und %2$s cm breit. Wie groß ist die Fläche in Quadratzentimetern?</string>
+    <string name="f_ge_koe_dreieck">Dreieck mit Grundseite %1$s cm und Höhe %2$s cm. Wie groß ist die Fläche in Quadratzentimetern?</string>
+    <string name="f_ge_koe_quader">Quader mit %1$s cm, %2$s cm und %3$s cm. Wie groß ist das Volumen in Kubikzentimetern?</string>
+    <string name="f_ge_koe_rest">Aus einem Quader mit %1$s cm, %2$s cm und %3$s cm ist ein Quader mit %4$s cm, %5$s cm und %6$s cm ausgespart. Wie groß ist das übrige Volumen in Kubikzentimetern?</string>
+    <string name="f_gl_lgs_x">%1$s und %2$s — wie groß ist x?</string>
+    <string name="f_po_rat_hoch">%1$s hoch %2$s</string>
 
     <!-- Rechenwege -->
     <string name="w_rechnung_mal">%1$s · %2$s = %3$s</string>
@@ -166,6 +193,40 @@
     <string name="w_gl_durch_teilen">Durch %1$s teilen: x = %2$s</string>
     <string name="w_gl_klammer_teilen">Durch %1$s teilen: x + %2$s = %3$s</string>
     <string name="w_gl_klammer_ausgleichen">Auf beiden Seiten − %1$s rechnen: x = %2$s</string>
+
+    <!-- Rechenwege der Klassen 9 und 10 -->
+    <string name="w_pyt_satz">Im rechtwinkligen Dreieck gilt a² + b² = c².</string>
+    <string name="w_pyt_quadrate">%1$s² = %2$s und %3$s² = %4$s</string>
+    <string name="w_pyt_wurzel">Wurzel aus %1$s ist %2$s.</string>
+    <string name="w_pyt_umstellen">Umgestellt: b² = c² − a² = %1$s − %2$s = %3$s</string>
+    <string name="w_wur_quadratzahl">%1$s ist %2$s · %3$s.</string>
+    <string name="w_wur_ergebnis">Die Wurzel ist also %1$s.</string>
+    <string name="w_wur_bruch">Zähler und Nenner getrennt: Wurzel aus %1$s ist %2$s, Wurzel aus %3$s ist %4$s.</string>
+    <string name="w_str_verhaeltnis">Beim Strahlensatz gilt SA : SB = SC : SD.</string>
+    <string name="w_str_einsetzen_zweiter">Eingesetzt: %1$s : %2$s = %3$s : SD</string>
+    <string name="w_str_einsetzen_erster">Eingesetzt: %1$s : SB = %2$s : %3$s</string>
+    <string name="w_str_aufloesen">Aufgelöst: %1$s · %2$s : %3$s = %4$s</string>
+    <string name="w_zin_ein_jahr">%1$s %% von %2$s Euro sind %3$s Euro Zinsen im Jahr.</string>
+    <string name="w_zin_mal_jahre">%1$s · %2$s Jahre = %3$s Euro Zinsen insgesamt</string>
+    <string name="w_zin_faktor">Jedes Jahr wird mit %1$s multipliziert.</string>
+    <string name="w_zin_jahr">Nach Jahr %1$s: %2$s Euro</string>
+    <string name="w_qua_vieta">Gesucht sind zwei Zahlen, die addiert %1$s und multipliziert %2$s ergeben.</string>
+    <string name="w_qua_zerlegt">Das sind %1$s und %2$s.</string>
+    <string name="w_qua_produkt">Ein Produkt ist null, wenn ein Faktor null ist: x = %1$s oder x = %2$s.</string>
+    <string name="w_qua_groesser">Die größere Lösung ist %1$s.</string>
+    <string name="w_koe_rechteck">Fläche eines Rechtecks: Länge mal Breite.</string>
+    <string name="w_koe_dreieck">Fläche eines Dreiecks: Grundseite mal Höhe, davon die Hälfte.</string>
+    <string name="w_koe_halbieren">Die Hälfte von %1$s ist %2$s.</string>
+    <string name="w_koe_quader">Volumen eines Quaders: Länge mal Breite mal Höhe.</string>
+    <string name="w_koe_gross">Großer Quader: %1$s · %2$s · %3$s = %4$s</string>
+    <string name="w_koe_klein">Ausgesparter Quader: %1$s · %2$s · %3$s = %4$s</string>
+    <string name="w_lgs_gleichnamig">Erste Gleichung mal %1$s, zweite Gleichung mal %2$s.</string>
+    <string name="w_lgs_y_faellt_weg">Nach dem Subtrahieren fällt y weg: %1$sx = %2$s</string>
+    <string name="w_lgs_x">Also x = %1$s</string>
+    <string name="w_lgs_y">Eingesetzt ergibt sich y = %1$s.</string>
+    <string name="w_rat_wurzel">Der Nenner %1$s im Exponenten ist die Wurzel: die %1$s-te Wurzel aus %2$s ist %3$s.</string>
+    <string name="w_rat_potenz">Der Zähler im Exponenten ist die Potenz: %1$s hoch %2$s = %3$s</string>
+    <string name="w_rat_negativ">Der negative Exponent dreht das Ergebnis um: %1$s</string>
 
     <!-- Gestufte Hilfe -->
     <string name="h_rechnung_mal">Erster Schritt: %1$s · %2$s = %3$s</string>
@@ -241,6 +302,49 @@
     <string name="h_gl_kla_1_a">Die Klammer steht als Ganzes mal %1$s.</string>
     <string name="h_gl_kla_1_b">Teile zuerst durch den Faktor vor der Klammer, die Klammer bleibt dabei zusammen.</string>
 
+    <!-- Gestufte Hilfe der Klassen 9 und 10 -->
+    <string name="h_ge_pyt_1_a">Skizziere das Dreieck und markiere den rechten Winkel.</string>
+    <string name="h_ge_pyt_1_b">Die Hypotenuse liegt dem rechten Winkel gegenüber. Addiere die Quadrate der beiden Katheten.</string>
+    <string name="h_ge_pyt_1_c">Die Summe der Quadrate ist %1$s. Davon fehlt noch die Wurzel.</string>
+    <string name="h_ge_pyt_1_d">Eine Kathete ist gesucht: stelle den Satz nach ihr um und ziehe das Quadrat der bekannten Kathete ab.</string>
+    <string name="h_ge_pyt_1_e">Nach dem Abziehen bleibt %1$s. Davon fehlt noch die Wurzel.</string>
+
+    <string name="h_po_wur_1_a">Die Wurzel fragt: welche Zahl mit sich selbst malgenommen ergibt das?</string>
+    <string name="h_po_wur_1_b">Geh die Quadratzahlen durch, bis du die passende findest.</string>
+    <string name="h_po_wur_1_c">Sieh dir %1$s genauer an.</string>
+
+    <string name="h_ge_str_1_a">Zeichne die beiden Strahlen und die Parallelen; halte fest, welche Strecke zu welcher gehört.</string>
+    <string name="h_ge_str_1_b">Auf beiden Strahlen stehen die Abschnitte im selben Verhältnis.</string>
+    <string name="h_ge_str_1_c">Der Streckfaktor zwischen beiden Parallelen ist %1$s.</string>
+
+    <string name="h_pz_zin_1_a">Rechne Jahr für Jahr, nicht in einem Schritt.</string>
+    <string name="h_pz_zin_1_b">Ohne Zinseszins bleiben die Zinsen in jedem Jahr gleich hoch.</string>
+    <string name="h_pz_zin_1_c">Ein Jahr bringt %1$s Euro Zinsen.</string>
+    <string name="h_pz_zin_1_d">Mit Zinseszins wird jedes Jahr das bereits gewachsene Kapital verzinst.</string>
+    <string name="h_pz_zin_1_e">Der Faktor je Jahr ist %1$s.</string>
+
+    <string name="h_gl_qua_1_a">Suche zwei Zahlen, die zusammen den Wert vor dem x und multipliziert den letzten Wert ergeben.</string>
+    <string name="h_gl_qua_1_b">Die beiden Zahlen ergeben addiert %1$s und multipliziert %2$s.</string>
+    <string name="h_gl_qua_1_c">Eine der beiden Lösungen ist %1$s. Die andere ist gesucht.</string>
+
+    <string name="h_ge_koe_1_a">Halte zuerst fest, ob eine Fläche oder ein Volumen gesucht ist.</string>
+    <string name="h_ge_koe_1_b">Die Fläche eines Rechtecks ist Länge mal Breite.</string>
+    <string name="h_ge_koe_1_c">Rechne %1$s · %2$s.</string>
+    <string name="h_ge_koe_1_d">Beim Dreieck kommt nach dem Malnehmen noch die Hälfte.</string>
+    <string name="h_ge_koe_1_e">Grundseite mal Höhe ergibt %1$s. Jetzt noch halbieren.</string>
+    <string name="h_ge_koe_1_f">Beim Quader werden alle drei Kanten multipliziert.</string>
+    <string name="h_ge_koe_1_g">Die Grundfläche ist %1$s, es fehlt noch die Höhe.</string>
+    <string name="h_ge_koe_1_h">Rechne zuerst den ganzen Quader, dann die Aussparung, dann die Differenz.</string>
+    <string name="h_ge_koe_1_i">Der ganze Quader hat %1$s. Davon geht die Aussparung ab.</string>
+
+    <string name="h_gl_lgs_1_a">Zwei Gleichungen, zwei Unbekannte: eine davon muss zuerst verschwinden.</string>
+    <string name="h_gl_lgs_1_b">Bringe beide Gleichungen auf gleich viele y und subtrahiere sie voneinander.</string>
+    <string name="h_gl_lgs_1_c">Nach dem Subtrahieren steht %1$sx = %2$s.</string>
+
+    <string name="h_po_rat_1_a">Ein Bruch im Exponenten ist Wurzel und Potenz in einem.</string>
+    <string name="h_po_rat_1_b">Der Nenner %1$s ist die Wurzel, der Zähler %2$s die Potenz.</string>
+    <string name="h_po_rat_1_c">Die Wurzel ergibt %1$s. Jetzt kommt die Potenz.</string>
+
     <!-- Fehlerarten -->
     <string name="fa_reihe_verzaehlt">Eine Reihe zu wenig gerechnet</string>
     <string name="fa_addiert_statt_mal">Addiert statt multipliziert</string>
@@ -277,6 +381,21 @@
     <string name="fa_falsche_gegenrechnung">In die falsche Richtung umgestellt</string>
     <string name="fa_klammer_nicht_beachtet">Klammer nicht als Ganzes behandelt</string>
     <string name="fa_falsches_vorzeichen_umgestellt">Beim Umstellen das Vorzeichen gedreht</string>
+    <string name="fa_quadriert_statt_addiert">Die Seiten addiert statt ihre Quadrate</string>
+    <string name="fa_wurzel_vergessen">Wurzel am Ende vergessen</string>
+    <string name="fa_kathete_als_hypotenuse">Längen abgezogen statt ihre Quadrate</string>
+    <string name="fa_wurzel_halbiert">Wurzel mit Halbieren verwechselt</string>
+    <string name="fa_verhaeltnis_gedreht">Das Verhältnis umgekehrt angesetzt</string>
+    <string name="fa_strecken_addiert">Strecken addiert statt im Verhältnis gerechnet</string>
+    <string name="fa_nur_einmal_verzinst">Nur ein Jahr verzinst</string>
+    <string name="fa_zinseszins_als_summe">Zinseszins als einfache Summe gerechnet</string>
+    <string name="fa_zweite_loesung_genommen">Die kleinere Lösung genannt</string>
+    <string name="fa_vorzeichen_der_wurzel">Vorzeichen der Lösung gedreht</string>
+    <string name="fa_nur_eine_gleichung">Nur die erste Gleichung genutzt</string>
+    <string name="fa_x_und_y_vertauscht">x und y vertauscht</string>
+    <string name="fa_exponent_als_faktor">Den Exponenten als Faktor gerechnet</string>
+    <string name="fa_halbierung_vergessen">Das Halbieren vergessen</string>
+    <string name="fa_flaeche_statt_volumen">Fläche statt Volumen gerechnet</string>
 
     <!-- Training -->
     <string name="training_titel">Training</string>

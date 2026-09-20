@@ -317,4 +317,122 @@
     <string name="zeit_sekunden">%1$s s</string>
     <string name="zeit_stunden">%1$s h %2$s min</string>
     <string name="zurueck">Atrás</string>
+
+    <!-- Ámbitos de competencia, cursos 9 y 10 -->
+    <string name="bereich_potenzen">Potencias y raíces</string>
+    <string name="bereich_geometrie">Geometría</string>
+
+    <!-- Competencias, cursos 9 y 10 -->
+    <string name="k_ge_pyt_1">Teorema de Pitágoras</string>
+    <string name="k_po_wur_1">Expresiones con raíces</string>
+    <string name="k_ge_str_1">Teorema de Tales</string>
+    <string name="k_pz_zin_1">Interés a lo largo de varios años</string>
+    <string name="k_gl_qua_1">Ecuaciones cuadráticas</string>
+    <string name="k_ge_koe_1">Áreas y cuerpos</string>
+    <string name="k_gl_lgs_1">Sistemas de ecuaciones lineales</string>
+    <string name="k_po_rat_1">Potencias con exponentes racionales</string>
+
+    <!-- Enunciados, cursos 9 y 10 -->
+    <string name="f_ge_pyt_hypotenuse">Triángulo rectángulo, catetos a = %1$s y b = %2$s. ¿Cuánto mide la hipotenusa c?</string>
+    <string name="f_ge_pyt_kathete">Triángulo rectángulo, hipotenusa c = %1$s, cateto a = %2$s. ¿Cuánto mide el cateto b?</string>
+    <string name="f_po_wur_zahl">Raíz cuadrada de %1$s</string>
+    <string name="f_po_wur_bruch">Raíz cuadrada de %1$s</string>
+    <string name="f_ge_str_zweiter">Dos rayos desde S, cortados por dos paralelas. SA = %1$s, SB = %2$s, SC = %3$s. ¿Cuánto mide SD?</string>
+    <string name="f_ge_str_erster">Dos rayos desde S, cortados por dos paralelas. SA = %1$s, SC = %2$s, SD = %3$s. ¿Cuánto mide SB?</string>
+    <string name="f_pz_zin_einfach">%1$s euros al %3$s %% durante %2$s años, los intereses no se reinvierten. ¿Cuántos euros hay al final?</string>
+    <string name="f_pz_zin_zinseszins">%1$s euros al %3$s %% durante %2$s años, los intereses se reinvierten. ¿Cuántos euros hay al final?</string>
+    <string name="f_gl_qua_groessere">%1$s — indica la solución mayor.</string>
+    <string name="f_ge_koe_rechteck">Rectángulo de %1$s cm de largo y %2$s cm de ancho. ¿Cuál es el área en centímetros cuadrados?</string>
+    <string name="f_ge_koe_dreieck">Triángulo con base %1$s cm y altura %2$s cm. ¿Cuál es el área en centímetros cuadrados?</string>
+    <string name="f_ge_koe_quader">Ortoedro de %1$s cm, %2$s cm y %3$s cm. ¿Cuál es el volumen en centímetros cúbicos?</string>
+    <string name="f_ge_koe_rest">A un ortoedro de %1$s cm, %2$s cm y %3$s cm se le ha quitado otro de %4$s cm, %5$s cm y %6$s cm. ¿Cuál es el volumen restante en centímetros cúbicos?</string>
+    <string name="f_gl_lgs_x">%1$s y %2$s — ¿cuánto vale x?</string>
+    <string name="f_po_rat_hoch">%1$s elevado a %2$s</string>
+
+    <!-- Pasos de cálculo, cursos 9 y 10 -->
+    <string name="w_pyt_satz">En un triángulo rectángulo se cumple a² + b² = c².</string>
+    <string name="w_pyt_quadrate">%1$s² = %2$s y %3$s² = %4$s</string>
+    <string name="w_pyt_wurzel">La raíz cuadrada de %1$s es %2$s.</string>
+    <string name="w_pyt_umstellen">Despejado: b² = c² − a² = %1$s − %2$s = %3$s</string>
+    <string name="w_wur_quadratzahl">%1$s es %2$s · %3$s.</string>
+    <string name="w_wur_ergebnis">Así que la raíz es %1$s.</string>
+    <string name="w_wur_bruch">Numerador y denominador por separado: la raíz de %1$s es %2$s, la raíz de %3$s es %4$s.</string>
+    <string name="w_str_verhaeltnis">El teorema de Tales da SA : SB = SC : SD.</string>
+    <string name="w_str_einsetzen_zweiter">Sustituido: %1$s : %2$s = %3$s : SD</string>
+    <string name="w_str_einsetzen_erster">Sustituido: %1$s : SB = %2$s : %3$s</string>
+    <string name="w_str_aufloesen">Resuelto: %1$s · %2$s : %3$s = %4$s</string>
+    <string name="w_zin_ein_jahr">El %1$s %% de %2$s euros son %3$s euros de interés al año.</string>
+    <string name="w_zin_mal_jahre">%1$s · %2$s años = %3$s euros de interés en total</string>
+    <string name="w_zin_faktor">Cada año se multiplica por %1$s.</string>
+    <string name="w_zin_jahr">Tras el año %1$s: %2$s euros</string>
+    <string name="w_qua_vieta">Busca dos números que sumados den %1$s y multiplicados %2$s.</string>
+    <string name="w_qua_zerlegt">Son %1$s y %2$s.</string>
+    <string name="w_qua_produkt">Un producto es cero cuando un factor es cero: x = %1$s o x = %2$s.</string>
+    <string name="w_qua_groesser">La solución mayor es %1$s.</string>
+    <string name="w_koe_rechteck">Área de un rectángulo: largo por ancho.</string>
+    <string name="w_koe_dreieck">Área de un triángulo: base por altura, y la mitad de eso.</string>
+    <string name="w_koe_halbieren">La mitad de %1$s es %2$s.</string>
+    <string name="w_koe_quader">Volumen de un ortoedro: largo por ancho por altura.</string>
+    <string name="w_koe_gross">Ortoedro grande: %1$s · %2$s · %3$s = %4$s</string>
+    <string name="w_koe_klein">Ortoedro quitado: %1$s · %2$s · %3$s = %4$s</string>
+    <string name="w_lgs_gleichnamig">Primera ecuación por %1$s, segunda ecuación por %2$s.</string>
+    <string name="w_lgs_y_faellt_weg">Al restar desaparece la y: %1$sx = %2$s</string>
+    <string name="w_lgs_x">Así que x = %1$s</string>
+    <string name="w_lgs_y">Al sustituir resulta y = %1$s.</string>
+    <string name="w_rat_wurzel">El denominador %1$s del exponente es la raíz: la raíz %1$s-ésima de %2$s es %3$s.</string>
+    <string name="w_rat_potenz">El numerador del exponente es la potencia: %1$s elevado a %2$s = %3$s</string>
+    <string name="w_rat_negativ">El exponente negativo invierte el resultado: %1$s</string>
+
+    <!-- Ayuda por niveles, cursos 9 y 10 -->
+    <string name="h_ge_pyt_1_a">Dibuja el triángulo y marca el ángulo recto.</string>
+    <string name="h_ge_pyt_1_b">La hipotenusa está frente al ángulo recto. Suma los cuadrados de los dos catetos.</string>
+    <string name="h_ge_pyt_1_c">La suma de los cuadrados es %1$s. Aún falta la raíz.</string>
+    <string name="h_ge_pyt_1_d">Se busca un cateto: despeja el teorema para él y resta el cuadrado del cateto conocido.</string>
+    <string name="h_ge_pyt_1_e">Tras restar queda %1$s. Aún falta la raíz.</string>
+    <string name="h_po_wur_1_a">La raíz pregunta: ¿qué número multiplicado por sí mismo da esto?</string>
+    <string name="h_po_wur_1_b">Repasa los cuadrados perfectos hasta encontrar el adecuado.</string>
+    <string name="h_po_wur_1_c">Fíjate bien en %1$s.</string>
+    <string name="h_ge_str_1_a">Dibuja los dos rayos y las paralelas; anota qué segmento pertenece a cuál.</string>
+    <string name="h_ge_str_1_b">En ambos rayos los segmentos guardan la misma proporción.</string>
+    <string name="h_ge_str_1_c">El factor de escala entre las dos paralelas es %1$s.</string>
+    <string name="h_pz_zin_1_a">Calcula año por año, no de una sola vez.</string>
+    <string name="h_pz_zin_1_b">Sin capitalización, los intereses son iguales todos los años.</string>
+    <string name="h_pz_zin_1_c">Un año da %1$s euros de interés.</string>
+    <string name="h_pz_zin_1_d">Con capitalización, cada año se aplica el interés al capital ya crecido.</string>
+    <string name="h_pz_zin_1_e">El factor por año es %1$s.</string>
+    <string name="h_gl_qua_1_a">Busca dos números cuya suma sea el valor delante de la x y cuyo producto sea el último valor.</string>
+    <string name="h_gl_qua_1_b">Los dos números suman %1$s y multiplicados dan %2$s.</string>
+    <string name="h_gl_qua_1_c">Una de las dos soluciones es %1$s. Se busca la otra.</string>
+    <string name="h_ge_koe_1_a">Decide primero si se busca un área o un volumen.</string>
+    <string name="h_ge_koe_1_b">El área de un rectángulo es largo por ancho.</string>
+    <string name="h_ge_koe_1_c">Calcula %1$s · %2$s.</string>
+    <string name="h_ge_koe_1_d">En el triángulo, después de multiplicar hay que tomar la mitad.</string>
+    <string name="h_ge_koe_1_e">Base por altura da %1$s. Ahora divide entre dos.</string>
+    <string name="h_ge_koe_1_f">En el ortoedro se multiplican las tres aristas.</string>
+    <string name="h_ge_koe_1_g">El área de la base es %1$s, aún falta la altura.</string>
+    <string name="h_ge_koe_1_h">Calcula primero el ortoedro entero, luego el hueco y después la diferencia.</string>
+    <string name="h_ge_koe_1_i">El ortoedro entero tiene %1$s. De ahí se resta el hueco.</string>
+    <string name="h_gl_lgs_1_a">Dos ecuaciones, dos incógnitas: una de ellas tiene que desaparecer primero.</string>
+    <string name="h_gl_lgs_1_b">Lleva ambas ecuaciones al mismo número de y y réstalas.</string>
+    <string name="h_gl_lgs_1_c">Tras restar queda %1$sx = %2$s.</string>
+    <string name="h_po_rat_1_a">Una fracción en el exponente es raíz y potencia a la vez.</string>
+    <string name="h_po_rat_1_b">El denominador %1$s es la raíz, el numerador %2$s es la potencia.</string>
+    <string name="h_po_rat_1_c">La raíz da %1$s. Ahora viene la potencia.</string>
+
+    <!-- Tipos de error, cursos 9 y 10 -->
+    <string name="fa_quadriert_statt_addiert">Sumó los lados en vez de sus cuadrados</string>
+    <string name="fa_wurzel_vergessen">Olvidó la raíz al final</string>
+    <string name="fa_kathete_als_hypotenuse">Restó las longitudes en vez de sus cuadrados</string>
+    <string name="fa_wurzel_halbiert">Confundió la raíz con dividir entre dos</string>
+    <string name="fa_verhaeltnis_gedreht">Planteó la proporción al revés</string>
+    <string name="fa_strecken_addiert">Sumó los segmentos en vez de usar la proporción</string>
+    <string name="fa_nur_einmal_verzinst">Solo calculó un año de interés</string>
+    <string name="fa_zinseszins_als_summe">Trató el interés compuesto como suma simple</string>
+    <string name="fa_zweite_loesung_genommen">Dio la solución menor</string>
+    <string name="fa_vorzeichen_der_wurzel">Cambió el signo de la solución</string>
+    <string name="fa_nur_eine_gleichung">Usó solo la primera ecuación</string>
+    <string name="fa_x_und_y_vertauscht">Intercambió x e y</string>
+    <string name="fa_exponent_als_faktor">Trató el exponente como factor</string>
+    <string name="fa_halbierung_vergessen">Olvidó dividir entre dos</string>
+    <string name="fa_flaeche_statt_volumen">Calculó un área en vez de un volumen</string>
 </resources>

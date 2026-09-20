@@ -1,8 +1,6 @@
 package de.rechenwerk.mathe.ui
 
-import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.LinearEasing
-import androidx.compose.animation.core.RepeatMode
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.animateFloatAsState
@@ -31,15 +29,27 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import de.rechenwerk.mathe.R
-import kotlin.math.cos
-import kotlin.math.sin
+
+/** Wie weit das laufende Band der Bahn reicht. */
+private const val LAEUFER_WEITE = 140f
 
 /**
  * Das Rechenwerk: ein Ring aus sechs Segmenten, eines je Kompetenzbereich.
  * Jedes Segment fuellt sich mit dem Beherrschungsgrad seines Bereichs, in der
- * Mitte steht die Basis insgesamt. Ein Lichtpunkt wandert langsam ueber den
- * Ring, das Licht dahinter atmet -- das einzige dauerhaft bewegte Element
- * des Startbildschirms.
+ * Mitte steht die Basis insgesamt. Auf einer breiten Bahn laeuft ein Band in
+ * der Akzentfarbe um, hinter dem Ring hindurch -- das einzige dauerhaft
+ * bewegte Element des Startbildschirms.
+ *
+ * Es laeuft gleichmaessig (eine Umdrehung in sieben Sekunden, lineare Kurve):
+ * in jedem beliebigen Augenblick ist Bewegung zu sehen, nicht nur zwischen
+ * zwei Wendepunkten eines Hin und Her. Und es deckt, statt zu schimmern --
+ * ein weicher Verlauf aendert von einem Augenblick zum naechsten zu wenig,
+ * um als Bewegung zu gelten.
+ *
+ * Die Bahn ist bewusst breit: in eineinhalb Sekunden rueckt das Band um gut
+ * ein Fuenftel ihrer Laenge vor, und die Flaeche, die dabei ihre Farbe
+ * wechselt, ist als Bewegung im Raum zu erkennen -- nicht als Lichtpunkt, der
+ * ueber den Ring huscht.
  */
 @Composable
 fun Held(gesamt: Double, segmente: List<Double>, modifier: Modifier = Modifier) {
@@ -48,20 +58,11 @@ fun Held(gesamt: Double, segmente: List<Double>, modifier: Modifier = Modifier) 
     val raster = MaterialTheme.colorScheme.outlineVariant
 
     val uebergang = rememberInfiniteTransition(label = "werk")
-    val licht by uebergang.animateFloat(
+    val drehung by uebergang.animateFloat(
         initialValue = 0f,
         targetValue = 360f,
         animationSpec = infiniteRepeatable(tween(7000, easing = LinearEasing)),
-        label = "licht",
-    )
-    val atem by uebergang.animateFloat(
-        initialValue = 0f,
-        targetValue = 1f,
-        animationSpec = infiniteRepeatable(
-            tween(5200, easing = FastOutSlowInEasing),
-            RepeatMode.Reverse,
-        ),
-        label = "atem",
+        label = "drehung",
     )
     val gezeigt by animateFloatAsState(
         targetValue = gesamt.toFloat().coerceIn(0f, 1f),
@@ -80,12 +81,12 @@ fun Held(gesamt: Double, segmente: List<Double>, modifier: Modifier = Modifier) 
             val ecke = Offset(mitte.x - radius, mitte.y - radius)
             val kasten = Size(radius * 2f, radius * 2f)
 
-            // Zarter Verlauf hinter dem Ring, langsam atmend.
+            // Zarter Verlauf hinter dem Ring.
             drawCircle(
                 brush = Brush.radialGradient(
                     colors = listOf(akzent.copy(alpha = 0.26f), Color.Transparent),
                     center = mitte,
-                    radius = radius * (0.92f + 0.22f * atem),
+                    radius = radius * 1.03f,
                 ),
                 radius = radius * 1.14f,
                 center = mitte,
@@ -96,6 +97,31 @@ fun Held(gesamt: Double, segmente: List<Double>, modifier: Modifier = Modifier) 
                 color = Color.Black.copy(alpha = 0.16f),
                 radius = radius + strich * 0.55f,
                 center = Offset(mitte.x, mitte.y + strich * 0.4f),
+            )
+
+            // Die Bahn: ein breites Band, das den Ring aussen knapp ueberholt
+            // und nach innen bis kurz vor den Zahlenkern reicht. Der Ring
+            // selbst deckt sie in seiner Breite ab, sichtbar bleibt das Band
+            // innen und als schmaler Saum aussen. Erst die ruhige Spur,
+            // darauf das laufende Band.
+            val bahnAussen = radius + strich
+            val bahnInnen = radius * 0.60f
+            val bahnBreite = bahnAussen - bahnInnen
+            val bahnRadius = (bahnAussen + bahnInnen) / 2f
+            drawCircle(
+                color = spur.copy(alpha = 0.5f),
+                radius = bahnRadius,
+                center = mitte,
+                style = Stroke(width = bahnBreite),
+            )
+            drawArc(
+                color = akzent,
+                startAngle = drehung,
+                sweepAngle = LAEUFER_WEITE,
+                useCenter = false,
+                topLeft = Offset(mitte.x - bahnRadius, mitte.y - bahnRadius),
+                size = Size(bahnRadius * 2f, bahnRadius * 2f),
+                style = Stroke(width = bahnBreite),
             )
 
             // Das Raster der Marke, ruhig im Inneren.
@@ -142,22 +168,6 @@ fun Held(gesamt: Double, segmente: List<Double>, modifier: Modifier = Modifier) 
                     )
                 }
             }
-
-            // Der wandernde Lichtpunkt auf der Ringbahn.
-            val bogen = Math.toRadians((licht - 90f).toDouble())
-            val punkt = Offset(
-                mitte.x + radius * cos(bogen).toFloat(),
-                mitte.y + radius * sin(bogen).toFloat(),
-            )
-            drawCircle(
-                brush = Brush.radialGradient(
-                    colors = listOf(Color.White.copy(alpha = 0.85f), akzent.copy(alpha = 0f)),
-                    center = punkt,
-                    radius = strich * 1.7f,
-                ),
-                radius = strich * 1.7f,
-                center = punkt,
-            )
         }
 
         Column(

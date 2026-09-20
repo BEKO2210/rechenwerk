@@ -320,4 +320,122 @@
     <string name="zeit_sekunden">%1$s s</string>
     <string name="zeit_stunden">%1$s h %2$s min</string>
     <string name="zurueck">Wstecz</string>
+
+    <!-- Obszary kompetencji, klasy 9 i 10 -->
+    <string name="bereich_potenzen">Potęgi i pierwiastki</string>
+    <string name="bereich_geometrie">Geometria</string>
+
+    <!-- Kompetencje, klasy 9 i 10 -->
+    <string name="k_ge_pyt_1">Twierdzenie Pitagorasa</string>
+    <string name="k_po_wur_1">Wyrażenia z pierwiastkami</string>
+    <string name="k_ge_str_1">Twierdzenie Talesa</string>
+    <string name="k_pz_zin_1">Odsetki przez kilka lat</string>
+    <string name="k_gl_qua_1">Równania kwadratowe</string>
+    <string name="k_ge_koe_1">Pola i bryły</string>
+    <string name="k_gl_lgs_1">Układy równań liniowych</string>
+    <string name="k_po_rat_1">Potęgi o wykładnikach wymiernych</string>
+
+    <!-- Polecenia, klasy 9 i 10 -->
+    <string name="f_ge_pyt_hypotenuse">Trójkąt prostokątny, przyprostokątne a = %1$s i b = %2$s. Jak długa jest przeciwprostokątna c?</string>
+    <string name="f_ge_pyt_kathete">Trójkąt prostokątny, przeciwprostokątna c = %1$s, przyprostokątna a = %2$s. Jak długa jest przyprostokątna b?</string>
+    <string name="f_po_wur_zahl">Pierwiastek kwadratowy z %1$s</string>
+    <string name="f_po_wur_bruch">Pierwiastek kwadratowy z %1$s</string>
+    <string name="f_ge_str_zweiter">Dwie półproste z S, przecięte dwiema prostymi równoległymi. SA = %1$s, SB = %2$s, SC = %3$s. Jak długi jest SD?</string>
+    <string name="f_ge_str_erster">Dwie półproste z S, przecięte dwiema prostymi równoległymi. SA = %1$s, SC = %2$s, SD = %3$s. Jak długi jest SB?</string>
+    <string name="f_pz_zin_einfach">%1$s euro na %3$s %% przez %2$s lata, odsetki nie są dopisywane do kapitału. Ile euro jest na koniec?</string>
+    <string name="f_pz_zin_zinseszins">%1$s euro na %3$s %% przez %2$s lata, odsetki są dopisywane do kapitału. Ile euro jest na koniec?</string>
+    <string name="f_gl_qua_groessere">%1$s — podaj większe rozwiązanie.</string>
+    <string name="f_ge_koe_rechteck">Prostokąt o długości %1$s cm i szerokości %2$s cm. Jakie jest pole w centymetrach kwadratowych?</string>
+    <string name="f_ge_koe_dreieck">Trójkąt o podstawie %1$s cm i wysokości %2$s cm. Jakie jest pole w centymetrach kwadratowych?</string>
+    <string name="f_ge_koe_quader">Prostopadłościan o wymiarach %1$s cm, %2$s cm i %3$s cm. Jaka jest objętość w centymetrach sześciennych?</string>
+    <string name="f_ge_koe_rest">Z prostopadłościanu o wymiarach %1$s cm, %2$s cm i %3$s cm wycięto prostopadłościan o wymiarach %4$s cm, %5$s cm i %6$s cm. Jaka jest pozostała objętość w centymetrach sześciennych?</string>
+    <string name="f_gl_lgs_x">%1$s oraz %2$s — ile wynosi x?</string>
+    <string name="f_po_rat_hoch">%1$s do potęgi %2$s</string>
+
+    <!-- Kroki obliczeń, klasy 9 i 10 -->
+    <string name="w_pyt_satz">W trójkącie prostokątnym zachodzi a² + b² = c².</string>
+    <string name="w_pyt_quadrate">%1$s² = %2$s oraz %3$s² = %4$s</string>
+    <string name="w_pyt_wurzel">Pierwiastek kwadratowy z %1$s to %2$s.</string>
+    <string name="w_pyt_umstellen">Po przekształceniu: b² = c² − a² = %1$s − %2$s = %3$s</string>
+    <string name="w_wur_quadratzahl">%1$s to %2$s · %3$s.</string>
+    <string name="w_wur_ergebnis">Pierwiastek wynosi więc %1$s.</string>
+    <string name="w_wur_bruch">Licznik i mianownik osobno: pierwiastek z %1$s to %2$s, pierwiastek z %3$s to %4$s.</string>
+    <string name="w_str_verhaeltnis">Z twierdzenia Talesa wynika SA : SB = SC : SD.</string>
+    <string name="w_str_einsetzen_zweiter">Po podstawieniu: %1$s : %2$s = %3$s : SD</string>
+    <string name="w_str_einsetzen_erster">Po podstawieniu: %1$s : SB = %2$s : %3$s</string>
+    <string name="w_str_aufloesen">Rozwiązane: %1$s · %2$s : %3$s = %4$s</string>
+    <string name="w_zin_ein_jahr">%1$s %% z %2$s euro to %3$s euro odsetek rocznie.</string>
+    <string name="w_zin_mal_jahre">%1$s · %2$s lata = %3$s euro odsetek łącznie</string>
+    <string name="w_zin_faktor">Każdy rok mnoży się przez %1$s.</string>
+    <string name="w_zin_jahr">Po roku %1$s: %2$s euro</string>
+    <string name="w_qua_vieta">Szukamy dwóch liczb, których suma wynosi %1$s, a iloczyn %2$s.</string>
+    <string name="w_qua_zerlegt">To %1$s i %2$s.</string>
+    <string name="w_qua_produkt">Iloczyn jest zerem, gdy jeden z czynników jest zerem: x = %1$s lub x = %2$s.</string>
+    <string name="w_qua_groesser">Większe rozwiązanie to %1$s.</string>
+    <string name="w_koe_rechteck">Pole prostokąta: długość razy szerokość.</string>
+    <string name="w_koe_dreieck">Pole trójkąta: podstawa razy wysokość, a z tego połowa.</string>
+    <string name="w_koe_halbieren">Połowa z %1$s to %2$s.</string>
+    <string name="w_koe_quader">Objętość prostopadłościanu: długość razy szerokość razy wysokość.</string>
+    <string name="w_koe_gross">Duży prostopadłościan: %1$s · %2$s · %3$s = %4$s</string>
+    <string name="w_koe_klein">Wycięty prostopadłościan: %1$s · %2$s · %3$s = %4$s</string>
+    <string name="w_lgs_gleichnamig">Pierwsze równanie razy %1$s, drugie równanie razy %2$s.</string>
+    <string name="w_lgs_y_faellt_weg">Po odjęciu y znika: %1$sx = %2$s</string>
+    <string name="w_lgs_x">Zatem x = %1$s</string>
+    <string name="w_lgs_y">Po podstawieniu wychodzi y = %1$s.</string>
+    <string name="w_rat_wurzel">Mianownik %1$s w wykładniku to pierwiastek: pierwiastek %1$s stopnia z %2$s to %3$s.</string>
+    <string name="w_rat_potenz">Licznik w wykładniku to potęga: %1$s do potęgi %2$s = %3$s</string>
+    <string name="w_rat_negativ">Ujemny wykładnik odwraca wynik: %1$s</string>
+
+    <!-- Pomoc stopniowana, klasy 9 i 10 -->
+    <string name="h_ge_pyt_1_a">Naszkicuj trójkąt i zaznacz kąt prosty.</string>
+    <string name="h_ge_pyt_1_b">Przeciwprostokątna leży naprzeciw kąta prostego. Dodaj kwadraty obu przyprostokątnych.</string>
+    <string name="h_ge_pyt_1_c">Suma kwadratów wynosi %1$s. Brakuje jeszcze pierwiastka.</string>
+    <string name="h_ge_pyt_1_d">Szukana jest przyprostokątna: przekształć twierdzenie i odejmij kwadrat znanej przyprostokątnej.</string>
+    <string name="h_ge_pyt_1_e">Po odjęciu zostaje %1$s. Brakuje jeszcze pierwiastka.</string>
+    <string name="h_po_wur_1_a">Pierwiastek pyta: jaka liczba pomnożona przez siebie daje ten wynik?</string>
+    <string name="h_po_wur_1_b">Przejdź po kwadratach liczb, aż znajdziesz właściwy.</string>
+    <string name="h_po_wur_1_c">Przyjrzyj się dokładniej liczbie %1$s.</string>
+    <string name="h_ge_str_1_a">Narysuj obie półproste i równoległe; zapisz, który odcinek należy do której.</string>
+    <string name="h_ge_str_1_b">Na obu półprostych odcinki są w tym samym stosunku.</string>
+    <string name="h_ge_str_1_c">Skala między dwiema równoległymi wynosi %1$s.</string>
+    <string name="h_pz_zin_1_a">Licz rok po roku, nie w jednym kroku.</string>
+    <string name="h_pz_zin_1_b">Bez kapitalizacji odsetki są co roku takie same.</string>
+    <string name="h_pz_zin_1_c">Jeden rok daje %1$s euro odsetek.</string>
+    <string name="h_pz_zin_1_d">Przy kapitalizacji co roku oprocentowany jest już powiększony kapitał.</string>
+    <string name="h_pz_zin_1_e">Współczynnik na rok wynosi %1$s.</string>
+    <string name="h_gl_qua_1_a">Szukaj dwóch liczb, których suma to wartość przed x, a iloczyn to ostatnia wartość.</string>
+    <string name="h_gl_qua_1_b">Te dwie liczby dają w sumie %1$s, a w iloczynie %2$s.</string>
+    <string name="h_gl_qua_1_c">Jedno z dwóch rozwiązań to %1$s. Szukane jest drugie.</string>
+    <string name="h_ge_koe_1_a">Ustal najpierw, czy szukane jest pole, czy objętość.</string>
+    <string name="h_ge_koe_1_b">Pole prostokąta to długość razy szerokość.</string>
+    <string name="h_ge_koe_1_c">Oblicz %1$s · %2$s.</string>
+    <string name="h_ge_koe_1_d">W trójkącie po mnożeniu trzeba jeszcze wziąć połowę.</string>
+    <string name="h_ge_koe_1_e">Podstawa razy wysokość daje %1$s. Teraz podziel przez dwa.</string>
+    <string name="h_ge_koe_1_f">W prostopadłościanie mnoży się wszystkie trzy krawędzie.</string>
+    <string name="h_ge_koe_1_g">Pole podstawy to %1$s, brakuje jeszcze wysokości.</string>
+    <string name="h_ge_koe_1_h">Policz najpierw cały prostopadłościan, potem wycięcie, potem różnicę.</string>
+    <string name="h_ge_koe_1_i">Cały prostopadłościan ma %1$s. Od tego odejmuje się wycięcie.</string>
+    <string name="h_gl_lgs_1_a">Dwa równania, dwie niewiadome: jedna z nich musi najpierw zniknąć.</string>
+    <string name="h_gl_lgs_1_b">Doprowadź oba równania do tej samej liczby y i odejmij je od siebie.</string>
+    <string name="h_gl_lgs_1_c">Po odjęciu zostaje %1$sx = %2$s.</string>
+    <string name="h_po_rat_1_a">Ułamek w wykładniku to pierwiastek i potęga naraz.</string>
+    <string name="h_po_rat_1_b">Mianownik %1$s to pierwiastek, licznik %2$s to potęga.</string>
+    <string name="h_po_rat_1_c">Pierwiastek daje %1$s. Teraz kolej na potęgę.</string>
+
+    <!-- Rodzaje błędów, klasy 9 i 10 -->
+    <string name="fa_quadriert_statt_addiert">Dodano boki zamiast ich kwadratów</string>
+    <string name="fa_wurzel_vergessen">Zapomniano o pierwiastku na końcu</string>
+    <string name="fa_kathete_als_hypotenuse">Odjęto długości zamiast ich kwadratów</string>
+    <string name="fa_wurzel_halbiert">Pomylono pierwiastek z połową</string>
+    <string name="fa_verhaeltnis_gedreht">Stosunek ustawiony odwrotnie</string>
+    <string name="fa_strecken_addiert">Dodano odcinki zamiast użyć stosunku</string>
+    <string name="fa_nur_einmal_verzinst">Policzono odsetki tylko za jeden rok</string>
+    <string name="fa_zinseszins_als_summe">Procent składany potraktowany jak zwykła suma</string>
+    <string name="fa_zweite_loesung_genommen">Podano mniejsze rozwiązanie</string>
+    <string name="fa_vorzeichen_der_wurzel">Odwrócony znak rozwiązania</string>
+    <string name="fa_nur_eine_gleichung">Użyto tylko pierwszego równania</string>
+    <string name="fa_x_und_y_vertauscht">Zamieniono x i y</string>
+    <string name="fa_exponent_als_faktor">Wykładnik potraktowany jak czynnik</string>
+    <string name="fa_halbierung_vergessen">Zapomniano podzielić przez dwa</string>
+    <string name="fa_flaeche_statt_volumen">Policzono pole zamiast objętości</string>
 </resources>

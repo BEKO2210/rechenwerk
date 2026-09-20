@@ -317,4 +317,122 @@
     <string name="zeit_sekunden">%1$s s</string>
     <string name="zeit_stunden">%1$s h %2$s min</string>
     <string name="zurueck">Indietro</string>
+
+    <!-- Ambiti di competenza, classi 9 e 10 -->
+    <string name="bereich_potenzen">Potenze e radici</string>
+    <string name="bereich_geometrie">Geometria</string>
+
+    <!-- Competenze, classi 9 e 10 -->
+    <string name="k_ge_pyt_1">Teorema di Pitagora</string>
+    <string name="k_po_wur_1">Espressioni con radici</string>
+    <string name="k_ge_str_1">Teorema di Talete</string>
+    <string name="k_pz_zin_1">Interessi su più anni</string>
+    <string name="k_gl_qua_1">Equazioni di secondo grado</string>
+    <string name="k_ge_koe_1">Aree e solidi</string>
+    <string name="k_gl_lgs_1">Sistemi di equazioni lineari</string>
+    <string name="k_po_rat_1">Potenze con esponenti razionali</string>
+
+    <!-- Consegne, classi 9 e 10 -->
+    <string name="f_ge_pyt_hypotenuse">Triangolo rettangolo, cateti a = %1$s e b = %2$s. Quanto è lunga l\'ipotenusa c?</string>
+    <string name="f_ge_pyt_kathete">Triangolo rettangolo, ipotenusa c = %1$s, cateto a = %2$s. Quanto è lungo il cateto b?</string>
+    <string name="f_po_wur_zahl">Radice quadrata di %1$s</string>
+    <string name="f_po_wur_bruch">Radice quadrata di %1$s</string>
+    <string name="f_ge_str_zweiter">Due semirette da S, tagliate da due parallele. SA = %1$s, SB = %2$s, SC = %3$s. Quanto è lungo SD?</string>
+    <string name="f_ge_str_erster">Due semirette da S, tagliate da due parallele. SA = %1$s, SC = %2$s, SD = %3$s. Quanto è lungo SB?</string>
+    <string name="f_pz_zin_einfach">%1$s euro al %3$s %% per %2$s anni, gli interessi non vengono reinvestiti. Quanti euro ci sono alla fine?</string>
+    <string name="f_pz_zin_zinseszins">%1$s euro al %3$s %% per %2$s anni, gli interessi vengono reinvestiti. Quanti euro ci sono alla fine?</string>
+    <string name="f_gl_qua_groessere">%1$s — indica la soluzione maggiore.</string>
+    <string name="f_ge_koe_rechteck">Rettangolo lungo %1$s cm e largo %2$s cm. Qual è l\'area in centimetri quadrati?</string>
+    <string name="f_ge_koe_dreieck">Triangolo con base %1$s cm e altezza %2$s cm. Qual è l\'area in centimetri quadrati?</string>
+    <string name="f_ge_koe_quader">Parallelepipedo di %1$s cm, %2$s cm e %3$s cm. Qual è il volume in centimetri cubi?</string>
+    <string name="f_ge_koe_rest">Da un parallelepipedo di %1$s cm, %2$s cm e %3$s cm è stato tolto un parallelepipedo di %4$s cm, %5$s cm e %6$s cm. Qual è il volume rimasto in centimetri cubi?</string>
+    <string name="f_gl_lgs_x">%1$s e %2$s — quanto vale x?</string>
+    <string name="f_po_rat_hoch">%1$s elevato a %2$s</string>
+
+    <!-- Passaggi di calcolo, classi 9 e 10 -->
+    <string name="w_pyt_satz">In un triangolo rettangolo vale a² + b² = c².</string>
+    <string name="w_pyt_quadrate">%1$s² = %2$s e %3$s² = %4$s</string>
+    <string name="w_pyt_wurzel">La radice quadrata di %1$s è %2$s.</string>
+    <string name="w_pyt_umstellen">Trasformato: b² = c² − a² = %1$s − %2$s = %3$s</string>
+    <string name="w_wur_quadratzahl">%1$s è %2$s · %3$s.</string>
+    <string name="w_wur_ergebnis">La radice è quindi %1$s.</string>
+    <string name="w_wur_bruch">Numeratore e denominatore separatamente: la radice di %1$s è %2$s, la radice di %3$s è %4$s.</string>
+    <string name="w_str_verhaeltnis">Il teorema di Talete dà SA : SB = SC : SD.</string>
+    <string name="w_str_einsetzen_zweiter">Sostituendo: %1$s : %2$s = %3$s : SD</string>
+    <string name="w_str_einsetzen_erster">Sostituendo: %1$s : SB = %2$s : %3$s</string>
+    <string name="w_str_aufloesen">Risolto: %1$s · %2$s : %3$s = %4$s</string>
+    <string name="w_zin_ein_jahr">Il %1$s %% di %2$s euro fa %3$s euro di interessi all\'anno.</string>
+    <string name="w_zin_mal_jahre">%1$s · %2$s anni = %3$s euro di interessi in totale</string>
+    <string name="w_zin_faktor">Ogni anno si moltiplica per %1$s.</string>
+    <string name="w_zin_jahr">Dopo l\'anno %1$s: %2$s euro</string>
+    <string name="w_qua_vieta">Cerca due numeri la cui somma è %1$s e il cui prodotto è %2$s.</string>
+    <string name="w_qua_zerlegt">Sono %1$s e %2$s.</string>
+    <string name="w_qua_produkt">Un prodotto è zero quando un fattore è zero: x = %1$s oppure x = %2$s.</string>
+    <string name="w_qua_groesser">La soluzione maggiore è %1$s.</string>
+    <string name="w_koe_rechteck">Area di un rettangolo: lunghezza per larghezza.</string>
+    <string name="w_koe_dreieck">Area di un triangolo: base per altezza, poi la metà.</string>
+    <string name="w_koe_halbieren">La metà di %1$s è %2$s.</string>
+    <string name="w_koe_quader">Volume di un parallelepipedo: lunghezza per larghezza per altezza.</string>
+    <string name="w_koe_gross">Parallelepipedo grande: %1$s · %2$s · %3$s = %4$s</string>
+    <string name="w_koe_klein">Parallelepipedo tolto: %1$s · %2$s · %3$s = %4$s</string>
+    <string name="w_lgs_gleichnamig">Prima equazione per %1$s, seconda equazione per %2$s.</string>
+    <string name="w_lgs_y_faellt_weg">Sottraendo, la y sparisce: %1$sx = %2$s</string>
+    <string name="w_lgs_x">Quindi x = %1$s</string>
+    <string name="w_lgs_y">Sostituendo si ottiene y = %1$s.</string>
+    <string name="w_rat_wurzel">Il denominatore %1$s dell\'esponente è la radice: la radice %1$s-esima di %2$s è %3$s.</string>
+    <string name="w_rat_potenz">Il numeratore dell\'esponente è la potenza: %1$s elevato a %2$s = %3$s</string>
+    <string name="w_rat_negativ">L\'esponente negativo inverte il risultato: %1$s</string>
+
+    <!-- Aiuto a livelli, classi 9 e 10 -->
+    <string name="h_ge_pyt_1_a">Disegna il triangolo e segna l\'angolo retto.</string>
+    <string name="h_ge_pyt_1_b">L\'ipotenusa sta di fronte all\'angolo retto. Somma i quadrati dei due cateti.</string>
+    <string name="h_ge_pyt_1_c">La somma dei quadrati è %1$s. Manca ancora la radice.</string>
+    <string name="h_ge_pyt_1_d">Si cerca un cateto: trasforma il teorema e togli il quadrato del cateto noto.</string>
+    <string name="h_ge_pyt_1_e">Dopo la sottrazione resta %1$s. Manca ancora la radice.</string>
+    <string name="h_po_wur_1_a">La radice chiede: quale numero moltiplicato per se stesso dà questo?</string>
+    <string name="h_po_wur_1_b">Passa in rassegna i quadrati perfetti finché trovi quello giusto.</string>
+    <string name="h_po_wur_1_c">Guarda %1$s più da vicino.</string>
+    <string name="h_ge_str_1_a">Disegna le due semirette e le parallele; annota quale segmento appartiene a quale.</string>
+    <string name="h_ge_str_1_b">Su entrambe le semirette i segmenti stanno nello stesso rapporto.</string>
+    <string name="h_ge_str_1_c">Il fattore di scala tra le due parallele è %1$s.</string>
+    <string name="h_pz_zin_1_a">Calcola anno per anno, non in un colpo solo.</string>
+    <string name="h_pz_zin_1_b">Senza capitalizzazione gli interessi sono uguali ogni anno.</string>
+    <string name="h_pz_zin_1_c">Un anno rende %1$s euro di interessi.</string>
+    <string name="h_pz_zin_1_d">Con la capitalizzazione ogni anno frutta interessi il capitale già cresciuto.</string>
+    <string name="h_pz_zin_1_e">Il fattore per anno è %1$s.</string>
+    <string name="h_gl_qua_1_a">Cerca due numeri la cui somma sia il valore davanti alla x e il cui prodotto sia l\'ultimo valore.</string>
+    <string name="h_gl_qua_1_b">I due numeri sommati danno %1$s e moltiplicati %2$s.</string>
+    <string name="h_gl_qua_1_c">Una delle due soluzioni è %1$s. Si cerca l\'altra.</string>
+    <string name="h_ge_koe_1_a">Stabilisci prima se si cerca un\'area o un volume.</string>
+    <string name="h_ge_koe_1_b">L\'area di un rettangolo è lunghezza per larghezza.</string>
+    <string name="h_ge_koe_1_c">Calcola %1$s · %2$s.</string>
+    <string name="h_ge_koe_1_d">Nel triangolo, dopo la moltiplicazione viene la metà.</string>
+    <string name="h_ge_koe_1_e">Base per altezza dà %1$s. Ora dividi per due.</string>
+    <string name="h_ge_koe_1_f">Nel parallelepipedo si moltiplicano tutti e tre gli spigoli.</string>
+    <string name="h_ge_koe_1_g">L\'area di base è %1$s, manca ancora l\'altezza.</string>
+    <string name="h_ge_koe_1_h">Calcola prima il parallelepipedo intero, poi il vuoto, poi la differenza.</string>
+    <string name="h_ge_koe_1_i">Il parallelepipedo intero fa %1$s. Da lì si toglie il vuoto.</string>
+    <string name="h_gl_lgs_1_a">Due equazioni, due incognite: una delle due deve sparire per prima.</string>
+    <string name="h_gl_lgs_1_b">Porta entrambe le equazioni allo stesso numero di y e sottraile.</string>
+    <string name="h_gl_lgs_1_c">Dopo la sottrazione resta %1$sx = %2$s.</string>
+    <string name="h_po_rat_1_a">Una frazione all\'esponente è radice e potenza insieme.</string>
+    <string name="h_po_rat_1_b">Il denominatore %1$s è la radice, il numeratore %2$s è la potenza.</string>
+    <string name="h_po_rat_1_c">La radice dà %1$s. Ora viene la potenza.</string>
+
+    <!-- Tipi di errore, classi 9 e 10 -->
+    <string name="fa_quadriert_statt_addiert">Ha sommato i lati invece dei loro quadrati</string>
+    <string name="fa_wurzel_vergessen">Ha dimenticato la radice alla fine</string>
+    <string name="fa_kathete_als_hypotenuse">Ha sottratto le lunghezze invece dei loro quadrati</string>
+    <string name="fa_wurzel_halbiert">Ha confuso la radice con la metà</string>
+    <string name="fa_verhaeltnis_gedreht">Ha impostato il rapporto al contrario</string>
+    <string name="fa_strecken_addiert">Ha sommato i segmenti invece di usare il rapporto</string>
+    <string name="fa_nur_einmal_verzinst">Ha calcolato un solo anno di interessi</string>
+    <string name="fa_zinseszins_als_summe">Ha trattato l\'interesse composto come somma semplice</string>
+    <string name="fa_zweite_loesung_genommen">Ha indicato la soluzione minore</string>
+    <string name="fa_vorzeichen_der_wurzel">Ha invertito il segno della soluzione</string>
+    <string name="fa_nur_eine_gleichung">Ha usato solo la prima equazione</string>
+    <string name="fa_x_und_y_vertauscht">Ha scambiato x e y</string>
+    <string name="fa_exponent_als_faktor">Ha trattato l\'esponente come un fattore</string>
+    <string name="fa_halbierung_vergessen">Ha dimenticato di dividere per due</string>
+    <string name="fa_flaeche_statt_volumen">Ha calcolato un\'area invece del volume</string>
 </resources>

@@ -2,12 +2,16 @@ package de.rechenwerk.mathe
 
 import de.rechenwerk.mathe.daten.Ablage
 import de.rechenwerk.mathe.daten.Bruch
+import de.rechenwerk.mathe.daten.Katalog
 import de.rechenwerk.mathe.daten.KompetenzStand
+import de.rechenwerk.mathe.daten.Laufend
 import de.rechenwerk.mathe.daten.Modus
 import de.rechenwerk.mathe.daten.Niveau
 import de.rechenwerk.mathe.daten.Papier
 import de.rechenwerk.mathe.daten.Profil
 import de.rechenwerk.mathe.daten.Schulart
+import de.rechenwerk.mathe.daten.Verlaufseintrag
+import de.rechenwerk.mathe.daten.Werkbank
 import de.rechenwerk.mathe.daten.Werte
 import de.rechenwerk.mathe.daten.Wiederholung
 import org.junit.Assert.assertEquals
@@ -108,7 +112,7 @@ class DatenTest {
             niveau = Niveau.E,
             eingerichtet = true,
         ),
-        modus = Modus.DUNKEL,
+        modus = Modus.HELL,
         staende = mapOf(
             "BR-ADD-1" to KompetenzStand(
                 kennung = "BR-ADD-1",
@@ -132,6 +136,11 @@ class DatenTest {
             schnellsteMs = 2_400L,
             sitzungen = 5,
         ),
+        verlauf = listOf(
+            Verlaufseintrag("BR-ADD-1", -8_123_456_789L, Niveau.E, true, 1_700_000_000_000L),
+            Verlaufseintrag("GL-QUA-1", 42L, Niveau.M, false, 1_700_000_060_000L),
+        ),
+        laufend = Laufend("GE-PYT-1", 9_876_543_210L, Niveau.E),
     )
 
     @Test
@@ -178,10 +187,77 @@ class DatenTest {
         assertEquals(Schulart.REALSCHULE, ablage.profil.schulart)
         assertEquals(10, ablage.profil.klasse)
         assertEquals(Niveau.M, ablage.profil.niveau)
-        assertEquals(Modus.SYSTEM, ablage.modus)
+        // Unbekanntes Erscheinungsbild faellt auf den Standard zurueck: dunkel.
+        assertEquals(Modus.DUNKEL, ablage.modus)
         assertEquals(0, ablage.werte.versuche)
         assertEquals(1.0, ablage.stand("GR-MUL-1").grad, 0.0001)
         assertEquals(Wiederholung.STUFEN.lastIndex, ablage.stand("GR-MUL-1").stufe)
+    }
+
+    @Test
+    fun eineFrischeInstallationStartetDunkelUndLeer() {
+        val frisch = Ablage()
+        assertEquals(Modus.DUNKEL, frisch.modus)
+        assertTrue(frisch.staende.isEmpty())
+        assertTrue(frisch.verlauf.isEmpty())
+        assertNull(frisch.laufend)
+        assertEquals(0, frisch.werte.versuche)
+    }
+
+    // ---- Startwerte in der Historie -----------------------------------------
+
+    @Test
+    fun startwerteUeberstehenDenWegDurchJson() {
+        val nachher = Papier.lies(Papier.schreibe(beispiel()))
+        assertEquals(2, nachher.verlauf.size)
+        assertEquals(-8_123_456_789L, nachher.verlauf[0].startwert)
+        assertEquals(Niveau.E, nachher.verlauf[0].niveau)
+        assertEquals(9_876_543_210L, nachher.laufend?.startwert)
+        assertEquals("GE-PYT-1", nachher.laufend?.kompetenz)
+    }
+
+    @Test
+    fun derselbeStartwertBautDieselbeAufgabeWiederAuf() {
+        val eintrag = beispiel().laufend!!
+        val erste = Werkbank.erzeuge(eintrag.kompetenz, eintrag.niveau, eintrag.startwert)
+        // Der Umweg ueber die Datei darf nichts veraendern.
+        val gelesen = Papier.lies(Papier.schreibe(beispiel())).laufend!!
+        val zweite = Werkbank.erzeuge(gelesen.kompetenz, gelesen.niveau, gelesen.startwert)
+        assertEquals(erste.frage, zweite.frage)
+        assertEquals(erste.loesung, zweite.loesung)
+    }
+
+    @Test
+    fun dieHistorieBleibtBegrenzt() {
+        var ablage = Ablage()
+        for (i in 0 until Ablage.VERLAUF_MAX + 50) {
+            ablage = ablage.copy(
+                verlauf = ablage.mitVerlauf(
+                    Verlaufseintrag("GR-MUL-1", i.toLong(), Niveau.M, true, i.toLong())
+                )
+            )
+        }
+        assertEquals(Ablage.VERLAUF_MAX, ablage.verlauf.size)
+        // Die aeltesten Eintraege fallen hinten weg, der jüngste steht am Ende.
+        assertEquals((Ablage.VERLAUF_MAX + 49).toLong(), ablage.verlauf.last().startwert)
+    }
+
+    @Test
+    fun eineDateiDerFassungEinsWirdWeiterGelesen() {
+        val alt = """
+            {"format":"rechenwerk","fassung":1,
+             "profil":{"schulart":"GYMNASIUM","klasse":7,"niveau":"E","eingerichtet":true},
+             "modus":"HELL",
+             "werte":{"versuche":12,"treffer":9},
+             "staende":[{"kennung":"BR-KUE-1","grad":0.5,"versuche":3}]}
+        """.trimIndent()
+        val ablage = Papier.lies(alt)
+        assertEquals(7, ablage.profil.klasse)
+        assertEquals(12, ablage.werte.versuche)
+        assertEquals(3, ablage.stand("BR-KUE-1").versuche)
+        // Fassung 1 kannte die Historie noch nicht.
+        assertTrue(ablage.verlauf.isEmpty())
+        assertNull(ablage.laufend)
     }
 
     // ---- Wiederholungsmodell ------------------------------------------------
@@ -217,5 +293,72 @@ class DatenTest {
         val spaeter = jetzt + 180L * 24L * 60L * 60L * 1000L
         assertTrue(Wiederholung.faellig(stand, spaeter))
         assertEquals(0.28, stand.grad, 1e-9)
+    }
+
+    // ---- Der Kompetenzgraph --------------------------------------------------
+
+    @Test
+    fun jedeVoraussetzungStehtImKatalog() {
+        for (kompetenz in Katalog.alle) {
+            for (kennung in kompetenz.voraussetzungen) {
+                assertNotNull(
+                    "${kompetenz.kennung} verweist auf die unbekannte Voraussetzung $kennung",
+                    Katalog.finde(kennung),
+                )
+            }
+        }
+    }
+
+    @Test
+    fun voraussetzungenSindLeichterUndNieSpaeter() {
+        // Weniger Muehe heisst: der Graph hat keinen Kreis. Und eine
+        // Voraussetzung darf nicht erst in einer spaeteren Klasse drankommen.
+        for (kompetenz in Katalog.alle) {
+            for (kennung in kompetenz.voraussetzungen) {
+                val vorher = Katalog.finde(kennung)!!
+                assertTrue(
+                    "${kompetenz.kennung} setzt $kennung voraus, das nicht leichter ist",
+                    vorher.muehe < kompetenz.muehe,
+                )
+                assertTrue(
+                    "${kompetenz.kennung} setzt $kennung aus einer spaeteren Klasse voraus",
+                    vorher.abKlasse <= kompetenz.abKlasse,
+                )
+            }
+        }
+    }
+
+    @Test
+    fun jedeVoraussetzungGibtEsImEigenenNiveau() {
+        // Sonst haengt eine Kompetenz an Stoff, den dieses Niveau nie zu sehen
+        // bekommt -- "Weiterlernen" boete sie dann nie an.
+        for (niveau in Niveau.entries) {
+            for (kompetenz in Katalog.alle.filter { it.giltFuer(niveau) }) {
+                for (kennung in Katalog.voraussetzungenFuer(kompetenz, niveau)) {
+                    assertTrue(
+                        "${kompetenz.kennung} setzt im Niveau $niveau $kennung voraus," +
+                            " das es dort nicht gibt",
+                        Katalog.finde(kennung)!!.giltFuer(niveau),
+                    )
+                }
+            }
+        }
+    }
+
+    @Test
+    fun einAusgeblendeterVorlaeuferWirdErsetztStattGestrichen() {
+        // GL-TER-1 setzt NZ-MUL-1 voraus, das es erst ab M gibt. Im Niveau G
+        // tritt dessen eigene Voraussetzung NZ-ADD-1 an seine Stelle.
+        val term = Katalog.finde("GL-TER-1")!!
+        assertEquals(listOf("NZ-MUL-1"), Katalog.voraussetzungenFuer(term, Niveau.M))
+        assertEquals(listOf("NZ-ADD-1"), Katalog.voraussetzungenFuer(term, Niveau.G))
+
+        // GL-QUA-1 haengt im Niveau M an GL-KLA-1 (nur E); dessen Vorlaeufer
+        // GL-LIN-1 bleibt erhalten, PO-WUR-1 steht unveraendert daneben.
+        val quadratisch = Katalog.finde("GL-QUA-1")!!
+        assertEquals(
+            listOf("GL-LIN-1", "PO-WUR-1"),
+            Katalog.voraussetzungenFuer(quadratisch, Niveau.M),
+        )
     }
 }

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Grundflaeche des Fensters, bevor Compose zeichnet. Hell wie das Theme. -->
-    <color name="fenster_grund">#F6F8F7</color>
+    <!-- Grundflaeche des Fensters, bevor Compose zeichnet. Dunkel wie der
+         Standardmodus einer neuen Installation, damit beim Start nichts
+         aufblitzt. Es ist der obere Ton des Grundverlaufs, nicht Schwarz. -->
+    <color name="fenster_grund">#0E1A17</color>
 </resources>

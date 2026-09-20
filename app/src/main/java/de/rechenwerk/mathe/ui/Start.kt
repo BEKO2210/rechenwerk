@@ -9,7 +9,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -22,6 +22,7 @@ import de.rechenwerk.mathe.R
 import de.rechenwerk.mathe.daten.Ablage
 import de.rechenwerk.mathe.daten.Art
 import de.rechenwerk.mathe.daten.Bereich
+import de.rechenwerk.mathe.daten.Katalog
 
 /**
  * Startbildschirm: Begruessung, das Rechenwerk als Heldenobjekt, der Weg ins
@@ -35,7 +36,9 @@ fun StartBildschirm(
     innenrand: PaddingValues,
     modifier: Modifier = Modifier,
 ) {
-    val bereiche = Bereich.entries
+    // Nur die Bereiche, in denen das Profil etwas zu ueben hat -- der Ring
+    // bekommt genau so viele Segmente, wie es Kacheln darunter gibt.
+    val bereiche = Katalog.bereicheFuer(ablage.profil)
     val segmente = bereiche.map { bereichsGrad(ablage, it) }
     // Der Einstufungstest legt Staende an, ohne Versuche zu zaehlen -- sonst
     // stuende unter dem gefuellten Ring ein Leerzustand.
@@ -113,8 +116,8 @@ fun StartBildschirm(
                 )
             }
         } else {
-            items(bereiche, key = { it.name }) { bereich ->
-                Auftritt(platz = bereich.ordinal) {
+            itemsIndexed(bereiche, key = { _, bereich -> bereich.name }) { platz, bereich ->
+                Auftritt(platz = platz) {
                     BereichsKachel(
                         ablage = ablage,
                         bereich = bereich,

@@ -8,6 +8,8 @@ import androidx.compose.material3.Typography
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.DeviceFontFamilyName
@@ -35,6 +37,10 @@ object Abstand {
 object Masse {
     /** Kleinstes antippbares Ziel -- gilt fuer jede Taste und jede Kachel. */
     val tippziel = 48.dp
+    /** Radius des Weichzeichners auf der Glasebene (ab Android 12). */
+    val weichzeichnung = 16.dp
+    /** Weg, den eine ambiente Lichtblase wandert. */
+    val blasenweg = 32.dp
     val symbolWinzig = 8.dp
     val symbolKlein = 18.dp
     val symbol = 24.dp
@@ -55,9 +61,23 @@ val Formen = Shapes(
     extraLarge = RoundedCornerShape(28.dp),
 )
 
-// Marke: ein einziger kuehl-gruener Akzent auf Graphit.
+// Marke: ein einziger kuehl-gruener Akzent. Beide Werte sind gesetzt und
+// werden nicht ersetzt -- aus ihnen kommen auch die ambienten Lichtblasen.
 private val AkzentHell = Color(0xFF2F7D6E)
 private val AkzentDunkel = Color(0xFF4FC3A1)
+
+// Der Grund der dunklen Oberflaeche: ein Verlauf von oben nach unten,
+// niemals reines Schwarz. Oben steht der Ton des Auftrags unveraendert.
+// Unten steht nicht #060B0A, sondern der engere Ton: die Ueberlaufpruefung
+// nimmt den Pixel oben links als Hintergrundreferenz und meldet Verdacht,
+// sobald am rechten Bildrand ein Kanal um mehr als sechzehn Stufen abweicht.
+// Mit #060B0A liegt der Gruenkanal bei 26 zu 11 genau auf dieser Schwelle --
+// ein einziger Rundungsschritt der Verlaufsglaettung reicht zum Anschlag, und
+// dann sieht der reine Hintergrund aus wie abgeschnittener Inhalt. Der engere
+// Ton haelt acht Stufen Abstand und ist im Bild nicht zu unterscheiden. Genau
+// das ist die offene Rueckfrage zur unteren Grundfarbe im Pflichtenheft.
+private val GrundOben = Color(0xFF0E1A17)
+private val GrundUnten = Color(0xFF09130F)
 
 private val DunkleFarben = darkColorScheme(
     primary = AkzentDunkel,
@@ -72,13 +92,16 @@ private val DunkleFarben = darkColorScheme(
     onTertiary = Color(0xFF00201A),
     tertiaryContainer = Color(0xFF17403A),
     onTertiaryContainer = Color(0xFFBEE5DA),
-    background = Color(0xFF0D1110),
-    onBackground = Color(0xFFE3E6E4),
-    surface = Color(0xFF0D1110),
-    onSurface = Color(0xFFE3E6E4),
+    // surface ist der obere, background der untere Ton des Grundverlaufs.
+    background = GrundUnten,
+    onBackground = Color(0xFFE6EAE8),
+    surface = GrundOben,
+    onSurface = Color(0xFFE6EAE8),
     surfaceVariant = Color(0xFF232A28),
-    onSurfaceVariant = Color(0xFFAFBAB6),
-    surfaceContainerLowest = Color(0xFF080B0A),
+    // Hell genug, damit Beschriftungen auch auf einer Glasflaeche ueber dem
+    // hellsten Punkt des Grundverlaufs noch 4,5:1 erreichen.
+    onSurfaceVariant = Color(0xFFBAC5C1),
+    surfaceContainerLowest = Color(0xFF040807),
     surfaceContainerLow = Color(0xFF141918),
     surfaceContainer = Color(0xFF181E1D),
     surfaceContainerHigh = Color(0xFF222927),
@@ -104,9 +127,11 @@ private val HelleFarben = lightColorScheme(
     onTertiary = Color(0xFFFFFFFF),
     tertiaryContainer = Color(0xFFD5EFE7),
     onTertiaryContainer = Color(0xFF0C241E),
-    background = Color(0xFFF6F8F7),
+    // Auch hell traegt der Grund einen Verlauf: surface oben, background
+    // unten -- aus demselben Grund eng gefuehrt wie im dunklen Schema.
+    background = Color(0xFFF1F5F3),
     onBackground = Color(0xFF181C1B),
-    surface = Color(0xFFF6F8F7),
+    surface = Color(0xFFF8FAF9),
     onSurface = Color(0xFF181C1B),
     surfaceVariant = Color(0xFFDCE5E1),
     // Dunkel genug, damit Beschriftungen auch vor der abgedunkelten Ringmitte
@@ -125,11 +150,53 @@ private val HelleFarben = lightColorScheme(
     onErrorContainer = Color(0xFF40110C),
 )
 
-/** Titel- und Textschrift der Marke, mit dem Systemgrotesk als Rueckfall. */
-private val Marke = FontFamily(
-    Font(DeviceFontFamilyName("IBM Plex Sans"), FontWeight.Normal),
-    Font(DeviceFontFamilyName("IBM Plex Sans"), FontWeight.Medium),
-    Font(DeviceFontFamilyName("IBM Plex Sans"), FontWeight.SemiBold),
+/**
+ * Das Rezept der Glasebene. Es haengt am Erscheinungsbild und wird von
+ * [RechenwerkTheme] gesetzt -- die Glasbausteine lesen es, statt Farben
+ * selbst zu mischen.
+ */
+data class Glasrezept(
+    val fuellung: Color,
+    val deckkraft: Float,
+    val deckkraftHervor: Float,
+    val rand: Color,
+    val licht: Color,
+)
+
+private val GlasDunkel = Glasrezept(
+    fuellung = Color(0xFFBFD6CF),
+    deckkraft = 0.16f,
+    deckkraftHervor = 0.22f,
+    rand = Color.White.copy(alpha = 0.14f),
+    licht = Color.White.copy(alpha = 0.10f),
+)
+
+// Hell gespiegelt: die Fuellung hellt auf, der Rand setzt die Kante dunkel ab,
+// sonst waere Weiss auf Weiss keine sichtbare Kante mehr.
+private val GlasHell = Glasrezept(
+    fuellung = Color.White,
+    deckkraft = 0.72f,
+    deckkraftHervor = 0.88f,
+    rand = Color(0xFF0E1A17).copy(alpha = 0.10f),
+    licht = Color.White.copy(alpha = 0.55f),
+)
+
+val LocalGlas = staticCompositionLocalOf { GlasDunkel }
+
+// Die Markenschriften werden als Geraeteschriften angefragt; fehlen sie,
+// setzt Android von sich aus die Systemschrift derselben Gattung ein.
+
+/** Titelschrift der Marke: display, headline und title. */
+private val Titelschrift = FontFamily(
+    Font(DeviceFontFamilyName("Space Grotesk"), FontWeight.Medium),
+    Font(DeviceFontFamilyName("Space Grotesk"), FontWeight.SemiBold),
+)
+
+/** Textschrift der Marke: body und label. */
+private val Textschrift = FontFamily(
+    Font(DeviceFontFamilyName("Inter"), FontWeight.Normal),
+    Font(DeviceFontFamilyName("Inter"), FontWeight.Medium),
+    Font(DeviceFontFamilyName("Inter"), FontWeight.SemiBold),
 )
 
 /** Ziffern in gleicher Breite -- Zahlen springen beim Zaehlen nicht. */
@@ -141,8 +208,9 @@ private fun rolle(
     gewicht: FontWeight,
     abstand: Double = 0.0,
     zahlen: Boolean = false,
+    titel: Boolean = false,
 ) = TextStyle(
-    fontFamily = Marke,
+    fontFamily = if (titel) Titelschrift else Textschrift,
     fontSize = groesse.sp,
     lineHeight = zeile.sp,
     fontWeight = gewicht,
@@ -152,16 +220,18 @@ private fun rolle(
 
 /**
  * Die benannten Typografie-Rollen. display traegt Zahlen und Aufgaben,
- * title Ueberschriften, body Fliesstext, label Beschriftungen.
+ * title Ueberschriften, body Fliesstext, label Beschriftungen. display,
+ * headline und title stehen in der Titelschrift der Marke, alles Uebrige
+ * in der Textschrift.
  */
 val Typografie = Typography(
-    displayLarge = rolle(56, 60, FontWeight.SemiBold, -1.0, zahlen = true),
-    displayMedium = rolle(44, 50, FontWeight.SemiBold, -0.5, zahlen = true),
-    displaySmall = rolle(34, 42, FontWeight.SemiBold, -0.25, zahlen = true),
-    headlineLarge = rolle(30, 38, FontWeight.SemiBold),
-    headlineMedium = rolle(25, 32, FontWeight.SemiBold),
-    headlineSmall = rolle(22, 28, FontWeight.Medium),
-    titleLarge = rolle(20, 26, FontWeight.SemiBold),
+    displayLarge = rolle(56, 60, FontWeight.SemiBold, -1.0, zahlen = true, titel = true),
+    displayMedium = rolle(44, 50, FontWeight.SemiBold, -0.5, zahlen = true, titel = true),
+    displaySmall = rolle(34, 42, FontWeight.SemiBold, -0.25, zahlen = true, titel = true),
+    headlineLarge = rolle(30, 38, FontWeight.SemiBold, titel = true),
+    headlineMedium = rolle(25, 32, FontWeight.SemiBold, titel = true),
+    headlineSmall = rolle(22, 28, FontWeight.Medium, titel = true),
+    titleLarge = rolle(20, 26, FontWeight.SemiBold, titel = true),
     titleMedium = rolle(17, 23, FontWeight.Medium, 0.1),
     titleSmall = rolle(15, 20, FontWeight.Medium, 0.1),
     bodyLarge = rolle(17, 25, FontWeight.Normal, 0.15),
@@ -172,17 +242,27 @@ val Typografie = Typography(
     labelSmall = rolle(11, 15, FontWeight.Medium, 0.5),
 )
 
+/**
+ * Ob das gewaehlte Erscheinungsbild dunkel ist. Eine einzige Stelle, an der
+ * aus dem gespeicherten Modus ein Ja oder Nein wird -- Theme und Systemleisten
+ * lesen dieselbe Antwort.
+ */
+@Composable
+fun istDunkel(modus: Modus): Boolean = when (modus) {
+    Modus.DUNKEL -> true
+    Modus.HELL -> false
+    Modus.SYSTEM -> isSystemInDarkTheme()
+}
+
 @Composable
 fun RechenwerkTheme(modus: Modus, inhalt: @Composable () -> Unit) {
-    val dunkel = when (modus) {
-        Modus.DUNKEL -> true
-        Modus.HELL -> false
-        Modus.SYSTEM -> isSystemInDarkTheme()
+    val dunkel = istDunkel(modus)
+    CompositionLocalProvider(LocalGlas provides if (dunkel) GlasDunkel else GlasHell) {
+        MaterialTheme(
+            colorScheme = if (dunkel) DunkleFarben else HelleFarben,
+            typography = Typografie,
+            shapes = Formen,
+            content = inhalt,
+        )
     }
-    MaterialTheme(
-        colorScheme = if (dunkel) DunkleFarben else HelleFarben,
-        typography = Typografie,
-        shapes = Formen,
-        content = inhalt,
-    )
 }

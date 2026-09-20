@@ -66,19 +66,25 @@ fun einordnung(grad: Double, beruehrt: Boolean): String = when {
  */
 val KompetenzStand.erfasst: Boolean get() = beruehrt || grad > 0.0
 
-/** Mittlerer Beherrschungsgrad eines Bereichs ueber alle seine Kompetenzen. */
+/**
+ * Mittlerer Beherrschungsgrad eines Bereichs. Gezaehlt wird nur, was zum
+ * Profil gehoert -- sonst zoege Stoff aus spaeteren Klassenstufen den Stand
+ * dauerhaft nach unten.
+ */
 fun bereichsGrad(ablage: Ablage, bereich: Bereich): Double {
-    val kompetenzen = Katalog.imBereich(bereich)
+    val kompetenzen = Katalog.imBereich(bereich, ablage.profil)
     if (kompetenzen.isEmpty()) return 0.0
     return kompetenzen.sumOf { ablage.stand(it.kennung).grad } / kompetenzen.size
 }
 
 /** Wie viele Kompetenzen eines Bereichs noch nicht sicher sitzen. */
 fun offeneImBereich(ablage: Ablage, bereich: Bereich): Int =
-    Katalog.imBereich(bereich).count { ablage.stand(it.kennung).grad < Wiederholung.SICHER }
+    Katalog.imBereich(bereich, ablage.profil)
+        .count { ablage.stand(it.kennung).grad < Wiederholung.SICHER }
 
-/** Beherrschungsgrad ueber die ganze App -- die Zahl in der Mitte des Werks. */
+/** Beherrschungsgrad ueber das eigene Pensum -- die Zahl in der Mitte des Werks. */
 fun gesamtGrad(ablage: Ablage): Double {
-    if (Katalog.alle.isEmpty()) return 0.0
-    return Katalog.alle.sumOf { ablage.stand(it.kennung).grad } / Katalog.alle.size
+    val kompetenzen = Katalog.fuer(ablage.profil)
+    if (kompetenzen.isEmpty()) return 0.0
+    return kompetenzen.sumOf { ablage.stand(it.kennung).grad } / kompetenzen.size
 }

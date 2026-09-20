@@ -317,4 +317,122 @@
     <string name="zeit_sekunden">%1$s s</string>
     <string name="zeit_stunden">%1$s h %2$s min</string>
     <string name="zurueck">Retour</string>
+
+    <!-- Domaines de compétence, classes 9 et 10 -->
+    <string name="bereich_potenzen">Puissances et racines</string>
+    <string name="bereich_geometrie">Géométrie</string>
+
+    <!-- Compétences, classes 9 et 10 -->
+    <string name="k_ge_pyt_1">Théorème de Pythagore</string>
+    <string name="k_po_wur_1">Expressions avec racines</string>
+    <string name="k_ge_str_1">Théorème de Thalès</string>
+    <string name="k_pz_zin_1">Intérêts sur plusieurs années</string>
+    <string name="k_gl_qua_1">Équations du second degré</string>
+    <string name="k_ge_koe_1">Aires et solides</string>
+    <string name="k_gl_lgs_1">Systèmes d\'équations linéaires</string>
+    <string name="k_po_rat_1">Puissances à exposants rationnels</string>
+
+    <!-- Énoncés, classes 9 et 10 -->
+    <string name="f_ge_pyt_hypotenuse">Triangle rectangle, côtés de l\'angle droit a = %1$s et b = %2$s. Quelle est la longueur de l\'hypoténuse c ?</string>
+    <string name="f_ge_pyt_kathete">Triangle rectangle, hypoténuse c = %1$s, côté a = %2$s. Quelle est la longueur du côté b ?</string>
+    <string name="f_po_wur_zahl">Racine carrée de %1$s</string>
+    <string name="f_po_wur_bruch">Racine carrée de %1$s</string>
+    <string name="f_ge_str_zweiter">Deux demi-droites issues de S, coupées par deux parallèles. SA = %1$s, SB = %2$s, SC = %3$s. Quelle est la longueur de SD ?</string>
+    <string name="f_ge_str_erster">Deux demi-droites issues de S, coupées par deux parallèles. SA = %1$s, SC = %2$s, SD = %3$s. Quelle est la longueur de SB ?</string>
+    <string name="f_pz_zin_einfach">%1$s euros à %3$s %% pendant %2$s ans, les intérêts ne sont pas réinvestis. Combien d\'euros à la fin ?</string>
+    <string name="f_pz_zin_zinseszins">%1$s euros à %3$s %% pendant %2$s ans, les intérêts sont réinvestis. Combien d\'euros à la fin ?</string>
+    <string name="f_gl_qua_groessere">%1$s — donne la plus grande solution.</string>
+    <string name="f_ge_koe_rechteck">Rectangle de %1$s cm de long et %2$s cm de large. Quelle est l\'aire en centimètres carrés ?</string>
+    <string name="f_ge_koe_dreieck">Triangle de base %1$s cm et de hauteur %2$s cm. Quelle est l\'aire en centimètres carrés ?</string>
+    <string name="f_ge_koe_quader">Pavé droit de %1$s cm, %2$s cm et %3$s cm. Quel est le volume en centimètres cubes ?</string>
+    <string name="f_ge_koe_rest">D\'un pavé droit de %1$s cm, %2$s cm et %3$s cm on a retiré un pavé de %4$s cm, %5$s cm et %6$s cm. Quel est le volume restant en centimètres cubes ?</string>
+    <string name="f_gl_lgs_x">%1$s et %2$s — que vaut x ?</string>
+    <string name="f_po_rat_hoch">%1$s puissance %2$s</string>
+
+    <!-- Étapes de calcul, classes 9 et 10 -->
+    <string name="w_pyt_satz">Dans un triangle rectangle, a² + b² = c².</string>
+    <string name="w_pyt_quadrate">%1$s² = %2$s et %3$s² = %4$s</string>
+    <string name="w_pyt_wurzel">La racine carrée de %1$s est %2$s.</string>
+    <string name="w_pyt_umstellen">Après transformation : b² = c² − a² = %1$s − %2$s = %3$s</string>
+    <string name="w_wur_quadratzahl">%1$s vaut %2$s · %3$s.</string>
+    <string name="w_wur_ergebnis">La racine est donc %1$s.</string>
+    <string name="w_wur_bruch">Numérateur et dénominateur séparément : la racine de %1$s est %2$s, la racine de %3$s est %4$s.</string>
+    <string name="w_str_verhaeltnis">Le théorème de Thalès donne SA : SB = SC : SD.</string>
+    <string name="w_str_einsetzen_zweiter">En remplaçant : %1$s : %2$s = %3$s : SD</string>
+    <string name="w_str_einsetzen_erster">En remplaçant : %1$s : SB = %2$s : %3$s</string>
+    <string name="w_str_aufloesen">Résolu : %1$s · %2$s : %3$s = %4$s</string>
+    <string name="w_zin_ein_jahr">%1$s %% de %2$s euros font %3$s euros d\'intérêts par an.</string>
+    <string name="w_zin_mal_jahre">%1$s · %2$s ans = %3$s euros d\'intérêts au total</string>
+    <string name="w_zin_faktor">Chaque année est multipliée par %1$s.</string>
+    <string name="w_zin_jahr">Après l\'année %1$s : %2$s euros</string>
+    <string name="w_qua_vieta">Cherche deux nombres dont la somme vaut %1$s et le produit %2$s.</string>
+    <string name="w_qua_zerlegt">Ce sont %1$s et %2$s.</string>
+    <string name="w_qua_produkt">Un produit est nul quand un facteur est nul : x = %1$s ou x = %2$s.</string>
+    <string name="w_qua_groesser">La plus grande solution est %1$s.</string>
+    <string name="w_koe_rechteck">Aire d\'un rectangle : longueur fois largeur.</string>
+    <string name="w_koe_dreieck">Aire d\'un triangle : base fois hauteur, puis la moitié.</string>
+    <string name="w_koe_halbieren">La moitié de %1$s est %2$s.</string>
+    <string name="w_koe_quader">Volume d\'un pavé droit : longueur fois largeur fois hauteur.</string>
+    <string name="w_koe_gross">Grand pavé : %1$s · %2$s · %3$s = %4$s</string>
+    <string name="w_koe_klein">Pavé retiré : %1$s · %2$s · %3$s = %4$s</string>
+    <string name="w_lgs_gleichnamig">Première équation fois %1$s, deuxième équation fois %2$s.</string>
+    <string name="w_lgs_y_faellt_weg">La soustraction fait disparaître y : %1$sx = %2$s</string>
+    <string name="w_lgs_x">Donc x = %1$s</string>
+    <string name="w_lgs_y">En remplaçant on obtient y = %1$s.</string>
+    <string name="w_rat_wurzel">Le dénominateur %1$s de l\'exposant est la racine : la racine %1$s-ième de %2$s est %3$s.</string>
+    <string name="w_rat_potenz">Le numérateur de l\'exposant est la puissance : %1$s puissance %2$s = %3$s</string>
+    <string name="w_rat_negativ">L\'exposant négatif inverse le résultat : %1$s</string>
+
+    <!-- Aide par paliers, classes 9 et 10 -->
+    <string name="h_ge_pyt_1_a">Fais un croquis du triangle et marque l\'angle droit.</string>
+    <string name="h_ge_pyt_1_b">L\'hypoténuse est opposée à l\'angle droit. Additionne les carrés des deux autres côtés.</string>
+    <string name="h_ge_pyt_1_c">La somme des carrés vaut %1$s. Il manque encore la racine.</string>
+    <string name="h_ge_pyt_1_d">C\'est un côté de l\'angle droit qui est cherché : transforme le théorème et retranche le carré du côté connu.</string>
+    <string name="h_ge_pyt_1_e">Après la soustraction il reste %1$s. Il manque encore la racine.</string>
+    <string name="h_po_wur_1_a">La racine demande : quel nombre multiplié par lui-même donne cela ?</string>
+    <string name="h_po_wur_1_b">Passe en revue les carrés parfaits jusqu\'à trouver le bon.</string>
+    <string name="h_po_wur_1_c">Regarde %1$s de plus près.</string>
+    <string name="h_ge_str_1_a">Trace les deux demi-droites et les parallèles ; note quel segment appartient à laquelle.</string>
+    <string name="h_ge_str_1_b">Sur les deux demi-droites, les segments sont dans le même rapport.</string>
+    <string name="h_ge_str_1_c">Le facteur d\'agrandissement entre les deux parallèles est %1$s.</string>
+    <string name="h_pz_zin_1_a">Calcule année par année, pas en une seule fois.</string>
+    <string name="h_pz_zin_1_b">Sans capitalisation, les intérêts sont les mêmes chaque année.</string>
+    <string name="h_pz_zin_1_c">Une année rapporte %1$s euros d\'intérêts.</string>
+    <string name="h_pz_zin_1_d">Avec capitalisation, le capital déjà accru rapporte des intérêts chaque année.</string>
+    <string name="h_pz_zin_1_e">Le facteur par année est %1$s.</string>
+    <string name="h_gl_qua_1_a">Cherche deux nombres dont la somme est la valeur devant le x et dont le produit est la dernière valeur.</string>
+    <string name="h_gl_qua_1_b">Les deux nombres font %1$s en somme et %2$s en produit.</string>
+    <string name="h_gl_qua_1_c">L\'une des deux solutions est %1$s. C\'est l\'autre qui est cherchée.</string>
+    <string name="h_ge_koe_1_a">Détermine d\'abord si l\'on cherche une aire ou un volume.</string>
+    <string name="h_ge_koe_1_b">L\'aire d\'un rectangle est longueur fois largeur.</string>
+    <string name="h_ge_koe_1_c">Calcule %1$s · %2$s.</string>
+    <string name="h_ge_koe_1_d">Pour le triangle, la moitié vient après la multiplication.</string>
+    <string name="h_ge_koe_1_e">Base fois hauteur donne %1$s. Il reste à diviser par deux.</string>
+    <string name="h_ge_koe_1_f">Pour le pavé droit, les trois arêtes sont multipliées.</string>
+    <string name="h_ge_koe_1_g">L\'aire de base est %1$s, il manque encore la hauteur.</string>
+    <string name="h_ge_koe_1_h">Calcule d\'abord le pavé entier, puis la découpe, puis la différence.</string>
+    <string name="h_ge_koe_1_i">Le pavé entier fait %1$s. La découpe se retranche de là.</string>
+    <string name="h_gl_lgs_1_a">Deux équations, deux inconnues : l\'une des deux doit disparaître en premier.</string>
+    <string name="h_gl_lgs_1_b">Amène les deux équations au même nombre de y et soustrais-les.</string>
+    <string name="h_gl_lgs_1_c">Après la soustraction il reste %1$sx = %2$s.</string>
+    <string name="h_po_rat_1_a">Une fraction en exposant, c\'est la racine et la puissance en même temps.</string>
+    <string name="h_po_rat_1_b">Le dénominateur %1$s est la racine, le numérateur %2$s la puissance.</string>
+    <string name="h_po_rat_1_c">La racine donne %1$s. Vient ensuite la puissance.</string>
+
+    <!-- Types d'erreur, classes 9 et 10 -->
+    <string name="fa_quadriert_statt_addiert">Côtés additionnés au lieu de leurs carrés</string>
+    <string name="fa_wurzel_vergessen">Racine oubliée à la fin</string>
+    <string name="fa_kathete_als_hypotenuse">Longueurs soustraites au lieu de leurs carrés</string>
+    <string name="fa_wurzel_halbiert">Racine confondue avec la moitié</string>
+    <string name="fa_verhaeltnis_gedreht">Rapport posé à l\'envers</string>
+    <string name="fa_strecken_addiert">Segments additionnés au lieu d\'utiliser le rapport</string>
+    <string name="fa_nur_einmal_verzinst">Une seule année d\'intérêts</string>
+    <string name="fa_zinseszins_als_summe">Intérêts composés traités comme une somme simple</string>
+    <string name="fa_zweite_loesung_genommen">La plus petite solution a été donnée</string>
+    <string name="fa_vorzeichen_der_wurzel">Signe de la solution inversé</string>
+    <string name="fa_nur_eine_gleichung">Seule la première équation utilisée</string>
+    <string name="fa_x_und_y_vertauscht">x et y intervertis</string>
+    <string name="fa_exponent_als_faktor">Exposant traité comme un facteur</string>
+    <string name="fa_halbierung_vergessen">Division par deux oubliée</string>
+    <string name="fa_flaeche_statt_volumen">Aire calculée au lieu du volume</string>
 </resources>

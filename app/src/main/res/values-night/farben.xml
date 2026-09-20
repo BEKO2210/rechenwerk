@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Graphit, der dunkle Grund der Marke. -->
-    <color name="fenster_grund">#0D1110</color>
+    <!-- Oberer Ton des Grundverlaufs der Marke. -->
+    <color name="fenster_grund">#0E1A17</color>
 </resources>

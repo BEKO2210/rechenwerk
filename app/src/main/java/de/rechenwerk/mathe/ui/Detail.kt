@@ -27,26 +27,34 @@ import de.rechenwerk.mathe.daten.Fehlerarten
 import de.rechenwerk.mathe.daten.Katalog
 import de.rechenwerk.mathe.daten.Kompetenz
 
-/** Kopfzeile mit Rueckweg -- gleiche Hoehe und gleicher Rand auf allen Unterseiten. */
+/**
+ * Kopfzeile mit Rueckweg -- gleiche Hoehe und gleicher Rand auf allen
+ * Unterseiten, und wie jede obere Leiste der App eine Glasflaeche.
+ */
 @Composable
 private fun Unterkopf(titel: String, aufZurueck: () -> Unit) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = Abstand.s, vertical = Abstand.xs),
-        verticalAlignment = Alignment.CenterVertically,
+    GlasFlaeche(
+        modifier = Modifier.fillMaxWidth().padding(Abstand.s),
+        form = MaterialTheme.shapes.extraLarge,
     ) {
-        Symboltaste(
-            symbol = Sym.PfeilLinks,
-            beschreibung = stringResource(R.string.zurueck),
-            aufDruck = aufZurueck,
-        )
-        Text(
-            text = titel,
-            style = MaterialTheme.typography.titleMedium,
-            color = MaterialTheme.colorScheme.onSurface,
-            modifier = Modifier.padding(horizontal = Abstand.s),
-        )
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = Abstand.s, vertical = Abstand.xs),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Symboltaste(
+                symbol = Sym.PfeilLinks,
+                beschreibung = stringResource(R.string.zurueck),
+                aufDruck = aufZurueck,
+            )
+            Text(
+                text = titel,
+                style = MaterialTheme.typography.titleMedium,
+                color = MaterialTheme.colorScheme.onSurface,
+                modifier = Modifier.padding(horizontal = Abstand.s),
+            )
+        }
     }
 }
 
@@ -60,7 +68,7 @@ fun BereichBildschirm(
     innenrand: PaddingValues,
     modifier: Modifier = Modifier,
 ) {
-    val kompetenzen = Katalog.imBereich(bereich)
+    val kompetenzen = Katalog.imBereich(bereich, ablage.profil)
     Column(
         modifier = modifier.padding(
             top = innenrand.calculateTopPadding(),
@@ -283,7 +291,12 @@ fun KompetenzBildschirm(
 
             item { Abschnitt(titel = stringResource(R.string.detail_voraussetzungen)) }
 
-            if (kompetenz.voraussetzungen.isEmpty()) {
+            // Nur die Voraussetzungen, die es im Niveau des Profils ueberhaupt
+            // gibt -- sonst fuehrte die Kachel auf ein Kompetenzblatt, das
+            // dieser Lernende nirgends sonst zu sehen bekommt.
+            val voraussetzungen = Katalog.voraussetzungenFuer(kompetenz, ablage.profil.niveau)
+
+            if (voraussetzungen.isEmpty()) {
                 item {
                     Leerzustand(
                         titel = stringResource(R.string.leer_voraussetzung_titel),
@@ -291,7 +304,7 @@ fun KompetenzBildschirm(
                     )
                 }
             } else {
-                items(kompetenz.voraussetzungen, key = { "vor_$it" }) { kennung ->
+                items(voraussetzungen, key = { "vor_$it" }) { kennung ->
                     val vorher = Katalog.finde(kennung)
                     if (vorher != null) {
                         Kachel(aufDruck = { aufKompetenz(kennung) }) {

@@ -40,8 +40,10 @@ fun FortschrittBildschirm(
     modifier: Modifier = Modifier,
 ) {
     val werte = ablage.werte
-    val beruehrte = Katalog.alle.filter { ablage.stand(it.kennung).erfasst }
-    val sicher = Katalog.alle.count { ablage.stand(it.kennung).grad >= Wiederholung.SICHER }
+    // Gezaehlt wird das eigene Pensum, nicht der ganze Katalog.
+    val pensum = Katalog.fuer(ablage.profil)
+    val beruehrte = pensum.filter { ablage.stand(it.kennung).erfasst }
+    val sicher = pensum.count { ablage.stand(it.kennung).grad >= Wiederholung.SICHER }
     val inArbeit = beruehrte.count { ablage.stand(it.kennung).grad < Wiederholung.SICHER }
     val quote = if (werte.versuche == 0) 0.0 else werte.treffer.toDouble() / werte.versuche
     val mitFehlern = beruehrte.filter { ablage.stand(it.kennung).fehlerarten.isNotEmpty() }

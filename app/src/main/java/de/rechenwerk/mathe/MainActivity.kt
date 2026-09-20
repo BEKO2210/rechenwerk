@@ -1,11 +1,15 @@
 package de.rechenwerk.mathe
 
+import android.graphics.Color as SystemFarbe
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -14,21 +18,26 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import de.rechenwerk.mathe.daten.Art
 import de.rechenwerk.mathe.daten.Bereich
 import de.rechenwerk.mathe.daten.Katalog
 import de.rechenwerk.mathe.daten.Werk
+import de.rechenwerk.mathe.ui.Abstand
 import de.rechenwerk.mathe.ui.BereichBildschirm
 import de.rechenwerk.mathe.ui.EinstellungenBildschirm
 import de.rechenwerk.mathe.ui.FortschrittBildschirm
+import de.rechenwerk.mathe.ui.GlasFlaeche
+import de.rechenwerk.mathe.ui.Grund
 import de.rechenwerk.mathe.ui.KompetenzBildschirm
 import de.rechenwerk.mathe.ui.OnboardingProfil
 import de.rechenwerk.mathe.ui.OnboardingTest
@@ -36,6 +45,7 @@ import de.rechenwerk.mathe.ui.RechenwerkTheme
 import de.rechenwerk.mathe.ui.StartBildschirm
 import de.rechenwerk.mathe.ui.Sym
 import de.rechenwerk.mathe.ui.TrainingBildschirm
+import de.rechenwerk.mathe.ui.istDunkel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(zustand: Bundle?) {
@@ -43,8 +53,22 @@ class MainActivity : ComponentActivity() {
         super.onCreate(zustand)
         setContent {
             val werk: Werk = viewModel()
+            // Die Systemleisten folgen dem gewaehlten Erscheinungsbild, nicht
+            // dem des Systems -- sonst staenden dunkle Symbole auf dunklem Glas.
+            val dunkel = istDunkel(werk.ablage.modus)
+            SideEffect {
+                val leiste = SystemBarStyle.auto(
+                    SystemFarbe.TRANSPARENT,
+                    SystemFarbe.TRANSPARENT,
+                ) { dunkel }
+                enableEdgeToEdge(statusBarStyle = leiste, navigationBarStyle = leiste)
+            }
             RechenwerkTheme(modus = werk.ablage.modus) {
-                Rahmen(werk = werk)
+                // Der Grund mit seinen wandernden Lichtblasen liegt hinter
+                // allem -- einmal fuer die ganze App, nicht je Bildschirm.
+                Grund(modifier = Modifier.fillMaxSize()) {
+                    Rahmen(werk = werk)
+                }
             }
         }
     }
@@ -101,36 +125,51 @@ private fun Rahmen(werk: Werk) {
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
-        containerColor = MaterialTheme.colorScheme.background,
+        containerColor = Color.Transparent,
         bottomBar = {
             if (ort == Ort.Reiterflaeche) {
-                NavigationBar(containerColor = MaterialTheme.colorScheme.surfaceContainer) {
-                    for (eintrag in Reiter.entries) {
-                        NavigationBarItem(
-                            selected = reiter == eintrag,
-                            onClick = { reiter = eintrag },
-                            icon = {
-                                Icon(
-                                    imageVector = when (eintrag) {
-                                        Reiter.START -> Sym.Raster
-                                        Reiter.FORTSCHRITT -> Sym.Saeulen
-                                        Reiter.EINSTELLUNGEN -> Sym.Schieber
-                                    },
-                                    contentDescription = null,
-                                )
-                            },
-                            label = {
-                                Text(
-                                    text = stringResource(
-                                        when (eintrag) {
-                                            Reiter.START -> R.string.reiter_start
-                                            Reiter.FORTSCHRITT -> R.string.reiter_fortschritt
-                                            Reiter.EINSTELLUNGEN -> R.string.reiter_einstellungen
-                                        }
+                // Die untere Leiste ist Glas: alle Reiter gleich breit, die
+                // Flaeche traegt Fuellung, Lichtkante und Haarrand. Sie steht
+                // mit demselben Rand links wie rechts frei -- ihr Haarrand lag
+                // sonst auf dem Bildschirmrand und sah nach abgeschnittenem
+                // Inhalt aus.
+                GlasFlaeche(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = Abstand.l),
+                    form = MaterialTheme.shapes.extraLarge,
+                ) {
+                    NavigationBar(
+                        containerColor = Color.Transparent,
+                        modifier = Modifier.fillMaxWidth(),
+                    ) {
+                        for (eintrag in Reiter.entries) {
+                            NavigationBarItem(
+                                selected = reiter == eintrag,
+                                onClick = { reiter = eintrag },
+                                icon = {
+                                    Icon(
+                                        imageVector = when (eintrag) {
+                                            Reiter.START -> Sym.Raster
+                                            Reiter.FORTSCHRITT -> Sym.Saeulen
+                                            Reiter.EINSTELLUNGEN -> Sym.Schieber
+                                        },
+                                        contentDescription = null,
                                     )
-                                )
-                            },
-                        )
+                                },
+                                label = {
+                                    Text(
+                                        text = stringResource(
+                                            when (eintrag) {
+                                                Reiter.START -> R.string.reiter_start
+                                                Reiter.FORTSCHRITT -> R.string.reiter_fortschritt
+                                                Reiter.EINSTELLUNGEN -> R.string.reiter_einstellungen
+                                            }
+                                        )
+                                    )
+                                },
+                            )
+                        }
                     }
                 }
             }
@@ -201,7 +240,7 @@ private fun Onboarding(werk: Werk) {
     var schritt by rememberSaveable { mutableStateOf(0) }
     Scaffold(
         modifier = Modifier.fillMaxSize(),
-        containerColor = MaterialTheme.colorScheme.background,
+        containerColor = Color.Transparent,
     ) { innenrand ->
         if (schritt == 0) {
             OnboardingProfil(

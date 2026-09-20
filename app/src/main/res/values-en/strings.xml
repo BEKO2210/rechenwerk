@@ -314,4 +314,122 @@
     <string name="zeit_sekunden">%1$s s</string>
     <string name="zeit_stunden">%1$s h %2$s min</string>
     <string name="zurueck">Back</string>
+
+    <!-- Competence areas, years 9 and 10 -->
+    <string name="bereich_potenzen">Powers and roots</string>
+    <string name="bereich_geometrie">Geometry</string>
+
+    <!-- Competences, years 9 and 10 -->
+    <string name="k_ge_pyt_1">The Pythagorean theorem</string>
+    <string name="k_po_wur_1">Root expressions</string>
+    <string name="k_ge_str_1">Intercept theorems</string>
+    <string name="k_pz_zin_1">Interest over several years</string>
+    <string name="k_gl_qua_1">Quadratic equations</string>
+    <string name="k_ge_koe_1">Areas and solids</string>
+    <string name="k_gl_lgs_1">Systems of linear equations</string>
+    <string name="k_po_rat_1">Powers with rational exponents</string>
+
+    <!-- Questions, years 9 and 10 -->
+    <string name="f_ge_pyt_hypotenuse">Right triangle, legs a = %1$s and b = %2$s. How long is the hypotenuse c?</string>
+    <string name="f_ge_pyt_kathete">Right triangle, hypotenuse c = %1$s, leg a = %2$s. How long is the leg b?</string>
+    <string name="f_po_wur_zahl">Square root of %1$s</string>
+    <string name="f_po_wur_bruch">Square root of %1$s</string>
+    <string name="f_ge_str_zweiter">Two rays from S, cut by two parallels. SA = %1$s, SB = %2$s, SC = %3$s. How long is SD?</string>
+    <string name="f_ge_str_erster">Two rays from S, cut by two parallels. SA = %1$s, SC = %2$s, SD = %3$s. How long is SB?</string>
+    <string name="f_pz_zin_einfach">%1$s euros at %3$s %% for %2$s years, interest is not reinvested. How many euros are there in the end?</string>
+    <string name="f_pz_zin_zinseszins">%1$s euros at %3$s %% for %2$s years, interest is reinvested. How many euros are there in the end?</string>
+    <string name="f_gl_qua_groessere">%1$s — give the larger solution.</string>
+    <string name="f_ge_koe_rechteck">Rectangle, %1$s cm long and %2$s cm wide. What is the area in square centimetres?</string>
+    <string name="f_ge_koe_dreieck">Triangle with base %1$s cm and height %2$s cm. What is the area in square centimetres?</string>
+    <string name="f_ge_koe_quader">Cuboid measuring %1$s cm, %2$s cm and %3$s cm. What is the volume in cubic centimetres?</string>
+    <string name="f_ge_koe_rest">A cuboid measuring %1$s cm, %2$s cm and %3$s cm has a cuboid of %4$s cm, %5$s cm and %6$s cm cut out of it. What is the remaining volume in cubic centimetres?</string>
+    <string name="f_gl_lgs_x">%1$s and %2$s — what is x?</string>
+    <string name="f_po_rat_hoch">%1$s to the power of %2$s</string>
+
+    <!-- Worked steps, years 9 and 10 -->
+    <string name="w_pyt_satz">In a right triangle, a² + b² = c².</string>
+    <string name="w_pyt_quadrate">%1$s² = %2$s and %3$s² = %4$s</string>
+    <string name="w_pyt_wurzel">The square root of %1$s is %2$s.</string>
+    <string name="w_pyt_umstellen">Rearranged: b² = c² − a² = %1$s − %2$s = %3$s</string>
+    <string name="w_wur_quadratzahl">%1$s is %2$s · %3$s.</string>
+    <string name="w_wur_ergebnis">So the root is %1$s.</string>
+    <string name="w_wur_bruch">Numerator and denominator separately: the root of %1$s is %2$s, the root of %3$s is %4$s.</string>
+    <string name="w_str_verhaeltnis">The intercept theorem gives SA : SB = SC : SD.</string>
+    <string name="w_str_einsetzen_zweiter">Substituted: %1$s : %2$s = %3$s : SD</string>
+    <string name="w_str_einsetzen_erster">Substituted: %1$s : SB = %2$s : %3$s</string>
+    <string name="w_str_aufloesen">Solved: %1$s · %2$s : %3$s = %4$s</string>
+    <string name="w_zin_ein_jahr">%1$s %% of %2$s euros is %3$s euros of interest per year.</string>
+    <string name="w_zin_mal_jahre">%1$s · %2$s years = %3$s euros of interest in total</string>
+    <string name="w_zin_faktor">Each year is multiplied by %1$s.</string>
+    <string name="w_zin_jahr">After year %1$s: %2$s euros</string>
+    <string name="w_qua_vieta">Look for two numbers that add up to %1$s and multiply to %2$s.</string>
+    <string name="w_qua_zerlegt">Those are %1$s and %2$s.</string>
+    <string name="w_qua_produkt">A product is zero when one factor is zero: x = %1$s or x = %2$s.</string>
+    <string name="w_qua_groesser">The larger solution is %1$s.</string>
+    <string name="w_koe_rechteck">Area of a rectangle: length times width.</string>
+    <string name="w_koe_dreieck">Area of a triangle: base times height, then half of it.</string>
+    <string name="w_koe_halbieren">Half of %1$s is %2$s.</string>
+    <string name="w_koe_quader">Volume of a cuboid: length times width times height.</string>
+    <string name="w_koe_gross">Large cuboid: %1$s · %2$s · %3$s = %4$s</string>
+    <string name="w_koe_klein">Cut-out cuboid: %1$s · %2$s · %3$s = %4$s</string>
+    <string name="w_lgs_gleichnamig">First equation times %1$s, second equation times %2$s.</string>
+    <string name="w_lgs_y_faellt_weg">Subtracting makes y drop out: %1$sx = %2$s</string>
+    <string name="w_lgs_x">So x = %1$s</string>
+    <string name="w_lgs_y">Substituting back gives y = %1$s.</string>
+    <string name="w_rat_wurzel">The denominator %1$s in the exponent is the root: the %1$s-th root of %2$s is %3$s.</string>
+    <string name="w_rat_potenz">The numerator in the exponent is the power: %1$s to the power of %2$s = %3$s</string>
+    <string name="w_rat_negativ">The negative exponent inverts the result: %1$s</string>
+
+    <!-- Staged hints, years 9 and 10 -->
+    <string name="h_ge_pyt_1_a">Sketch the triangle and mark the right angle.</string>
+    <string name="h_ge_pyt_1_b">The hypotenuse lies opposite the right angle. Add the squares of the two legs.</string>
+    <string name="h_ge_pyt_1_c">The sum of the squares is %1$s. The root is still missing.</string>
+    <string name="h_ge_pyt_1_d">A leg is wanted: rearrange the theorem for it and subtract the square of the known leg.</string>
+    <string name="h_ge_pyt_1_e">After subtracting, %1$s remains. The root is still missing.</string>
+    <string name="h_po_wur_1_a">A square root asks: which number times itself gives this?</string>
+    <string name="h_po_wur_1_b">Go through the square numbers until you find the right one.</string>
+    <string name="h_po_wur_1_c">Take a closer look at %1$s.</string>
+    <string name="h_ge_str_1_a">Draw both rays and the parallels; note which segment belongs to which.</string>
+    <string name="h_ge_str_1_b">On both rays the segments are in the same ratio.</string>
+    <string name="h_ge_str_1_c">The scale factor between the two parallels is %1$s.</string>
+    <string name="h_pz_zin_1_a">Work year by year, not in a single step.</string>
+    <string name="h_pz_zin_1_b">Without compounding, the interest is the same every year.</string>
+    <string name="h_pz_zin_1_c">One year yields %1$s euros of interest.</string>
+    <string name="h_pz_zin_1_d">With compounding, the capital that has already grown earns interest each year.</string>
+    <string name="h_pz_zin_1_e">The factor per year is %1$s.</string>
+    <string name="h_gl_qua_1_a">Look for two numbers whose sum is the value in front of x and whose product is the last value.</string>
+    <string name="h_gl_qua_1_b">The two numbers add up to %1$s and multiply to %2$s.</string>
+    <string name="h_gl_qua_1_c">One of the two solutions is %1$s. The other one is wanted.</string>
+    <string name="h_ge_koe_1_a">First decide whether an area or a volume is wanted.</string>
+    <string name="h_ge_koe_1_b">The area of a rectangle is length times width.</string>
+    <string name="h_ge_koe_1_c">Work out %1$s · %2$s.</string>
+    <string name="h_ge_koe_1_d">For a triangle, halving follows the multiplication.</string>
+    <string name="h_ge_koe_1_e">Base times height gives %1$s. Now halve it.</string>
+    <string name="h_ge_koe_1_f">For a cuboid, all three edges are multiplied.</string>
+    <string name="h_ge_koe_1_g">The base area is %1$s, the height is still missing.</string>
+    <string name="h_ge_koe_1_h">Work out the whole cuboid first, then the cut-out, then the difference.</string>
+    <string name="h_ge_koe_1_i">The whole cuboid has %1$s. The cut-out comes off that.</string>
+    <string name="h_gl_lgs_1_a">Two equations, two unknowns: one of them has to go first.</string>
+    <string name="h_gl_lgs_1_b">Bring both equations to the same number of y and subtract them.</string>
+    <string name="h_gl_lgs_1_c">After subtracting you get %1$sx = %2$s.</string>
+    <string name="h_po_rat_1_a">A fraction in the exponent is a root and a power in one.</string>
+    <string name="h_po_rat_1_b">The denominator %1$s is the root, the numerator %2$s is the power.</string>
+    <string name="h_po_rat_1_c">The root gives %1$s. Now comes the power.</string>
+
+    <!-- Error types, years 9 and 10 -->
+    <string name="fa_quadriert_statt_addiert">Added the sides instead of their squares</string>
+    <string name="fa_wurzel_vergessen">Forgot the square root at the end</string>
+    <string name="fa_kathete_als_hypotenuse">Subtracted the lengths instead of their squares</string>
+    <string name="fa_wurzel_halbiert">Confused the square root with halving</string>
+    <string name="fa_verhaeltnis_gedreht">Set up the ratio the wrong way round</string>
+    <string name="fa_strecken_addiert">Added the segments instead of using the ratio</string>
+    <string name="fa_nur_einmal_verzinst">Only one year of interest</string>
+    <string name="fa_zinseszins_als_summe">Treated compound interest as a simple sum</string>
+    <string name="fa_zweite_loesung_genommen">Gave the smaller solution</string>
+    <string name="fa_vorzeichen_der_wurzel">Flipped the sign of the solution</string>
+    <string name="fa_nur_eine_gleichung">Used only the first equation</string>
+    <string name="fa_x_und_y_vertauscht">Swapped x and y</string>
+    <string name="fa_exponent_als_faktor">Treated the exponent as a factor</string>
+    <string name="fa_halbierung_vergessen">Forgot to halve</string>
+    <string name="fa_flaeche_statt_volumen">Calculated an area instead of a volume</string>
 </resources>

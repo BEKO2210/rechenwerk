@@ -63,7 +63,8 @@ object Auswahl {
 
     /** Sind alle Voraussetzungen sicher genug, um hier weiterzugehen? */
     private fun bereit(kompetenz: Kompetenz, ablage: Ablage): Boolean =
-        kompetenz.voraussetzungen.all { ablage.stand(it).grad >= Wiederholung.IN_ARBEIT }
+        Katalog.voraussetzungenFuer(kompetenz, ablage.profil.niveau)
+            .all { ablage.stand(it).grad >= Wiederholung.IN_ARBEIT }
 
     private fun gewichtet(topf: List<Kompetenz>, ablage: Ablage, zufall: Random): Kompetenz? {
         if (topf.isEmpty()) return null
@@ -95,7 +96,13 @@ class Werk(anwendung: Application) : AndroidViewModel(anwendung) {
 
     // ---- Trainingssitzung ---------------------------------------------------
 
-    var aufgabe by mutableStateOf<Aufgabe?>(null)
+    /**
+     * Eine offene Aufgabe aus dem Tresor wird aus ihrem Startwert neu gebaut.
+     * Wer mitten in einer Aufgabe die App verliert, findet genau sie wieder.
+     */
+    var aufgabe by mutableStateOf(
+        ablage.laufend?.let { Werkbank.erzeuge(it.kompetenz, it.niveau, it.startwert) }
+    )
         private set
     var eingabe by mutableStateOf("")
         private set
@@ -117,6 +124,17 @@ class Werk(anwendung: Application) : AndroidViewModel(anwendung) {
     private var aufgabeBegonnen = 0L
     private var sitzungBegonnen = 0L
     private var zuletzt: String? = null
+
+    init {
+        // Eine aus dem Tresor wiederhergestellte Aufgabe faengt jetzt an zu
+        // laufen, nicht 1970 -- sonst zaehlte die Pause als Bearbeitungszeit.
+        val wiederaufgenommen = aufgabe
+        if (wiederaufgenommen != null) {
+            aufgabeBegonnen = System.currentTimeMillis()
+            sitzungBegonnen = aufgabeBegonnen
+            zuletzt = wiederaufgenommen.kompetenz
+        }
+    }
 
     val sitzungGestellt: Int get() = gestellt
     val sitzungRichtig: Int get() = anzahlRichtig
@@ -196,12 +214,16 @@ class Werk(anwendung: Application) : AndroidViewModel(anwendung) {
     fun naechsteAufgabe() {
         val jetzt = System.currentTimeMillis()
         val kennung = Auswahl.naechste(art, ziel, ablage, jetzt, zufall, zuletzt)
+        val niveau = ablage.profil.niveau
+        // Der Startwert ist die Aufgabe: aus ihm entsteht sie jederzeit neu.
+        val startwert = zufall.nextLong()
         zuletzt = kennung
-        aufgabe = Werkbank.erzeuge(kennung, zufall)
+        aufgabe = Werkbank.erzeuge(kennung, niveau, startwert)
         eingabe = ""
         hilfestufe = 0
         rueckmeldung = null
         aufgabeBegonnen = jetzt
+        sichere(ablage.copy(laufend = Laufend(kennung, startwert, niveau)))
     }
 
     fun tippe(zeichen: String) {
@@ -250,9 +272,18 @@ class Werk(anwendung: Application) : AndroidViewModel(anwendung) {
         if (richtig) anzahlRichtig += 1
 
         val werte = ablage.werte
+        val eintrag = Verlaufseintrag(
+            kompetenz = laufend.kompetenz,
+            startwert = laufend.startwert,
+            niveau = laufend.niveau,
+            richtig = richtig,
+            zeitpunkt = jetzt,
+        )
         sichere(
             ablage.copy(
                 staende = ablage.staende + (laufend.kompetenz to neu),
+                verlauf = ablage.mitVerlauf(eintrag),
+                laufend = null,
                 werte = werte.copy(
                     lernzeitMs = werte.lernzeitMs + dauer,
                     versuche = werte.versuche + 1,
@@ -284,6 +315,7 @@ class Werk(anwendung: Application) : AndroidViewModel(anwendung) {
         rueckmeldung = null
         eingabe = ""
         hilfestufe = 0
+        if (ablage.laufend != null) sichere(ablage.copy(laufend = null))
     }
 
     fun verwirfBilanz() {
@@ -303,14 +335,18 @@ class Werk(anwendung: Application) : AndroidViewModel(anwendung) {
     }
 
     private fun pruefSchritt() {
-        val frei = Katalog.nachMuehe.filter { it.kennung !in pruefBenutzt }
+        // Der Test laeuft die Schwierigkeitsachse des eigenen Profils ab, nicht
+        // die des ganzen Katalogs -- sonst pruefte er Stoff anderer Klassenstufen.
+        val frei = Katalog.fuer(ablage.profil)
+            .sortedBy { it.muehe }
+            .filter { it.kennung !in pruefBenutzt }
         if (frei.isEmpty()) {
             pruefAufgabe = null
             return
         }
         val gewaehlt = frei.minByOrNull { kotlin.math.abs(it.muehe - pruefMuehe) } ?: frei.first()
         pruefBenutzt += gewaehlt.kennung
-        pruefAufgabe = Werkbank.erzeuge(gewaehlt.kennung, zufall)
+        pruefAufgabe = Werkbank.erzeuge(gewaehlt.kennung, ablage.profil.niveau, zufall.nextLong())
         eingabe = ""
     }
 

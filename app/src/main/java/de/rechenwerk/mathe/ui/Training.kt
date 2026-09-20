@@ -231,31 +231,37 @@ fun TrainingBildschirm(
     }
 }
 
+/** Die obere Leiste ist Glas -- wie Karten und die untere Navigationsleiste. */
 @Composable
 private fun Kopfzeile(titel: String, zaehler: String?, aufSchliessen: () -> Unit) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = Abstand.s, vertical = Abstand.xs),
-        verticalAlignment = Alignment.CenterVertically,
+    GlasFlaeche(
+        modifier = Modifier.fillMaxWidth().padding(Abstand.s),
+        form = MaterialTheme.shapes.extraLarge,
     ) {
-        Symboltaste(
-            symbol = Sym.Kreuz,
-            beschreibung = stringResource(R.string.training_beenden),
-            aufDruck = aufSchliessen,
-        )
-        Column(modifier = Modifier.weight(1f).padding(horizontal = Abstand.s)) {
-            Text(
-                text = titel,
-                style = MaterialTheme.typography.titleMedium,
-                color = MaterialTheme.colorScheme.onSurface,
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = Abstand.s, vertical = Abstand.xs),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Symboltaste(
+                symbol = Sym.Kreuz,
+                beschreibung = stringResource(R.string.training_beenden),
+                aufDruck = aufSchliessen,
             )
-            if (zaehler != null) {
+            Column(modifier = Modifier.weight(1f).padding(horizontal = Abstand.s)) {
                 Text(
-                    text = zaehler,
-                    style = MaterialTheme.typography.labelMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    text = titel,
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.onSurface,
                 )
+                if (zaehler != null) {
+                    Text(
+                        text = zaehler,
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                    )
+                }
             }
         }
     }
